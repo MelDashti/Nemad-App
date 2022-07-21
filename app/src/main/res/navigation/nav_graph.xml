@@ -3,31 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/WelcomeFragment">
+    android:label="authentication"
+    app:startDestination="@id/navigation">
 
-    <fragment
-        android:id="@+id/WelcomeFragment"
-        android:name="com.example.internproject.ui.auth.WelcomeFragment"
-        android:label="@string/welcome_fragment_label"
-        tools:layout="@layout/fragment_welcome">
+    <navigation
+        android:id="@+id/navigation"
+        app:startDestination="@id/WelcomeFragment">
+        <fragment
+            android:id="@+id/RegisterFragment"
+            android:name="com.example.internproject.ui.auth.RegisterFragment"
+            android:label="@string/register_fragment_label"
+            tools:layout="@layout/fragment_register">
 
-        <action
-            android:id="@+id/action_WelcomeFragment_to_RegisterFragment"
-            app:destination="@id/RegisterFragment" />
-        <action
-            android:id="@+id/action_WelcomeFragment_to_loginFragment2"
-            app:destination="@id/loginFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/RegisterFragment"
-        android:name="com.example.internproject.ui.auth.RegisterFragment"
-        android:label="@string/register_fragment_label"
-        tools:layout="@layout/fragment_register">
+        </fragment>
+        <fragment
+            android:id="@+id/WelcomeFragment"
+            android:name="com.example.internproject.ui.auth.WelcomeFragment"
+            android:label="@string/welcome_fragment_label"
+            tools:layout="@layout/fragment_welcome">
 
-    </fragment>
+            <action
+                android:id="@+id/action_WelcomeFragment_to_RegisterFragment"
+                app:destination="@id/RegisterFragment" />
+            <action
+                android:id="@+id/action_WelcomeFragment_to_loginFragment2"
+                app:destination="@id/loginFragment2" />
+            <action
+                android:id="@+id/action_WelcomeFragment_to_homeFragment"
+                app:destination="@id/mainFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/loginFragment2"
+            android:name="com.example.internproject.ui.auth.LoginFragment"
+            android:label="LoginFragment"
+            tools:layout="@layout/fragment_login" />
+    </navigation>
     <fragment
-        android:id="@+id/loginFragment2"
-        android:name="com.example.internproject.ui.auth.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/mainFragment"
+        android:name="com.example.internproject.ui.main.MainFragment"
+        android:label="MainFragment" />
 </navigation>

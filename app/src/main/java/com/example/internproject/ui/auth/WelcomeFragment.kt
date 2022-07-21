@@ -1,10 +1,11 @@
 package com.example.internproject.ui.auth
 
+import android.os.Build
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.internproject.R
 import com.example.internproject.databinding.FragmentWelcomeBinding
@@ -12,8 +13,10 @@ import com.example.internproject.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
 
+
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +27,16 @@ class WelcomeFragment : Fragment() {
         binding.signUpButton.setOnClickListener {
             findNavController().navigate(R.id.action_WelcomeFragment_to_RegisterFragment)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireActivity().window.statusBarColor = requireActivity().getColor(R.color.welcome_status_bar)
+        };
 
         binding.signInButton.setOnClickListener{
             findNavController().navigate(R.id.action_WelcomeFragment_to_loginFragment2)
+        }
+
+        binding.guestButton.setOnClickListener{
+            findNavController().navigate(R.id.action_WelcomeFragment_to_homeFragment)
         }
 
 
