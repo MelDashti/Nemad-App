@@ -4,17 +4,20 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface RegisterApiService {
+
+// api for authentication
+
+interface AuthenticationApiService {
     @FormUrlEncoded
     @POST("login.php")
-    suspend fun loginCustomer(
+    suspend fun loginUser(
         @Field("email") email: String,
         @Field("password") password: String
     ): AuthenticationResult
 
     @FormUrlEncoded
     @POST("register.php")
-    suspend fun createCustomer(
+    suspend fun createUser(
         @Field("first_name") firstName: String,
         @Field("last_name") lastName: String,
         @Field("email") email: String,
