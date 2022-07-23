@@ -1,5 +1,10 @@
 package com.example.internproject.api.auth
+
 import com.example.internproject.api.auth.responses.AuthenticationResult
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -8,21 +13,24 @@ import retrofit2.http.POST
 // api for authentication
 
 interface AuthenticationApiService {
-    @FormUrlEncoded
-    @POST("login.php")
-    suspend fun loginUser(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): AuthenticationResult
+//    @POST("Authenticate/LoginAppUser")
+//    suspend fun loginUser(
+//        @Field("username") username: String,
+//        @Field("password") password: String
+//    ): AuthenticationResult
 
-    @FormUrlEncoded
-    @POST("register.php")
-    suspend fun createUser(
-        @Field("first_name") firstName: String,
-        @Field("last_name") lastName: String,
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): AuthenticationResult
+    @POST("Authenticate/LoginAppUser")
+    suspend fun loginUser(@Body requestBody: RequestBody): Response<ResponseBody>
+
+//    @POST("Authenticate/registerAppUser")
+//    suspend fun createUser(
+//        @Field("username") username: String,
+//        @Field("password") password: String
+//    ): AuthenticationResult
+
+    @POST("Authenticate/registerAppUser")
+    suspend fun createUser(@Body requestBody: RequestBody): AuthenticationResult
+
 
 
 }

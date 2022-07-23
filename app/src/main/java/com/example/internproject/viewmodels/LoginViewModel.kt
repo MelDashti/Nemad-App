@@ -1,6 +1,7 @@
 package com.example.internproject.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.internproject.api.auth.responses.AuthenticationResult
 import com.example.internproject.repository.AuthRepository
@@ -25,7 +26,6 @@ class LoginViewModel @Inject constructor(val authRepository: AuthRepository) : V
     }
 
     init {
-
     }
 
     fun onLoginClicked() {
@@ -34,7 +34,12 @@ class LoginViewModel @Inject constructor(val authRepository: AuthRepository) : V
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
+            try {
+           authRepository.login(username, password)
+            } catch (e: Exception) {
+                Log.d("status",e.localizedMessage)
 
+            }
         }
     }
 

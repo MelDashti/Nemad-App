@@ -1,3 +1,3 @@
 package com.example.internproject.util
 
-const val BASE_URL ="http://10.0.2.2:80/"  // base url
+const val BASE_URL ="https://namay.ostanyazd.ir:6791/api/"  // base url

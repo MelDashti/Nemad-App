@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     lateinit var binding: FragmentRegisterBinding
-     val viewModel: RegisterViewModel by viewModels();
+    val viewModel: RegisterViewModel by viewModels();
 
 
     override fun onCreateView(
@@ -28,9 +28,10 @@ class RegisterFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.viewModel.onClickRegister.observe(viewLifecycleOwner, Observer {
-            binding.header
-
+        viewModel.onClickRegister.observe(viewLifecycleOwner, Observer {
+            val username = binding.phoneEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+            viewModel.register(username, password)
         })
 
 

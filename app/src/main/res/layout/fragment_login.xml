@@ -20,7 +20,9 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username"
+        android:id="@+id/code_header"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="#F7F8F9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,7 +42,9 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password"
+        android:id="@+id/hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="#F7F8F9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -50,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/code_header"
         app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,6 +67,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register"
+        app:cornerRadius="50dp"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"

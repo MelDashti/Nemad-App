@@ -1,5 +1,9 @@
 package com.example.internproject.di
 
+import com.example.internproject.api.auth.AuthenticationApiService
+import com.example.internproject.api.main.MainApiService
+import com.example.internproject.repository.AuthRepository
+import com.example.internproject.repository.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,6 +14,25 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 @Module
 object RepositoryModule {
 
+    @Provides
+    @ActivityRetainedScoped
+    fun provideAuthRepository(
+        authenticationApiService: AuthenticationApiService
+    ): AuthRepository {
+        return AuthRepository(authenticationApiService)
+    }
 
+    @Provides
+    @ActivityRetainedScoped
+    fun provideMainRepository(
+        mainApiService: MainApiService
+    ): MainRepository {
+        return MainRepository(mainApiService)
+    }
 
 }
+
+
+
+
+

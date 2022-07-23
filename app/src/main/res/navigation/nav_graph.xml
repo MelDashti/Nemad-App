@@ -15,6 +15,7 @@
             android:label="@string/register_fragment_label"
             tools:layout="@layout/fragment_register">
 
+
         </fragment>
         <fragment
             android:id="@+id/WelcomeFragment"
@@ -36,7 +37,41 @@
             android:id="@+id/loginFragment2"
             android:name="com.example.internproject.ui.auth.LoginFragment"
             android:label="LoginFragment"
-            tools:layout="@layout/fragment_login" />
+            tools:layout="@layout/fragment_login" >
+            <action
+                android:id="@+id/action_loginFragment2_to_rememberPasswordFragment"
+                app:destination="@id/rememberPasswordFragment" />
+            <action
+                android:id="@+id/action_loginFragment2_to_RegisterFragment"
+                app:destination="@id/RegisterFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/forgetPasswordFragment"
+            android:name="com.example.internproject.ui.auth.ForgetPasswordFragment"
+            android:label="fragment_forget_password"
+            tools:layout="@layout/fragment_forget_password" />
+        <fragment
+            android:id="@+id/rememberPasswordFragment"
+            android:name="com.example.internproject.ui.auth.RememberPasswordFragment"
+            android:label="RememberPasswordFragment"
+            tools:layout="@layout/remember_password_fragment"
+            >
+            <action
+                android:id="@+id/action_rememberPasswordFragment_to_resetFragment"
+                app:destination="@id/resetFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/verificationFragment"
+            android:name="com.example.internproject.ui.auth.VerificationFragment"
+            android:label="VerificationFragment"
+            tools:layout="@layout/verification_fragment"
+            />
+        <fragment
+            android:id="@+id/resetFragment"
+            android:name="com.example.internproject.ui.auth.ResetFragment"
+            android:label="ResetFragment"
+            tools:layout="@layout/reset_fragment"
+            />
     </navigation>
     <fragment
         android:id="@+id/mainFragment"
