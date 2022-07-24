@@ -9,19 +9,26 @@ import com.example.internproject.api.main.response.Category
 import com.example.internproject.api.main.response.Organization
 import com.example.internproject.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
 
+    var orgId: Long = 0
+    var leafNodeCategoryId: Long = 0
 
+    var parentCategoryList: Stack<List<Category>> = Stack()
+
+    var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
+    var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
+    private val _orgResponse = MutableLiveData<Category>()
+    val orgResponse: LiveData<Category> = _orgResponse
     var test: Int = 0
     var list: List<Category>? = null
 
-    var orgList: MutableList<Organization>? = null
-
+    var isLeafNode: Boolean = false
 
     private val _response = MutableLiveData<Category>()
     val response: LiveData<Category> = _response
@@ -34,11 +41,13 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         fetchOrg()
     }
 
+
     fun fetchOrg() {
         viewModelScope.launch {
             try {
                 Log.d("hehehe", "before fetching ord")
-                orgList = mainRepository.fetchOrganization()
+                orgList!!.value = mainRepository.fetchOrganization()
+                Log.d("hehehe", orgList!!.value!!.size.toString())
             } catch (e: java.lang.Exception) {
                 Log.d("hehehe", e.localizedMessage)
             }
@@ -46,12 +55,13 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
-    private fun fetchCat() {
+     fun fetchCat() {
         viewModelScope.launch {
             try {
                 Log.d("hehehe", "before fetching")
                 val category = mainRepository.fetchCategories()
                 list = listOf(category)
+                categoryList.value = mainRepository.fetchCategories().children
 
             } catch (e: Exception) {
                 Log.d("hehehe", e.localizedMessage)
@@ -64,13 +74,37 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         _showSublist.value = true
     }
 
-    fun subList(category: Category): List<Category>? {
-        return category.children
-
+    fun subList(category: Category) {
+        if (!categoryList.value.isNullOrEmpty())
+            parentCategoryList.add(categoryList.value)
+        categoryList.value = category.children
     }
 
     fun changeTest() {
         test = 99
+
+    }
+
+    fun clearData() {
+        categoryList.value = null
+        orgId = 0
+        leafNodeCategoryId = 0
+    }
+
+//    fun getCategory(currentParentId: Long) {
+//        viewModelScope.launch {
+//            mainRepository.getCategory(currentParentId)
+//
+//        }
+//
+//    }
+
+    fun sendRequest(managerName: String, complaintHeader: String, complaintText: String) {
+
+    }
+
+    fun setAsParent() {
+        categoryList.value = parentCategoryList.pop() as List<Category>?
 
     }
 

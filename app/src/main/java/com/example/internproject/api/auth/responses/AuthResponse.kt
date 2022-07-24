@@ -7,6 +7,6 @@ import com.squareup.moshi.Json
 
 class AuthenticationResult {
  var status: String? = null
-
 var message: String? = null
+ var token : String? =null
 }

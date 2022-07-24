@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OrganizationFragment : Fragment() {
 
-    val viewModel: OrganizationViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
+    val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
     lateinit var binding: OrganizationFragmentBinding
 
     override fun onCreateView(
@@ -37,6 +37,7 @@ class OrganizationFragment : Fragment() {
         val organizationItemAdapter = OrganizationItemAdapter(OrganizationItemListener {
             // navigate to form fragment
             findNavController().navigate(R.id.action_organizationFragment_to_formFragment)
+            viewModel.orgId = it
         })
         Log.d("list", "test123")
 //        Log.d("list", viewModel.orgList!![0].title.toString())
@@ -44,7 +45,6 @@ class OrganizationFragment : Fragment() {
 
         viewModel.orgList.observe(viewLifecycleOwner, Observer {
             organizationItemAdapter.submitList(it)
-
         })
 
 

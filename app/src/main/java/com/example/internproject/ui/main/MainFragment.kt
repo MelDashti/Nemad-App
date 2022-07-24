@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -57,49 +58,73 @@ class MainFragment : Fragment() {
             true
         }
 
-        //organization related code
-//        val organizationItemAdapter = OrganizationItemAdapter(OrganizationItemListener {
-//            // navigate to form fragment
-//            findNavController().navigate(R.id.action_mainFragment_to_formFragment)
-//        })
-
-
-        var subList: List<Category>? = null
+//        var subList: List<Category>? = null
 
         val categoryListAdapter = CategoryItemAdapter(CategoryItemListener {
             //            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListFragment(it))
             if (it.children.isNullOrEmpty()) {
                 Log.d("hello", "empty")
+                viewModel.isLeafNode = true
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
-                // move to organizations
-//                if (!viewModel.orgList.isNullOrEmpty()) {
-
-                //                    organizationItemAdapter.submitList(viewModel.orgList)
-//                    binding.categoryRecyclerView.adapter = organizationItemAdapter
+                viewModel.leafNodeCategoryId = it.id
             } else {
                 // display list
                 Log.d("hello", "nope")
-                subList = viewModel.subList(it)
-                viewModel.showSublist()
+                viewModel.subList(it)
             }
         })
 
-        viewModel.showSublist.observe(viewLifecycleOwner, Observer {
-            categoryListAdapter.submitList(subList)
-        })
+        binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        addDecorationToGroupRecyclerView()
 
-
-//        categoryListAdapter.submitList(initializeCategoryData())
 
 
         //floating action button
         binding.floatingButton.setOnClickListener {
+
+            if (!viewModel.categoryList.value.isNullOrEmpty()) {
+                categoryListAdapter.submitList(viewModel.categoryList.value)
+            } else {
+                viewModel.fetchCat()
+                viewModel.fetchOrg()
+            }
+            binding.categoryRecyclerView.adapter = categoryListAdapter
+        }
+
+        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
+            categoryListAdapter.submitList(it)
+        })
+
+
+
+        if (viewModel.isLeafNode) {
             binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             addDecorationToGroupRecyclerView()
-            val listOfCategory: List<Category>? = null
-            if (!viewModel.list.isNullOrEmpty())
-                categoryListAdapter.submitList(viewModel.list)
+            if (!viewModel.categoryList.value.isNullOrEmpty())
+                categoryListAdapter.submitList(viewModel.categoryList.value)
             binding.categoryRecyclerView.adapter = categoryListAdapter
+            viewModel.isLeafNode = false
+        }
+
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // Handle the back button event
+            if (viewModel.categoryList.value.isNullOrEmpty()) {
+                Log.d("hahaa", "pop")
+                findNavController().popBackStack()
+
+            }
+            val parentNodeId = 1
+            val currentParentId = viewModel.categoryList.value?.get(0)?.parentId
+
+            if (currentParentId == parentNodeId.toLong()) {
+                Log.d("hahaa", "cool")
+                viewModel.clearData()
+            } else {
+                Log.d("hahaa", "parentCategory")
+                viewModel.setAsParent()
+//                viewModel.getCategory(currentParentId!!)
+            }
 
 
         }
@@ -108,59 +133,9 @@ class MainFragment : Fragment() {
 
 
 
-
-
-
         return binding.root
     }
 
-    fun initializeCategoryData(): List<Category> {
-        return listOf(
-            Category()
-//            Category(
-//                parentId = null,
-//                id = "1",
-//                title = "hello",
-//                description = null,
-//                children = null
-//            ),
-//            Category(
-//                id = "1",
-//                title = "hello",
-//                description = null,
-//                parentId = null,
-//                children = null
-//            ),
-//            Category(
-//                id = 1,
-//                title = "hello",
-//                description = null,
-//                parentId = null,
-//                children = null
-//            ),
-//            Category(
-//                id = 1,
-//                title = "hello",
-//                description = null,
-//                parentId = null,
-//                children = null
-//            ),
-//            Category(
-//                id = 1,
-//                title = "hello",
-//                description = null,
-//                parentId = null,
-//                children = null
-//            ),
-//            Category(
-//                id = 1,
-//                title = "hello",
-//                description = null,
-//                parentId = null,
-//                children = null
-//            )
-        )
-    }
 
     private fun addDecorationToGroupRecyclerView() {
         val dividerItemDecoration = DividerItemDecoration(

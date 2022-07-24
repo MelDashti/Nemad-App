@@ -1,9 +1,13 @@
 package com.example.internproject.di
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.internproject.api.auth.AuthenticationApiService
 import com.example.internproject.api.main.MainApiService
 import com.example.internproject.util.BASE_URL
 import com.example.internproject.util.NetworkConnectionInterceptor
+import com.example.internproject.util.PreferenceKeys
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -32,6 +36,15 @@ object NetworkModule {
     @Provides
     fun provideMainApiService(retrofit: Retrofit): MainApiService {
         return retrofit.create(MainApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(application: Application): SharedPreferences {
+        return application.getSharedPreferences(
+            PreferenceKeys.PREFERENCE_AUTH_KEY,
+            Context.MODE_PRIVATE
+        )
     }
 
 

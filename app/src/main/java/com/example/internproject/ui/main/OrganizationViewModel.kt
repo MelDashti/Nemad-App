@@ -17,27 +17,10 @@ import javax.inject.Inject
 class OrganizationViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
 
 
-    var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
-
-
-    private val _response = MutableLiveData<Category>()
-    val response: LiveData<Category> = _response
 
 
     init {
-        fetchOrg()
-    }
 
-    fun fetchOrg()  {
-        viewModelScope.launch {
-            try {
-                Log.d("hehehe", "before fetching ord")
-                orgList!!.value = mainRepository.fetchOrganization()
-                Log.d("hehehe", orgList!!.value!!.size.toString())
-            } catch (e: java.lang.Exception) {
-                Log.d("hehehe", e.localizedMessage)
-            }
-        }
     }
 
 

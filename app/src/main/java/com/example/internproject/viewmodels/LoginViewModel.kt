@@ -8,13 +8,14 @@ import com.example.internproject.repository.AuthRepository
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(val authRepository: AuthRepository) : ViewModel() {
 
-    private val _response = MutableLiveData<AuthenticationResult>()
-    val response: LiveData<AuthenticationResult> = _response
+    private val _response = MutableLiveData<Response<AuthenticationResult>>()
+    val response: LiveData<Response<AuthenticationResult>> = _response
 
     private val _buttonClicked = MutableLiveData<Boolean>()
     val loginButtonCLicked: LiveData<Boolean> = _buttonClicked
@@ -33,10 +34,9 @@ class LoginViewModel @Inject constructor(val authRepository: AuthRepository) : V
     fun login(username: String, password: String) {
         viewModelScope.launch {
             try {
-           authRepository.login(username, password)
+                _response.value = authRepository.login(username, password)
             } catch (e: Exception) {
-                Log.d("status",e.localizedMessage)
-
+                Log.d("status", e.localizedMessage)
             }
         }
     }

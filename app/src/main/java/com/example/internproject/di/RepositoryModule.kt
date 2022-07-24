@@ -1,5 +1,6 @@
 package com.example.internproject.di
 
+import android.content.SharedPreferences
 import com.example.internproject.api.auth.AuthenticationApiService
 import com.example.internproject.api.main.MainApiService
 import com.example.internproject.repository.AuthRepository
@@ -17,17 +18,20 @@ object RepositoryModule {
     @Provides
     @ActivityRetainedScoped
     fun provideAuthRepository(
+        sharedPreferences: SharedPreferences,
         authenticationApiService: AuthenticationApiService
     ): AuthRepository {
-        return AuthRepository(authenticationApiService)
+        return AuthRepository(authenticationApiService,sharedPreferences)
     }
+
 
     @Provides
     @ActivityRetainedScoped
     fun provideMainRepository(
-        mainApiService: MainApiService
+        mainApiService: MainApiService,
+        sharedPreferences: SharedPreferences
     ): MainRepository {
-        return MainRepository(mainApiService)
+        return MainRepository(mainApiService, sharedPreferences)
     }
 
 }

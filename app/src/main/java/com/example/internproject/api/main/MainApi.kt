@@ -15,4 +15,7 @@ interface MainApiService {
     @GET("Organization")
     suspend fun getOrganizations(): MutableList<Organization>
 
+    @GET("Categories")
+    suspend fun getCategory(id: Long): Category
+
 }
