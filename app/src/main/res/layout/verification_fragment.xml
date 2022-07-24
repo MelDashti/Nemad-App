@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.internproject.viewmodels.VerificationViewModel" />
+            type="com.example.internproject.viewmodels.RegisterViewModel" />
     </data>
 
 
@@ -23,9 +23,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textColor="@color/black"
             android:layout_marginEnd="16dp"
             android:textStyle="bold"
-            android:hint="Enter Password"
+            android:hint="تایید کد ارسال شده"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,10 +39,14 @@
             android:background="#F7F8F9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:boxCornerRadiusBottomEnd="24dp"
+            app:boxCornerRadiusBottomStart="24dp"
+            app:boxCornerRadiusTopEnd="24dp"
+            app:boxCornerRadiusTopStart="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="Repeat Password"
+            android:hint="لطفا کد را وارد کنید"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +54,10 @@
             app:layout_constraintVertical_bias="0.0">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_edit_text"
+                android:id="@+id/code_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -85,16 +89,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="@string/as_guest"
+            android:text="اکانت کاربری ندارید؟هم اکنون ثبت نام کنید"
             android:textColor="#35C2C1"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </TextView>
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

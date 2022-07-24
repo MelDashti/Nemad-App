@@ -13,6 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(val authRepository: AuthRepository) : ViewModel() {
 
+    private val _onClickConfirm = MutableLiveData<Boolean>()
+    val onClickConfirm: LiveData<Boolean> = _onClickConfirm
+
+
     private val _onClickRegister = MutableLiveData<Boolean>()
 
     val onClickRegister: LiveData<Boolean> = _onClickRegister
@@ -21,6 +25,12 @@ class RegisterViewModel @Inject constructor(val authRepository: AuthRepository) 
 
 
     }
+
+
+    fun onConfirmedClicked() {
+        _onClickConfirm.value = true
+    }
+
 
     fun onClickRegister() {
         _onClickRegister.value = true;
@@ -38,6 +48,10 @@ class RegisterViewModel @Inject constructor(val authRepository: AuthRepository) 
         }
 
 
+    }
+
+    fun postCode(code: String) {
+        TODO("Not yet implemented")
     }
 
 

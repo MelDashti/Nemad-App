@@ -24,11 +24,12 @@
         style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="436dp"
-        android:text="Yazdbin"
+        android:layout_marginTop="450dp"
+        android:text="نظارت مردمی استان یزد"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="36sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,26 @@
         app:layout_constraintVertical_chainStyle="packed">
 
     </TextView>
+
+    <ImageView
+        android:id="@+id/logo"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed">
+
+    </ImageView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
@@ -46,9 +67,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_up_button"
+            app:cornerRadius="50dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="59dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
@@ -62,8 +84,9 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_in_button"
+            app:cornerRadius="50dp"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="59dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:textAllCaps="false"

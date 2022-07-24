@@ -11,7 +11,7 @@
 
         <variable
             name="category"
-            type="com.example.internproject.domain.Category" />
+            type="com.example.internproject.api.main.response.Category" />
 
     </data>
 

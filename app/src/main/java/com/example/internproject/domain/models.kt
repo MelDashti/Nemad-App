@@ -1,20 +1,13 @@
 package com.example.internproject.domain
 
-data class Category(
-    val parentId: String?,
-    val id: String,
-    val title: String = "heh",
-    val description: String?,
-    val children: List<Category>?,
-//    val filterType: FilterType,
-)
+import com.example.internproject.api.main.response.Category
 
-data class Organization(
-    val parentId: String?,
-    val id: String,
-    val title: String = "heh",
-    val description: String?,
-    val children: List<Category>?,
-//    val filterType: FilterType,
+//data class Category(
+//    val parentId: String?,
+//    val id: String,
+//    val title: String = "heh",
+//    val description: String?,
+//    val children: List<Category>?,
+////    val filterType: FilterType,
+//)
 
-)

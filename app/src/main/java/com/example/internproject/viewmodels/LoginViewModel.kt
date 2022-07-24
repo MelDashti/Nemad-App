@@ -16,13 +16,11 @@ class LoginViewModel @Inject constructor(val authRepository: AuthRepository) : V
     private val _response = MutableLiveData<AuthenticationResult>()
     val response: LiveData<AuthenticationResult> = _response
 
-
     private val _buttonClicked = MutableLiveData<Boolean>()
     val loginButtonCLicked: LiveData<Boolean> = _buttonClicked
 
     override fun onCleared() {
         super.onCleared()
-
     }
 
     init {

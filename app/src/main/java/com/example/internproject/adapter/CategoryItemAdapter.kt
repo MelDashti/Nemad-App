@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.internproject.api.main.response.Category
 import com.example.internproject.databinding.CategoryListItemBinding
-import com.example.internproject.domain.Category
 
 class CategoryItemAdapter(private val clickListener: CategoryItemListener) :
     ListAdapter<Category, CategoryItemViewHolder>(CategoryItemDiffUtilCallback()) {
@@ -46,6 +46,6 @@ class CategoryItemViewHolder(val bind: CategoryListItemBinding) :
     }
 }
 
-class CategoryItemListener(val ClickListener: (productId: String) -> Unit) {
-    fun onClick(category: Category) = ClickListener(category.id)
+class CategoryItemListener(val ClickListener: (category: Category) -> Unit) {
+    fun onClick(category: Category) = ClickListener(category)
 }

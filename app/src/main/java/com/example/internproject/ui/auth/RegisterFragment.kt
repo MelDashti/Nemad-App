@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.internproject.R
 import com.example.internproject.databinding.FragmentRegisterBinding
 import com.example.internproject.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class RegisterFragment : Fragment() {
             val username = binding.phoneEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
             viewModel.register(username, password)
+            findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
         })
 
 

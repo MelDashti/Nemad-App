@@ -6,28 +6,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.internproject.R
+import com.example.internproject.databinding.VerificationFragmentBinding
+import com.example.internproject.viewmodels.RegisterViewModel
 import com.example.internproject.viewmodels.VerificationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VerificationFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = VerificationFragment()
-    }
 
-    private lateinit var viewModel: VerificationViewModel
+    val viewModel: RegisterViewModel by viewModels()
+    lateinit var binding: VerificationFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.verification_fragment, container, false)
+        binding = VerificationFragmentBinding.inflate(inflater)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.onClickConfirm.observe(viewLifecycleOwner, Observer {
+            val code = binding.codeEditText.text.toString().trim()
+            viewModel.postCode(code)
+
+        })
+
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(VerificationViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

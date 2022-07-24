@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.internproject.ui.main.MainViewModel" />
+            type="com.example.internproject.ui.main.OrganizationViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -21,15 +21,17 @@
             android:background="@drawable/background">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_recycler_view"
-                android:padding="30dp"
+                android:id="@+id/organization_recycler_view"
+                android:padding="22dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/category_list_item" />
+                tools:listitem="@layout/organization_list_item" />
 
 
 

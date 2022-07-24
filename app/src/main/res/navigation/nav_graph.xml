@@ -16,6 +16,9 @@
             tools:layout="@layout/fragment_register">
 
 
+            <action
+                android:id="@+id/action_RegisterFragment_to_verificationFragment"
+                app:destination="@id/verificationFragment" />
         </fragment>
         <fragment
             android:id="@+id/WelcomeFragment"
@@ -71,10 +74,30 @@
             android:name="com.example.internproject.ui.auth.ResetFragment"
             android:label="ResetFragment"
             tools:layout="@layout/reset_fragment"
-            />
+            >
+            <action
+                android:id="@+id/action_resetFragment_to_verificationFragment"
+                app:destination="@id/verificationFragment" />
+        </fragment>
     </navigation>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.internproject.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_organizationFragment"
+            app:destination="@id/organizationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.example.internproject.ui.main.FormFragment"
+        android:label="FormFragment" />
+    <fragment
+        android:id="@+id/organizationFragment"
+        android:name="com.example.internproject.ui.main.OrganizationFragment"
+        android:label="OrganizationFragment" >
+        <action
+            android:id="@+id/action_organizationFragment_to_formFragment"
+            app:destination="@id/formFragment" />
+    </fragment>
 </navigation>

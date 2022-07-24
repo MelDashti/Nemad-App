@@ -32,10 +32,6 @@ class LoginFragment : Fragment() {
             viewModel.login(username, password)
         })
 
-
-
-
-
         return binding.root
     }
 

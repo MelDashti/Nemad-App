@@ -67,7 +67,7 @@ class AuthRepository @Inject constructor(private val authenticationApiService: A
 
         CoroutineScope(Dispatchers.IO).launch {
             // Do the POST request and get response
-            val response = authenticationApiService.loginUser(requestBody)
+            val response = authenticationApiService.createUser(requestBody)
 
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
