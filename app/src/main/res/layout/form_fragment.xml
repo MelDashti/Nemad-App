@@ -64,7 +64,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/backButton"
                 app:layout_constraintTop_toBottomOf="@+id/header"
-                app:layout_constraintVertical_bias="0.060000002">
+                app:layout_constraintVertical_bias="0.04000002">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/complaint_header_input_text"
@@ -135,10 +135,51 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header"
-                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintVertical_bias="0.88"
                 app:layout_constraintVertical_chainStyle="packed">
 
             </com.google.android.material.button.MaterialButton>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/uploadFile"
+                android:layout_width="139dp"
+                android:layout_height="58dp"
+                android:backgroundTint="#AD8700"
+                android:text="افزودن پیوست"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/complaint_text"
+                app:layout_constraintTop_toBottomOf="@+id/complaint_text"
+                app:layout_constraintVertical_bias="0.07999998"
+                app:layout_constraintVertical_chainStyle="packed">
+
+            </com.google.android.material.button.MaterialButton>
+
+            <TextView
+                android:id="@+id/uploadFileDescription"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="حداکثر حجم فایل ارسال 8 مگابایت فرمت های مجاز: jpg,ppt,doc,pdf"
+                app:layout_constraintBottom_toBottomOf="@+id/uploadFile"
+                app:layout_constraintStart_toEndOf="@+id/uploadFile"
+                app:layout_constraintTop_toTopOf="@+id/uploadFile"
+                app:layout_constraintVertical_bias="0.666" />
+
+            <TextView
+                android:id="@+id/uploadedFileName"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/primaryColor"
+                android:gravity="center_vertical"
+                android:text="   نام فایل آپلود شده"
+                app:layout_constraintEnd_toEndOf="@+id/complaint_text"
+                app:layout_constraintStart_toStartOf="@+id/uploadFile"
+                app:layout_constraintTop_toBottomOf="@+id/uploadFile" />
 
 
             <LinearLayout

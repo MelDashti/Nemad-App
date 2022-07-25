@@ -4,8 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable-v24/divider.xml" value="0.17239583333333333" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/add_white_24dp.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/filled_home.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/filled_user_edit.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/home.xml" value="0.2518518518518518" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/home_icon.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/ic_category.xml" value="0.2994791666666667" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/note_icon.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/stats_icon.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/drawable/user_edit_icon.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/category_list_item.xml" value="0.4" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/form_fragment.xml" value="0.2833333333333333" />
@@ -14,7 +22,7 @@
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/fragment_register.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/fragment_welcome.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/main_fragment.xml" value="0.25104166666666666" />
-        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/organization_fragment.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/organization_fragment.xml" value="0.2" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/organization_list_item.xml" value="0.4" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/remember_password_fragment.xml" value="0.240625" />
         <entry key="..\:/Users/Meelad/Desktop/Android/MyProjects/InternProject/app/src/main/res/layout/reset_fragment.xml" value="0.240625" />

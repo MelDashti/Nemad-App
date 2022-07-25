@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class VerificationFragment : Fragment() {
 
 
-    val viewModel: RegisterViewModel by viewModels()
+    val viewModel: VerificationViewModel by viewModels()
     lateinit var binding: VerificationFragmentBinding
 
     override fun onCreateView(
@@ -28,11 +28,11 @@ class VerificationFragment : Fragment() {
         binding = VerificationFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.onClickConfirm.observe(viewLifecycleOwner, Observer {
-            val code = binding.codeEditText.text.toString().trim()
-            viewModel.postCode(code)
-
-        })
+//        viewModel.onClickConfirm.observe(viewLifecycleOwner, Observer {
+//            val code = binding.codeEditText.text.toString().trim()
+//            viewModel.postCode(code)
+//
+//        })
 
 
         return binding.root

@@ -29,7 +29,7 @@ interface AuthenticationApiService {
 //    ): AuthenticationResult
 
     @POST("Authenticate/registerAppUser")
-    suspend fun createUser(@Body requestBody: RequestBody): Response<ResponseBody>
+    suspend fun createUser(@Body requestBody: RequestBody): Response<AuthenticationResult>
 
 
 }

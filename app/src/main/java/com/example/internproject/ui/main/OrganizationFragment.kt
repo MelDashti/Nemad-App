@@ -47,10 +47,9 @@ class OrganizationFragment : Fragment() {
             organizationItemAdapter.submitList(it)
         })
 
-
-
-
-
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }

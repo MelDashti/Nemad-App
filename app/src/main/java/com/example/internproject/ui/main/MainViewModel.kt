@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.internproject.api.main.response.Category
+import com.example.internproject.api.main.response.ComplaintResult
 import com.example.internproject.api.main.response.Organization
+import com.example.internproject.api.main.response.OrganizationalUnits
 import com.example.internproject.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.util.*
 import javax.inject.Inject
 
@@ -19,13 +22,21 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var orgId: Long = 0
     var leafNodeCategoryId: Long = 0
 
+    private val _complaintResponse = MutableLiveData<Response<ComplaintResult>>()
+    val complaintResponse: LiveData<Response<ComplaintResult>> = _complaintResponse
+
     var parentCategoryList: Stack<List<Category>> = Stack()
 
+    var organizationalUnitsList: MutableLiveData<List<OrganizationalUnits>?> = MutableLiveData()
     var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
+
+
     var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
     private val _orgResponse = MutableLiveData<Category>()
     val orgResponse: LiveData<Category> = _orgResponse
     var test: Int = 0
+
+    var orgUnitList: List<OrganizationalUnits>? = null
     var list: List<Category>? = null
 
     var isLeafNode: Boolean = false
@@ -55,7 +66,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
-     fun fetchCat() {
+    fun fetchCat() {
         viewModelScope.launch {
             try {
                 Log.d("hehehe", "before fetching")
@@ -69,6 +80,19 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         }
     }
 
+    fun fetchOrgUnits() {
+        viewModelScope.launch {
+            try {
+                Log.d("hehehe", "before fetching")
+                val organizationalUnits = mainRepository.fetchOrganizationalUnits()
+                orgUnitList = listOf(organizationalUnits)
+                organizationalUnitsList.value = mainRepository.fetchOrganizationalUnits().children
+
+            } catch (e: Exception) {
+                Log.d("hehehe", e.localizedMessage)
+            }
+        }
+    }
 
     fun showSublist() {
         _showSublist.value = true
@@ -100,7 +124,16 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 //    }
 
     fun sendRequest(managerName: String, complaintHeader: String, complaintText: String) {
+        viewModelScope.launch {
 
+            mainRepository.sendComplaint(
+                managerName,
+                complaintHeader,
+                complaintText,
+                orgId,
+                leafNodeCategoryId
+            )
+        }
     }
 
     fun setAsParent() {

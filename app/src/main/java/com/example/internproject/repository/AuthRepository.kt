@@ -5,17 +5,12 @@ import android.util.Log
 import com.example.internproject.api.auth.AuthenticationApiService
 import com.example.internproject.api.auth.responses.AuthenticationResult
 import com.example.internproject.util.PreferenceKeys
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonParser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import javax.inject.Inject
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Response
 
 
@@ -23,6 +18,13 @@ class AuthRepository @Inject constructor(
     private val authenticationApiService: AuthenticationApiService,
     private val sharedPreferences: SharedPreferences
 ) {
+
+
+    suspend fun verifyCode() {
+
+
+
+    }
 
 
     suspend fun login(username: String, password: String): Response<AuthenticationResult> {
@@ -51,7 +53,7 @@ class AuthRepository @Inject constructor(
     }
 
 
-    suspend fun register(username: String, password: String) {
+    suspend fun register(username: String, password: String): Response<AuthenticationResult> {
         Log.d("status", "register")
         // Create JSON using JSONObject
         val jsonObject = JSONObject()
@@ -64,24 +66,21 @@ class AuthRepository @Inject constructor(
         // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
-        CoroutineScope(Dispatchers.IO).launch {
-            // Do the POST request and get response
-            val response = authenticationApiService.createUser(requestBody)
+        // Do the POST request and get response
+        val response = authenticationApiService.createUser(requestBody)
 
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    // Convert raw JSON to pretty JSON using GSON library
-                    Log.d("status", response.body().toString())
-                    Log.d("status", response.message())
+        if (response.isSuccessful) {
+            // Convert raw JSON to pretty JSON using GSON library
+            Log.d("status", response.body().toString())
+            Log.d("status", response.message())
 
-                } else {
+        } else {
 
-                    Log.e("status", response.code().toString())
-                    Log.e("status", response.body().toString())
-                    Log.e("status", response.message().toString())
-                }
-            }
+            Log.e("status", response.code().toString())
+            Log.e("status", response.body().toString())
+            Log.e("status", response.message().toString())
         }
+        return response
     }
 
 

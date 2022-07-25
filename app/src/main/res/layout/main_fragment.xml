@@ -22,16 +22,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_recycler_view"
-                android:padding="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="30dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/category_list_item" />
-
-
 
 
             <LinearLayout
@@ -45,10 +43,11 @@
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottom_navigation"
                     style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                    android:backgroundTint="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#D6D6D6"
+                    app:itemIconTint="@drawable/bottom_navigation_selector"
+                    app:itemTextColor="@drawable/bottom_navigation_selector"
                     app:menu="@menu/bottom_navigation_menu" />
 
 
@@ -60,10 +59,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_marginBottom="80dp"
             android:layout_marginStart="27dp"
+            android:layout_marginBottom="80dp"
             android:backgroundTint="#032886"
-            app:srcCompat="@drawable/add_white_24dp" />
+            android:src="@drawable/add_white_24dp"
+            app:iconTint="@color/white"
+            app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
