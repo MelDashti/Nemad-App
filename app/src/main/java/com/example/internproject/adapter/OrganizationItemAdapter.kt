@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.internproject.api.main.response.Organization
+import com.example.internproject.api.main.response.OrganizationalUnits
 import com.example.internproject.databinding.OrganizationListItemBinding
 
 class OrganizationItemAdapter(private val clickListener: OrganizationItemListener) :
-    ListAdapter<Organization, OrganizationItemViewHolder>(OrganizationItemDiffUtilCallback()) {
+    ListAdapter<OrganizationalUnits, OrganizationItemViewHolder>(OrganizationItemDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrganizationItemViewHolder {
         return OrganizationItemViewHolder.from(parent)
     }
@@ -20,19 +21,25 @@ class OrganizationItemAdapter(private val clickListener: OrganizationItemListene
 }
 
 
-class OrganizationItemDiffUtilCallback : DiffUtil.ItemCallback<Organization>() {
-    override fun areItemsTheSame(oldItem: Organization, newItem: Organization): Boolean {
+class OrganizationItemDiffUtilCallback : DiffUtil.ItemCallback<OrganizationalUnits>() {
+    override fun areItemsTheSame(
+        oldItem: OrganizationalUnits,
+        newItem: OrganizationalUnits
+    ): Boolean {
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: Organization, newItem: Organization): Boolean {
+    override fun areContentsTheSame(
+        oldItem: OrganizationalUnits,
+        newItem: OrganizationalUnits
+    ): Boolean {
         return oldItem == newItem
     }
 }
 
 class OrganizationItemViewHolder(val bind: OrganizationListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
-    fun bind(organization: Organization, clickListener: OrganizationItemListener) {
+    fun bind(organization: OrganizationalUnits, clickListener: OrganizationItemListener) {
         bind.clickListener = clickListener
         bind.organization = organization
     }
@@ -46,6 +53,6 @@ class OrganizationItemViewHolder(val bind: OrganizationListItemBinding) :
     }
 }
 
-class OrganizationItemListener(val ClickListener: (organizationId: Long) -> Unit) {
-    fun onClick(organization: Organization) = ClickListener(organization.id)
+class OrganizationItemListener(val ClickListener: (organizationalUnit: OrganizationalUnits) -> Unit) {
+    fun onClick(organizationalUnits: OrganizationalUnits) = ClickListener(organizationalUnits)
 }

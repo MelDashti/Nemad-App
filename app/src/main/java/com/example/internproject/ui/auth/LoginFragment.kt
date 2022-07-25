@@ -36,12 +36,10 @@ class LoginFragment : Fragment() {
 
         viewModel.response.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
-                Toast.makeText(requireContext(), "Successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "ورود با موفقیت", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_loginFragment2_to_WelcomeFragment)
-            }
-            else(Toast.makeText(requireContext(),"Login Failed",Toast.LENGTH_SHORT)).show()
+            } else (Toast.makeText(requireContext(), "ورود ناموفق بود", Toast.LENGTH_SHORT)).show()
         })
-
 
         return binding.root
     }

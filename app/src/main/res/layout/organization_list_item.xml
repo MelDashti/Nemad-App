@@ -11,7 +11,7 @@
 
         <variable
             name="organization"
-            type="com.example.internproject.api.main.response.Organization" />
+            type="com.example.internproject.api.main.response.OrganizationalUnits" />
 
     </data>
 

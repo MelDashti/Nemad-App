@@ -26,6 +26,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     val complaintResponse: LiveData<Response<ComplaintResult>> = _complaintResponse
 
     var parentCategoryList: Stack<List<Category>> = Stack()
+    var parentOrganizationalUnitsList: Stack<List<OrganizationalUnits>> = Stack()
 
     var organizationalUnitsList: MutableLiveData<List<OrganizationalUnits>?> = MutableLiveData()
     var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
@@ -40,6 +41,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var list: List<Category>? = null
 
     var isLeafNode: Boolean = false
+    var isOrgLeafNode: Boolean = false
 
     private val _response = MutableLiveData<Category>()
     val response: LiveData<Category> = _response
@@ -50,6 +52,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     init {
         fetchCat()
         fetchOrg()
+        fetchOrgUnits()
     }
 
 
@@ -104,6 +107,12 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         categoryList.value = category.children
     }
 
+    fun subOrgList(organizationalUnits: OrganizationalUnits) {
+        if (!organizationalUnitsList.value.isNullOrEmpty())
+            parentOrganizationalUnitsList.add(organizationalUnitsList.value)
+        organizationalUnitsList.value = organizationalUnits.children
+    }
+
     fun changeTest() {
         test = 99
 
@@ -113,6 +122,11 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         categoryList.value = null
         orgId = 0
         leafNodeCategoryId = 0
+    }
+
+    fun clearOrgData() {
+//        organizationalUnitsList.value = null
+        orgId = 0
     }
 
 //    fun getCategory(currentParentId: Long) {
@@ -138,6 +152,12 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     fun setAsParent() {
         categoryList.value = parentCategoryList.pop() as List<Category>?
+
+    }
+
+    fun setAsOrgParent() {
+        organizationalUnitsList.value =
+            parentOrganizationalUnitsList.pop() as List<OrganizationalUnits>?
 
     }
 

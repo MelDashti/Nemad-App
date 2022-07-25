@@ -6,6 +6,7 @@ class ComplaintResult {
 }
 
 
+
 class Category() {
     var parentId: Long? = null
     var id: Long = 0

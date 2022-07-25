@@ -46,10 +46,10 @@ class FormFragment : Fragment() {
 
 
         binding.sendRequest.setOnClickListener {
+            Toast.makeText(requireContext(), "درخواست شما با موفقیت ارسال شد", Toast.LENGTH_SHORT).show()
             val managerName = binding.managerNameTextInput.text.toString().trim()
             val complaintHeader = binding.complaintHeaderInputText.toString().trim()
             val complaintText = binding.complaintTextInput.toString().trim()
-
             viewModel.sendRequest(managerName, complaintHeader, complaintText)
 
         }
@@ -62,19 +62,13 @@ class FormFragment : Fragment() {
         })
 
 
-
-
-
-
-
-
-
         val sActivityResultLauncher = registerForActivityResult(
             StartActivityForResult(),
             ActivityResultCallback { result ->
                 if (result.getResultCode() === Activity.RESULT_OK) {
                     val data: Intent = result.getData()!!
                     val uri: Uri? = data.data
+                    binding.uploadedFileName.text = uri.toString()
                 }
             })
 
@@ -96,13 +90,12 @@ class FormFragment : Fragment() {
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 111 && resultCode == RESULT_OK) {
             val selectedFile = data?.data //The uri with the location of the file
-            Toast.makeText(requireContext(), "File name", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), "File name", Toast.LENGTH_SHORT).show()
         }
     }
 }

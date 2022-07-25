@@ -23,12 +23,12 @@ class AuthRepository @Inject constructor(
     suspend fun verifyCode() {
 
 
-
     }
 
 
     suspend fun login(username: String, password: String): Response<AuthenticationResult> {
         // Create JSON using JSONObject
+
         val jsonObject = JSONObject()
         jsonObject.put("username", username)
         jsonObject.put("password", password)

@@ -65,7 +65,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#D6D6D6"
-                    android:backgroundTint="@color/black"
+                    app:itemIconTint="@drawable/bottom_navigation_selector"
+                    app:itemTextColor="@drawable/bottom_navigation_selector"
                     app:menu="@menu/bottom_navigation_menu" />
 
 

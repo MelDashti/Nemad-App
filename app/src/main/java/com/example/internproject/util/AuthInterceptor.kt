@@ -12,6 +12,16 @@ import okhttp3.internal.concurrent.TaskRunner
 import java.io.IOException
 
 
+class AuthInterceptor(private val sharedPreferences: SharedPreferences) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val requestBuilder = chain.request().newBuilder()
+        // If token has been saved, add it to the header
+        val token = sharedPreferences.getString(PreferenceKeys.PREFERENCE_AUTH_KEY, "empty")
+        requestBuilder.addHeader("Authorization", "Bearer $token")
+        return chain.proceed(requestBuilder.build())
+    }
+}
+
 class NetworkConnectionInterceptor(private val context: Context) : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

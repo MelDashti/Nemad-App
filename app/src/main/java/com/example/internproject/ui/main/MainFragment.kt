@@ -65,6 +65,7 @@ class MainFragment : Fragment() {
             if (it.children.isNullOrEmpty()) {
                 Log.d("hello", "empty")
                 viewModel.isLeafNode = true
+                Log.d("lolwa",viewModel.isLeafNode.toString())
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
                 viewModel.leafNodeCategoryId = it.id
             } else {
@@ -97,7 +98,9 @@ class MainFragment : Fragment() {
 
 
 
+        Log.d("lolwa",viewModel.isLeafNode.toString())
         if (viewModel.isLeafNode) {
+            Log.d("lolwa","heeeel")
             binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             addDecorationToGroupRecyclerView()
             if (!viewModel.categoryList.value.isNullOrEmpty())
@@ -120,6 +123,7 @@ class MainFragment : Fragment() {
             if (currentParentId == parentNodeId.toLong()) {
                 Log.d("hahaa", "cool")
                 viewModel.clearData()
+
             } else {
                 Log.d("hahaa", "parentCategory")
                 viewModel.setAsParent()
@@ -128,9 +132,6 @@ class MainFragment : Fragment() {
 
 
         }
-
-
-
 
 
         return binding.root
