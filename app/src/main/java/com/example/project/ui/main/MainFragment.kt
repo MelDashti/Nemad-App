@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.adapter.CategoryItemAdapter
 import com.example.project.adapter.CategoryItemListener
@@ -24,8 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
+    override var bottomNavigationViewVisibility = View.VISIBLE
     val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
     private lateinit var binding: MainFragmentBinding
 
@@ -83,20 +85,7 @@ class MainFragment : Fragment() {
         })
 
 
-        binding.bottomNavigation.setupWithNavController(findNavController())
-
-        //set nav destinations for bottom navigation buttons
-        binding.bottomNavigation.setOnItemSelectedListener {
-            NavigationUI.onNavDestinationSelected(it, findNavController()) || onOptionsItemSelected(
-                it
-            )
-        }
-
-
-
-        Log.d("lolwa", viewModel.isLeafNode.toString())
         if (viewModel.isLeafNode) {
-            Log.d("lolwa", "heeeel")
             binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             addDecorationToGroupRecyclerView()
             if (!viewModel.categoryList.value.isNullOrEmpty())
@@ -109,7 +98,6 @@ class MainFragment : Fragment() {
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // Handle the back button event
             if (viewModel.categoryList.value.isNullOrEmpty()) {
-                Log.d("hahaa", "pop")
                 findNavController().popBackStack()
 
             }
@@ -117,27 +105,18 @@ class MainFragment : Fragment() {
             val currentParentId = viewModel.categoryList.value?.get(0)?.parentId
 
             if (currentParentId == parentNodeId.toLong()) {
-                Log.d("hahaa", "cool")
                 viewModel.clearData()
 
             } else {
-                Log.d("hahaa", "parentCategory")
                 viewModel.setAsParent()
-//                viewModel.getCategory(currentParentId!!)
             }
 
 
         }
 
-        bottomNavigationSettings()
-
         return binding.root
     }
 
-
-    private fun bottomNavigationSettings() {
-        binding.bottomNavigation.selectedItemId = R.id.mainFragment
-    }
 
     private fun addDecorationToGroupRecyclerView() {
         val dividerItemDecoration = DividerItemDecoration(

@@ -94,7 +94,7 @@
                     android:id="@+id/manager_name_text_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"/>
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,9 +119,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/complaint_text_input"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:layout_height="match_parent" />
+                    android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,27 +187,7 @@
                 app:layout_constraintStart_toStartOf="@+id/uploadFile"
                 app:layout_constraintTop_toBottomOf="@+id/uploadFile" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:context=".ui.main.MainFragment">
 
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottom_navigation"
-                    style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#D6D6D6"
-                    app:itemIconTint="@drawable/bottom_navigation_selector"
-                    app:itemTextColor="@drawable/bottom_navigation_selector"
-                    app:menu="@menu/bottom_navigation_menu" />
-
-
-
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

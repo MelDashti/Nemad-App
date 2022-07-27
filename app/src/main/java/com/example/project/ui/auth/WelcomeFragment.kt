@@ -1,21 +1,24 @@
 package com.example.project.ui.auth
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentWelcomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class WelcomeFragment : Fragment() {
-
+class WelcomeFragment : BaseFragment() {
 
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
+
+    override var bottomNavigationViewVisibility = View.GONE
 
 
     override fun onCreateView(
@@ -28,6 +31,8 @@ class WelcomeFragment : Fragment() {
         binding.signUpButton.setOnClickListener {
             findNavController().navigate(R.id.action_WelcomeFragment_to_RegisterFragment)
         }
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().window.statusBarColor =
                 requireActivity().getColor(R.color.welcome_status_bar)
@@ -42,9 +47,7 @@ class WelcomeFragment : Fragment() {
 //        }
 
         return binding.root
-
     }
-
 
 
 }

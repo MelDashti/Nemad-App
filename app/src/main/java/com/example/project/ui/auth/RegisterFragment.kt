@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentRegisterBinding
 import com.example.project.viewmodels.RegisterViewModel
@@ -16,8 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment() {
 
+    override var bottomNavigationViewVisibility = View.GONE
     lateinit var binding: FragmentRegisterBinding
     val viewModel: RegisterViewModel by viewModels();
 
@@ -55,7 +57,6 @@ class RegisterFragment : Fragment() {
         }
         return binding.root
     }
-
 
 
 }

@@ -9,15 +9,18 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentLoginBinding
 import com.example.project.viewmodels.LoginViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
+    override var bottomNavigationViewVisibility = View.GONE
     lateinit var binding: FragmentLoginBinding
     val viewModel: LoginViewModel by viewModels()
 
@@ -47,6 +50,13 @@ class LoginFragment : Fragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        view.visibility = View.GONE
+    }
 
 
 }

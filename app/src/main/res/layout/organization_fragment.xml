@@ -51,26 +51,7 @@
                 tools:listitem="@layout/organization_list_item" />
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:context=".ui.main.MainFragment">
 
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottom_navigation"
-                    style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#D6D6D6"
-                    app:itemIconTint="@drawable/bottom_navigation_selector"
-                    app:itemTextColor="@drawable/bottom_navigation_selector"
-                    app:menu="@menu/bottom_navigation_menu" />
-
-
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

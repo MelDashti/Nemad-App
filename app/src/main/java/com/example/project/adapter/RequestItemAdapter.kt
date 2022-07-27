@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.project.api.main.response.OrganizationalUnits
 import com.example.project.api.main.response.Requests
-import com.example.project.databinding.OrganizationListItemBinding
 import com.example.project.databinding.RequestListItemBinding
 
 class RequestItemAdapter(private val clickListener: RequestItemListener) :

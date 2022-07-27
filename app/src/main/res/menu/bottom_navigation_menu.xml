@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home_page"
+        android:id="@+id/mainFragment"
         android:enabled="true"
         android:icon="@drawable/home_icon"
         android:title="صفحه اصلی" />
@@ -11,7 +11,7 @@
         android:icon="@drawable/note_icon"
         android:title="درخواست ها" />
     <item
-        android:id="@+id/user_page"
+        android:id="@+id/settingsFragment"
         android:enabled="true"
         android:icon="@drawable/user_edit_icon"
         android:title="تنظیمات" />

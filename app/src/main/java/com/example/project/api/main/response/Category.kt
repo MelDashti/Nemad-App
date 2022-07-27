@@ -6,6 +6,15 @@ class ComplaintResult {
 }
 
 
+class UserInfo {
+    var id: String? = null
+    var firstName: String? = null
+    var nationalId: String? = null
+    var lastName: String? = null
+
+}
+
+
 class Requests {
     var parentId: Long? = null
     lateinit var id: String

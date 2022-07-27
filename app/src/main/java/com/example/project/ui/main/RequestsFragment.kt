@@ -23,17 +23,17 @@ class RequestsFragment : Fragment() {
     ): View? {
         binding = FragmentRequestsBinding.inflate(inflater)
         binding.viewModel = viewModel
-        // now use nav gaph
+        // now use nav graph
+
 
         val adapter = RequestItemAdapter(RequestItemListener {
+
         })
 
         binding.requestRecyclerView.adapter = adapter
         viewModel.requestList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
-
-
 
 
 

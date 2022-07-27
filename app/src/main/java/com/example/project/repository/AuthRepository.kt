@@ -51,6 +51,8 @@ class AuthRepository @Inject constructor(
     }
 
 
+
+
     suspend fun register(username: String, password: String): Response<AuthenticationResult> {
         Log.d("status", "register")
         // Create JSON using JSONObject

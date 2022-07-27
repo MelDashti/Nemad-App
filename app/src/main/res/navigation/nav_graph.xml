@@ -110,4 +110,8 @@
         android:id="@+id/requestsFragment"
         android:name="com.example.project.ui.main.RequestsFragment"
         android:label="RequestsFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.project.ui.main.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
