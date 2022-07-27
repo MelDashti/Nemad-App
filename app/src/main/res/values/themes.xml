@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.InternProject" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Project" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
 <!--        <item name="android:background">@drawable/background</item>-->
         <item name="colorPrimary">#032886</item>
@@ -15,12 +15,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.InternProject.NoActionBar">
+    <style name="Theme.Project.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.InternProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Project.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.InternProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Project.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

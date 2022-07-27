@@ -6,7 +6,7 @@
         android:icon="@drawable/home_icon"
         android:title="صفحه اصلی" />
     <item
-        android:id="@+id/note_page"
+        android:id="@+id/requestsFragment"
         android:enabled="true"
         android:icon="@drawable/note_icon"
         android:title="درخواست ها" />

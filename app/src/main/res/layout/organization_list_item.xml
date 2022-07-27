@@ -7,11 +7,11 @@
 
         <variable
             name="clickListener"
-            type="com.example.internproject.adapter.OrganizationItemListener" />
+            type="com.example.project.adapter.OrganizationItemListener" />
 
         <variable
             name="organization"
-            type="com.example.internproject.api.main.response.OrganizationalUnits" />
+            type="com.example.project.api.main.response.OrganizationalUnits" />
 
     </data>
 

@@ -11,7 +11,7 @@
         app:startDestination="@id/WelcomeFragment">
         <fragment
             android:id="@+id/RegisterFragment"
-            android:name="com.example.internproject.ui.auth.RegisterFragment"
+            android:name="com.example.project.ui.auth.RegisterFragment"
             android:label="@string/register_fragment_label"
             tools:layout="@layout/fragment_register">
 
@@ -22,7 +22,7 @@
         </fragment>
         <fragment
             android:id="@+id/WelcomeFragment"
-            android:name="com.example.internproject.ui.auth.WelcomeFragment"
+            android:name="com.example.project.ui.auth.WelcomeFragment"
             android:label="@string/welcome_fragment_label"
             tools:layout="@layout/fragment_welcome">
 
@@ -38,7 +38,7 @@
         </fragment>
         <fragment
             android:id="@+id/loginFragment2"
-            android:name="com.example.internproject.ui.auth.LoginFragment"
+            android:name="com.example.project.ui.auth.LoginFragment"
             android:label="LoginFragment"
             tools:layout="@layout/fragment_login" >
             <action
@@ -53,12 +53,12 @@
         </fragment>
         <fragment
             android:id="@+id/forgetPasswordFragment"
-            android:name="com.example.internproject.ui.auth.ForgetPasswordFragment"
+            android:name="com.example.project.ui.auth.ForgetPasswordFragment"
             android:label="fragment_forget_password"
             tools:layout="@layout/fragment_forget_password" />
         <fragment
             android:id="@+id/rememberPasswordFragment"
-            android:name="com.example.internproject.ui.auth.RememberPasswordFragment"
+            android:name="com.example.project.ui.auth.RememberPasswordFragment"
             android:label="RememberPasswordFragment"
             tools:layout="@layout/remember_password_fragment"
             >
@@ -68,13 +68,13 @@
         </fragment>
         <fragment
             android:id="@+id/verificationFragment"
-            android:name="com.example.internproject.ui.auth.VerificationFragment"
+            android:name="com.example.project.ui.auth.VerificationFragment"
             android:label="VerificationFragment"
             tools:layout="@layout/verification_fragment"
             />
         <fragment
             android:id="@+id/resetFragment"
-            android:name="com.example.internproject.ui.auth.ResetFragment"
+            android:name="com.example.project.ui.auth.ResetFragment"
             android:label="ResetFragment"
             tools:layout="@layout/reset_fragment"
             >
@@ -85,22 +85,29 @@
     </navigation>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.internproject.ui.main.MainFragment"
+        android:name="com.example.project.ui.main.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_organizationFragment"
             app:destination="@id/organizationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_requestsFragment"
+            app:destination="@id/requestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.example.internproject.ui.main.FormFragment"
+        android:name="com.example.project.ui.main.FormFragment"
         android:label="FormFragment" />
     <fragment
         android:id="@+id/organizationFragment"
-        android:name="com.example.internproject.ui.main.OrganizationFragment"
+        android:name="com.example.project.ui.main.OrganizationFragment"
         android:label="OrganizationFragment" >
         <action
             android:id="@+id/action_organizationFragment_to_formFragment"
             app:destination="@id/formFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/requestsFragment"
+        android:name="com.example.project.ui.main.RequestsFragment"
+        android:label="RequestsFragment" />
 </navigation>

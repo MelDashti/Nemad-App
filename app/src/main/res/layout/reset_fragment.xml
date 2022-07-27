@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.internproject.viewmodels.ResetViewModel" />
+            type="com.example.project.viewmodels.ResetViewModel" />
     </data>
 
 
