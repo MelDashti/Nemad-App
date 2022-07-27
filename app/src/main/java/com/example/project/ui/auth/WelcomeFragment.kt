@@ -23,7 +23,6 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        hideBottomNavBar()
 
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         binding.signUpButton.setOnClickListener {
@@ -46,10 +45,6 @@ class WelcomeFragment : Fragment() {
 
     }
 
-    fun hideBottomNavBar() {
-        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        view.visibility = View.GONE
-    }
 
 
 }

@@ -27,7 +27,6 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        hideBottomNavBar()
         binding = FragmentRegisterBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -57,9 +56,6 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    fun hideBottomNavBar() {
-        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        view.visibility = View.GONE
-    }
+
 
 }

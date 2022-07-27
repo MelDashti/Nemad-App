@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        hideBottomNavBar()
+
         binding = FragmentLoginBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -46,10 +46,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    fun hideBottomNavBar() {
-        val view = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        view.visibility = View.GONE
-    }
+
 
 
 }
