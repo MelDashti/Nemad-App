@@ -14,16 +14,17 @@ import retrofit2.http.POST
 
 interface MainApiService {
 
+
     @POST("Media")
     suspend fun sendMedia(@Body requestBody: RequestBody): Response<ResponseBody>
 
-    @GET("OrganizationalUnits")
+    @GET("common/organizationalunit")
     suspend fun getOrganizationUnits(): OrganizationalUnits
 
     @POST("Citizen/Request")
     suspend fun sendRequest(@Body requestBody: RequestBody): Response<ComplaintResult>
 
-    @GET("Categories")
+    @GET("common/category")
     suspend fun getCategories(): Category
 
     @GET("Organization")

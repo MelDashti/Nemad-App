@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.project.databinding.ActivityMainBinding
 import com.example.project.util.PreferenceKeys
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         //set nav destinations for bottom navigation buttons
         binding.bottomNavigation.setOnItemSelectedListener {
+            if (it.equals(R.id.mainFragment)) {
+
+            }
+            Log.d("nana", it.itemId.toString())
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
             )

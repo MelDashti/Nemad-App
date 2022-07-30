@@ -19,7 +19,6 @@ class MainRepository @Inject constructor(
 ) {
 
     suspend fun fetchCategories(): Category {
-        Log.d("hehehe", "before connecting to api")
         var response = mainApiService.getCategories()
         return response
     }
@@ -78,8 +77,26 @@ class MainRepository @Inject constructor(
     suspend fun sendFile(string: String) {
         val jsonObject = JSONObject()
         jsonObject.put("File", string)
+        jsonObject.put("AttachmentType", 0)
 
-//        mainApiService.sendMedia()
+        val jsonObjectString = jsonObject.toString()
+        // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
+        // c
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        // Do the POST request and get response
+        val response = mainApiService.sendMedia(requestBody)
+        Log.d("hahahaa", "helloo")
+        if (response.isSuccessful) {
+            Log.d("hahahaa", response.body().toString())
+            Log.d("hahahaa", "whaat")
+
+        } else {
+            Log.d("hahahaa", response.message())
+            Log.d("hahahaa", "lool")
+
+        }
+
+
     }
 
 

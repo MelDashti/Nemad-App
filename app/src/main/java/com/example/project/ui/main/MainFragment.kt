@@ -52,14 +52,11 @@ class MainFragment : BaseFragment() {
         val categoryListAdapter = CategoryItemAdapter(CategoryItemListener {
             //            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListFragment(it))
             if (it.children.isNullOrEmpty()) {
-                Log.d("hello", "empty")
                 viewModel.isLeafNode = true
-                Log.d("lolwa", viewModel.isLeafNode.toString())
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
                 viewModel.leafNodeCategoryId = it.id
             } else {
                 // display list
-                Log.d("hello", "nope")
                 viewModel.subList(it)
             }
         })

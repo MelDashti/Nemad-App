@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) : ViewModel() {
 
-    var settingsList: MutableLiveData<List<UserInfo>?> = MutableLiveData()
+    var settings: MutableLiveData<UserInfo?> = MutableLiveData()
 
     init {
         fetchSettings()
@@ -21,12 +21,15 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
 
     fun fetchSettings() {
         viewModelScope.launch {
-
-
+            settings.value = authRepository.getUserInfo()
 
         }
 
 
+    }
+
+    fun signout() {
+        authRepository.signout()
     }
 
 

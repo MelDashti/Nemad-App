@@ -60,6 +60,7 @@ class FormFragment : Fragment() {
                 if (result.getResultCode() === Activity.RESULT_OK) {
                     val data: Intent = result.getData()!!
                     val uri: Uri? = data.data
+                    viewModel.uploadFile(uri.toString())
                     binding.uploadedFileName.text = uri.toString()
                     viewModel.uploadFile(uri.toString())
                 }

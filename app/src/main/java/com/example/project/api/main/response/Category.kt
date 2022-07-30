@@ -16,7 +16,8 @@ class UserInfo {
 
 
 class Requests {
-    var parentId: Long? = null
+    var employeeName: String? = null
+    var comments: String? = null
     lateinit var id: String
     var title: String? = null
     var description: String? = null

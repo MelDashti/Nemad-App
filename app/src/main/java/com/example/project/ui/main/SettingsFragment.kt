@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.project.R
 import com.example.project.adapter.RequestItemAdapter
 import com.example.project.adapter.RequestItemListener
 import com.example.project.adapter.SettingItemAdapter
 import com.example.project.adapter.SettingItemListener
 import com.example.project.databinding.SettingsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Observer
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -26,13 +29,17 @@ class SettingsFragment : Fragment() {
     ): View? {
         binding = SettingsFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
-
-
-        val adapter = SettingItemAdapter(SettingItemListener {
-
+        viewModel.settings.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            binding.userName.text = it!!.firstName.toString()
+            binding.password.text = it.id.toString()
+            binding.nationalId.text = it!!.nationalId.toString()
         })
-        adapter.submitList(listOf())
 
+        binding.signoutButton.setOnClickListener {
+            viewModel.signout()
+            findNavController().navigate(R.id.action_settingsFragment_to_navigation)
+
+        }
 
 
         return binding.root

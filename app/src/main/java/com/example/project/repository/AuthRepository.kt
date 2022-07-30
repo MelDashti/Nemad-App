@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.project.api.auth.AuthenticationApiService
 import com.example.project.api.auth.responses.AuthenticationResult
+import com.example.project.api.main.response.UserInfo
 import com.example.project.util.PreferenceKeys
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -16,6 +17,14 @@ class AuthRepository @Inject constructor(
     private val authenticationApiService: AuthenticationApiService,
     private val sharedPreferences: SharedPreferences
 ) {
+
+
+    suspend fun getUserInfo(): UserInfo {
+        Log.d("hehehe", "before connecting to api")
+        val response = authenticationApiService.getUserInfo()
+        Log.d("hehehe", response.nationalId.toString())
+        return response
+    }
 
 
     suspend fun verifyCode() {
@@ -51,8 +60,6 @@ class AuthRepository @Inject constructor(
     }
 
 
-
-
     suspend fun register(username: String, password: String): Response<AuthenticationResult> {
         Log.d("status", "register")
         // Create JSON using JSONObject
@@ -81,6 +88,10 @@ class AuthRepository @Inject constructor(
             Log.e("status", response.message().toString())
         }
         return response
+    }
+
+    fun signout() {
+        sharedPreferences.edit().clear().apply()
     }
 
 
