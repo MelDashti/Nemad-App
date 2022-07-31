@@ -11,6 +11,7 @@ import com.example.project.api.main.response.Requests
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import java.io.File
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -79,12 +80,14 @@ class MainRepository @Inject constructor(
         jsonObject.put("File", string)
         jsonObject.put("AttachmentType", 0)
 
+        val file = File(string)
+
         val jsonObjectString = jsonObject.toString()
         // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
         // c
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         // Do the POST request and get response
-        val response = mainApiService.sendMedia(requestBody)
+        val response = mainApiService.sendMedia(string)
         Log.d("hahahaa", "helloo")
         if (response.isSuccessful) {
             Log.d("hahahaa", response.body().toString())

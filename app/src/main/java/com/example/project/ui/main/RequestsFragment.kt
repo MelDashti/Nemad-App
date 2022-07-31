@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
-import com.example.project.R
 import com.example.project.adapter.RequestItemAdapter
-import com.example.project.adapter.RequestItemListener
 import com.example.project.databinding.FragmentRequestsBinding
+import androidx.recyclerview.widget.SimpleItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
+import android.R
+
+import androidx.core.content.ContextCompat
+
 
 class RequestsFragment : Fragment() {
 
-    val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph)
+    val viewModel: MainViewModel by navGraphViewModels(com.example.project.R.id.nav_graph)
     lateinit var binding: FragmentRequestsBinding
 
     override fun onCreateView(
@@ -26,15 +30,23 @@ class RequestsFragment : Fragment() {
         // now use nav graph
 
 
-        val adapter = RequestItemAdapter(RequestItemListener {
-
-        })
+        val adapter = RequestItemAdapter()
+        (binding.requestRecyclerView.getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
+            false
 
         binding.requestRecyclerView.adapter = adapter
         viewModel.requestList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        itemDecorator.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                com.example.project.R.drawable.divider
+            )!!
+        )
+        binding.requestRecyclerView.addItemDecoration(itemDecorator)
 
 
 

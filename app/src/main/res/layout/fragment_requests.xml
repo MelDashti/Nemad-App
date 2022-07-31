@@ -4,36 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.project.ui.main.MainViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coord"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/background">
 
-            <TextView
-                android:id="@+id/header"
-                style="?attr/textAppearanceHeadline6"
+            <LinearLayout
+                android:id="@id/headerLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="48dp"
-                android:layout_marginRight="28dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="درخواست های من"
-                android:textColor="#AD8700"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="28dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:layout_width="218dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:background="#c0c0c0" />
+
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_marginEnd="8dp"
+                    style="?attr/textAppearanceHeadline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="درخواست های من"
+                    android:textColor="#AD8700"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -46,13 +63,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header"
+                app:layout_constraintTop_toBottomOf="@+id/headerLayout"
                 tools:listitem="@layout/organization_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -1,21 +1,24 @@
 package com.example.project.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project.R
 import com.example.project.api.main.response.Requests
 import com.example.project.databinding.RequestListItemBinding
 
-class RequestItemAdapter(private val clickListener: RequestItemListener) :
+class RequestItemAdapter() :
     ListAdapter<Requests, RequestItemViewHolder>(RequestItemDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestItemViewHolder {
         return RequestItemViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: RequestItemViewHolder, position: Int) {
-        holder.bind(getItem(position), clickListener)
+        holder.bind(getItem(position))
     }
 }
 
@@ -38,9 +41,20 @@ class RequestItemDiffUtilCallback : DiffUtil.ItemCallback<Requests>() {
 
 class RequestItemViewHolder(val bind: RequestListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
-    fun bind(requests: Requests, clickListener: RequestItemListener) {
-        bind.clickListener = clickListener
+    fun bind(requests: Requests) {
         bind.request = requests
+        var expanded = requests.expanded
+        bind.toggle.setOnClickListener {
+            expanded = !expanded
+            bind.subItem.visibility = if (expanded) View.VISIBLE else View.GONE
+            if (expanded) {
+                bind.toggle.setImageResource(R.drawable.invertedarrow)
+            } else {
+                bind.toggle.setImageResource(R.drawable.dropdown)
+            }
+
+            requests.expanded = expanded
+        }
     }
 
     companion object {
@@ -52,6 +66,11 @@ class RequestItemViewHolder(val bind: RequestListItemBinding) :
     }
 }
 
-class RequestItemListener(val ClickListener: (requests: Requests) -> Unit) {
-    fun onClick(requests: Requests) = ClickListener(requests)
-}
+
+
+
+
+
+
+
+

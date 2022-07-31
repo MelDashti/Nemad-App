@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.project.R
-import com.example.project.adapter.RequestItemAdapter
-import com.example.project.adapter.RequestItemListener
-import com.example.project.adapter.SettingItemAdapter
-import com.example.project.adapter.SettingItemListener
 import com.example.project.databinding.SettingsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Observer
@@ -31,16 +27,25 @@ class SettingsFragment : Fragment() {
         binding.viewModel = viewModel
         viewModel.settings.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.userName.text = it!!.firstName.toString()
-            binding.password.text = it.id.toString()
             binding.nationalId.text = it!!.nationalId.toString()
         })
 
         binding.signoutButton.setOnClickListener {
             viewModel.signout()
             findNavController().navigate(R.id.action_settingsFragment_to_navigation)
-
         }
 
+        binding.materialCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_userNameFragment)
+        }
+
+        binding.materialCardView2.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_nationalIdFragment)
+        }
+
+        binding.materialCardView3.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_userPasswordFragment)
+        }
 
         return binding.root
     }

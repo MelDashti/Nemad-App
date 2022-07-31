@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.R
 import com.example.project.adapter.OrganizationItemAdapter
 import com.example.project.adapter.OrganizationItemListener
@@ -62,6 +64,15 @@ class OrganizationFragment : Fragment() {
         Log.d("list", "test123")
 //        Log.d("list", viewModel.orgList!![0].title.toString())
         binding.organizationRecyclerView.adapter = organizationItemAdapter
+
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        itemDecorator.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                com.example.project.R.drawable.divider
+            )!!
+        )
+        binding.organizationRecyclerView.addItemDecoration(itemDecorator)
 
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

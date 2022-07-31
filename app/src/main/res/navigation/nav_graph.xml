@@ -117,5 +117,26 @@
         <action
             android:id="@+id/action_settingsFragment_to_navigation"
             app:destination="@id/navigation" />
+        <action
+            android:id="@+id/action_settingsFragment_to_nationalIdFragment"
+            app:destination="@id/nationalIdFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_userNameFragment"
+            app:destination="@id/userNameFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_userPasswordFragment"
+            app:destination="@id/userPasswordFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userNameFragment"
+        android:name="com.example.project.ui.main.UserNameFragment"
+        android:label="UserNameFragment" />
+    <fragment
+        android:id="@+id/userPasswordFragment"
+        android:name="com.example.project.ui.main.UserPasswordFragment"
+        android:label="UserPasswordFragment" />
+    <fragment
+        android:id="@+id/nationalIdFragment"
+        android:name="com.example.project.ui.main.NationalIdFragment"
+        android:label="NationalIdFragment" />
 </navigation>

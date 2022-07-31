@@ -5,9 +5,7 @@ import com.example.project.api.main.response.*
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 // api for authentication
@@ -15,8 +13,9 @@ import retrofit2.http.POST
 interface MainApiService {
 
 
+    @FormUrlEncoded
     @POST("Media")
-    suspend fun sendMedia(@Body requestBody: RequestBody): Response<ResponseBody>
+    suspend fun sendMedia(@Field("file") file: String): Response<ResponseBody>
 
     @GET("common/organizationalunit")
     suspend fun getOrganizationUnits(): OrganizationalUnits

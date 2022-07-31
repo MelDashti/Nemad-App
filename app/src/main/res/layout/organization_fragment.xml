@@ -29,7 +29,7 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginRight="28dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text="انتخاب سازمان مورد نظر"
+                android:text="انتخاب واحد سازمانی"
                 android:textColor="#AD8700"
                 android:textSize="16sp"
                 android:textStyle="bold"

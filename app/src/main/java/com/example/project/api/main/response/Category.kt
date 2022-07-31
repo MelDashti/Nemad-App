@@ -20,8 +20,9 @@ class Requests {
     var comments: String? = null
     lateinit var id: String
     var title: String? = null
-    var description: String? = null
-    var children: List<Category>? = null
+    var organizationalUnit: OrganizationalUnits? = null
+    var expanded: Boolean = false
+
 }
 
 
