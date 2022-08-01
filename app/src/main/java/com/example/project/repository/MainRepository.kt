@@ -2,17 +2,22 @@ package com.example.project.repository
 
 import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
 import com.example.project.api.main.MainApiService
-import com.example.project.api.main.response.Category
-import com.example.project.api.main.response.Organization
-import com.example.project.api.main.response.OrganizationalUnits
-import com.example.project.api.main.response.Requests
+import com.example.project.api.main.response.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.File
 import javax.inject.Inject
+import okhttp3.MultipartBody
+
+import okhttp3.RequestBody
+import org.json.JSONArray
+import retrofit2.Response
+
 
 class MainRepository @Inject constructor(
     private val mainApiService: MainApiService,
@@ -48,14 +53,22 @@ class MainRepository @Inject constructor(
         complaintHeader: String,
         complaintText: String,
         orgId: Long,
-        leafNodeCategoryId: Long
+        leafNodeCategoryId: Long,
+        attachmentFiles: List<String>
     ) {
         val jsonObject = JSONObject()
+
+        val attachmentFilesJson = JSONArray()
+        attachmentFiles.forEach {
+            attachmentFilesJson.put(it)
+        }
+
         jsonObject.put("categoryID", leafNodeCategoryId)
         jsonObject.put("organizationalUnitId", orgId)
         jsonObject.put("employeeName", managerName)
         jsonObject.put("title", complaintHeader)
         jsonObject.put("comment", complaintText)
+        jsonObject.put("attachmentFiles", attachmentFilesJson)
 
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
@@ -65,8 +78,11 @@ class MainRepository @Inject constructor(
         // Do the POST request and get response
         val response = mainApiService.sendRequest(requestBody)
         if (response.isSuccessful) {
+            Log.d("finally", "over")
+            Log.d("finally", attachmentFilesJson.toString())
 
         } else {
+            Log.d("finally", "not over")
 
 
         }
@@ -75,30 +91,15 @@ class MainRepository @Inject constructor(
     }
 
 
-    suspend fun sendFile(string: String) {
-        val jsonObject = JSONObject()
-        jsonObject.put("File", string)
-        jsonObject.put("AttachmentType", 0)
+    suspend fun sendFile(string: File): Response<MediaResponse> {
 
-        val file = File(string)
+        val reqBody: RequestBody =
+            RequestBody.create("multipart/form-file".toMediaTypeOrNull(), string)
+        val partImage = MultipartBody.Part.createFormData("file", string.getName(), reqBody)
+        val response = mainApiService.sendMedia(partImage)
 
-        val jsonObjectString = jsonObject.toString()
-        // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
-        // c
-        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-        // Do the POST request and get response
-        val response = mainApiService.sendMedia(string)
-        Log.d("hahahaa", "helloo")
-        if (response.isSuccessful) {
-            Log.d("hahahaa", response.body().toString())
-            Log.d("hahahaa", "whaat")
-
-        } else {
-            Log.d("hahahaa", response.message())
-            Log.d("hahahaa", "lool")
-
-        }
-
+        Log.d("lolaaa", response.toString())
+        return response
 
     }
 

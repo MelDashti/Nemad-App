@@ -1,27 +1,32 @@
 package com.example.project
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.project.databinding.ActivityMainBinding
+import com.example.project.ui.main.MainViewModel
 import com.example.project.util.PreferenceKeys
+import com.example.project.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    val viewModel: MainViewModel by viewModels()
     lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         //set nav destinations for bottom navigation buttons
         binding.bottomNavigation.setOnItemSelectedListener {
-            if (it.equals(R.id.mainFragment)) {
-
+            if (it.itemId == 2131296532) {
+                viewModel.clearAllData()
+                Log.d("haaa", "hello")
             }
-            Log.d("nana", it.itemId.toString())
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
             )

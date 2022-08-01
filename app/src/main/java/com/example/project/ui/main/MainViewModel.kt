@@ -10,6 +10,7 @@ import com.example.project.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.io.File
 import java.util.*
 import javax.inject.Inject
 
@@ -18,6 +19,9 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     var orgId: Long = 0
     var leafNodeCategoryId: Long = 0
+
+    private val _mediaResponse = MutableLiveData<Response<MediaResponse>>()
+    val mediaResponse: LiveData<Response<MediaResponse>> = _mediaResponse
 
     private val _complaintResponse = MutableLiveData<Response<ComplaintResult>>()
     val complaintResponse: LiveData<Response<ComplaintResult>> = _complaintResponse
@@ -129,6 +133,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     }
 
+
     fun clearData() {
         categoryList.value = null
         orgId = 0
@@ -148,7 +153,12 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 //
 //    }
 
-    fun sendRequest(managerName: String, complaintHeader: String, complaintText: String) {
+    fun sendRequest(
+        managerName: String,
+        complaintHeader: String,
+        complaintText: String,
+        attachmentFiles: List<String>
+    ) {
         viewModelScope.launch {
 
             mainRepository.sendComplaint(
@@ -156,7 +166,8 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                 complaintHeader,
                 complaintText,
                 orgId,
-                leafNodeCategoryId
+                leafNodeCategoryId,
+                attachmentFiles
             )
         }
     }
@@ -172,10 +183,20 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     }
 
-    fun uploadFile(toString: String) {
+    fun uploadFile(file: File) {
         viewModelScope.launch {
-            mainRepository.sendFile(toString)
+            _mediaResponse.value = mainRepository.sendFile(file)
         }
+    }
+
+    fun clearAllData() {
+        orgList.value = null
+        categoryList.value = null
+        orgUnitList = null
+        orgId = 0
+        leafNodeCategoryId = 0
+        parentCategoryList.clear()
+
     }
 
 

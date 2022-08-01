@@ -5,6 +5,10 @@ class ComplaintResult {
     var message: String? = null
 }
 
+class MediaResponse {
+    var id: String? = null
+}
+
 
 class UserInfo {
     var id: String? = null
