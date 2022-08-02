@@ -20,10 +20,7 @@ class AuthRepository @Inject constructor(
 
 
     suspend fun getUserInfo(): UserInfo {
-        Log.d("hehehe", "before connecting to api")
-        val response = authenticationApiService.getUserInfo()
-        Log.d("hehehe", response.nationalId.toString())
-        return response
+        return authenticationApiService.getUserInfo()
     }
 
 
@@ -43,18 +40,14 @@ class AuthRepository @Inject constructor(
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
 
-        // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-        // Do the POST request and get response
         val response = authenticationApiService.loginUser(requestBody)
         if (response.isSuccessful) {
-            // Convert raw JSON to pretty JSON using GSON library
-            Log.d("lala", response.body()!!.token.toString())
             val token = response.body()!!.token
             sharedPreferences.edit().putString(PreferenceKeys.PREFERENCE_AUTH_KEY, token)
                 .apply()
         } else {
-            Log.e("lala", response.message().toString())
+            Log.e("response", response.message().toString())
         }
         return response
     }
@@ -62,29 +55,16 @@ class AuthRepository @Inject constructor(
 
     suspend fun register(username: String, password: String): Response<AuthenticationResult> {
         Log.d("status", "register")
-        // Create JSON using JSONObject
         val jsonObject = JSONObject()
         jsonObject.put("username", username)
         jsonObject.put("password", password)
-
-        // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
-
-        // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-
-        // Do the POST request and get response
         val response = authenticationApiService.createUser(requestBody)
-
         if (response.isSuccessful) {
-            // Convert raw JSON to pretty JSON using GSON library
-            Log.d("status", response.body().toString())
             Log.d("status", response.message())
 
         } else {
-
-            Log.e("status", response.code().toString())
-            Log.e("status", response.body().toString())
             Log.e("status", response.message().toString())
         }
         return response

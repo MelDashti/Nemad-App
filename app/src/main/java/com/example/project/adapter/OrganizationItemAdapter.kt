@@ -36,7 +36,7 @@ class OrganizationItemDiffUtilCallback : DiffUtil.ItemCallback<OrganizationalUni
     }
 }
 
-class OrganizationItemViewHolder(val bind: OrganizationListItemBinding) :
+class OrganizationItemViewHolder(private val bind: OrganizationListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
     fun bind(organization: OrganizationalUnits, clickListener: OrganizationItemListener) {
         bind.clickListener = clickListener

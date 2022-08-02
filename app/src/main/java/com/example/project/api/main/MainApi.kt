@@ -4,7 +4,6 @@ package com.example.project.api.main
 import com.example.project.api.main.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -31,9 +30,6 @@ interface MainApiService {
 
     @GET("Organization")
     suspend fun getOrganizations(): MutableList<Organization>
-
-    @GET("Categories")
-    suspend fun getCategory(id: Long): Category
 
     @GET("Citizen/Request")
     suspend fun getRequests(): MutableList<Requests>

@@ -65,7 +65,7 @@ object NetworkModule {
     }
 
     @Singleton
-    @Provides()
+    @Provides
     fun provideAuthInterceptor(sharedPreferences: SharedPreferences): AuthInterceptor {
         return AuthInterceptor(sharedPreferences)
     }

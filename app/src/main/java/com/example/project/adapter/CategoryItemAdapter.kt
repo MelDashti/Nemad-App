@@ -30,7 +30,7 @@ class CategoryItemDiffUtilCallback : DiffUtil.ItemCallback<Category>() {
     }
 }
 
-class CategoryItemViewHolder(val bind: CategoryListItemBinding) :
+class CategoryItemViewHolder(private val bind: CategoryListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
     fun bind(category: Category, clickListener: CategoryItemListener) {
         bind.clickListener = clickListener

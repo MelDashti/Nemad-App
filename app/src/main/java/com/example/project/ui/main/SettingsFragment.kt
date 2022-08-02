@@ -1,16 +1,15 @@
 package com.example.project.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.project.R
 import com.example.project.databinding.SettingsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Observer
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -22,12 +21,12 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = SettingsFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
-        viewModel.settings.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.settings.observe(viewLifecycleOwner, {
             binding.userName.text = it!!.firstName.toString()
-            binding.nationalId.text = it!!.nationalId.toString()
+            binding.nationalId.text = it.nationalId.toString()
         })
 
         binding.signoutButton.setOnClickListener {

@@ -1,7 +1,6 @@
 package com.example.project.api.auth
 
 import com.example.project.api.auth.responses.AuthenticationResult
-import com.example.project.api.main.response.OrganizationalUnits
 import com.example.project.api.main.response.UserInfo
 import okhttp3.RequestBody
 import retrofit2.Response

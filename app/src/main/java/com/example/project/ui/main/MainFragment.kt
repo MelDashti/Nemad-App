@@ -3,17 +3,14 @@ package com.example.project.ui.main
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.project.BaseFragment
@@ -29,20 +26,19 @@ class MainFragment : BaseFragment() {
 
     override var bottomNavigationViewVisibility = View.VISIBLE
     val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
+
+    //    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = MainFragmentBinding.inflate(inflater, container, false);
+    ): View {
+        binding = MainFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
 
-        Log.d("test", viewModel.test.toString())
-        viewModel.changeTest()
-        Log.d("test", viewModel.test.toString())
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -72,14 +68,18 @@ class MainFragment : BaseFragment() {
                 categoryListAdapter.submitList(viewModel.categoryList.value)
             } else {
                 viewModel.fetchCat()
-                viewModel.fetchOrg()
             }
             binding.categoryRecyclerView.adapter = categoryListAdapter
         }
 
-        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
+        viewModel.categoryList.observe(viewLifecycleOwner, {
             categoryListAdapter.submitList(it)
         })
+
+//        viewModel.clearRecyclerView.observe(viewLifecycleOwner, {
+//            Log.d("fdsaf", "inside listener right now")
+//            categoryListAdapter.currentList.clear()
+//        })
 
 
         if (viewModel.isLeafNode) {
@@ -92,7 +92,7 @@ class MainFragment : BaseFragment() {
         }
 
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // Handle the back button event
             if (viewModel.categoryList.value.isNullOrEmpty()) {
                 findNavController().popBackStack()

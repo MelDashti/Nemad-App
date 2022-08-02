@@ -4,20 +4,16 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.project.api.main.MainApiService
 import com.example.project.api.main.response.*
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.File
 import javax.inject.Inject
 import okhttp3.MultipartBody
-
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONArray
 import retrofit2.Response
-
 
 class MainRepository @Inject constructor(
     private val mainApiService: MainApiService,
@@ -25,27 +21,20 @@ class MainRepository @Inject constructor(
 ) {
 
     suspend fun fetchCategories(): Category {
-        var response = mainApiService.getCategories()
-        return response
+        return mainApiService.getCategories()
     }
 
     suspend fun fetchRequests(): MutableList<Requests> {
-        Log.d("response1", "before getting requests")
-        var response = mainApiService.getRequests()
-        Log.d("response1", response[0].id)
-        return response
+        return mainApiService.getRequests()
     }
 
 
     suspend fun fetchOrganizationalUnits(): OrganizationalUnits {
-        Log.d("hehehe", "before connecting to api")
-        var response = mainApiService.getOrganizationUnits()
-        return response
+        return mainApiService.getOrganizationUnits()
     }
 
     suspend fun fetchOrganization(): MutableList<Organization> {
-        var response = mainApiService.getOrganizations()
-        return response
+        return mainApiService.getOrganizations()
     }
 
     suspend fun sendComplaint(
@@ -70,19 +59,14 @@ class MainRepository @Inject constructor(
         jsonObject.put("comment", complaintText)
         jsonObject.put("attachmentFiles", attachmentFilesJson)
 
-        // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
-        // Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
-        // c
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-        // Do the POST request and get response
         val response = mainApiService.sendRequest(requestBody)
         if (response.isSuccessful) {
-            Log.d("finally", "over")
-            Log.d("finally", attachmentFilesJson.toString())
+            Log.d("response", "Successful")
 
         } else {
-            Log.d("finally", "not over")
+            Log.d("response", response.errorBody().toString())
 
 
         }
@@ -94,12 +78,9 @@ class MainRepository @Inject constructor(
     suspend fun sendFile(string: File): Response<MediaResponse> {
 
         val reqBody: RequestBody =
-            RequestBody.create("multipart/form-file".toMediaTypeOrNull(), string)
-        val partImage = MultipartBody.Part.createFormData("file", string.getName(), reqBody)
-        val response = mainApiService.sendMedia(partImage)
-
-        Log.d("lolaaa", response.toString())
-        return response
+            string.asRequestBody("multipart/form-file".toMediaTypeOrNull())
+        val partImage = MultipartBody.Part.createFormData("file", string.name, reqBody)
+        return mainApiService.sendMedia(partImage)
 
     }
 

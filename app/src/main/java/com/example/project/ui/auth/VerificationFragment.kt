@@ -20,7 +20,7 @@ class VerificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = VerificationFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

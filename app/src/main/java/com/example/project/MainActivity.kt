@@ -1,6 +1,5 @@
 package com.example.project
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,18 +8,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.project.databinding.ActivityMainBinding
 import com.example.project.ui.main.MainViewModel
 import com.example.project.util.PreferenceKeys
-import com.example.project.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -32,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding =
-            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val navController = findNavController(R.id.nav_host_fragment)
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
@@ -43,9 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         //set nav destinations for bottom navigation buttons
         binding.bottomNavigation.setOnItemSelectedListener {
-            if (it.itemId == 2131296532) {
+            Log.d("fdsaf", it.toString())
+            Log.d("fdsaf", it.itemId.toString())
+            if (it.itemId == R.id.mainFragment) {
+                Log.d("fdsaf", "before clearing data")
                 viewModel.clearAllData()
-                Log.d("haaa", "hello")
+                //                navController.graph.clear()
             }
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
@@ -60,13 +57,12 @@ class MainActivity : AppCompatActivity() {
         val defaultValue = "empty"
         val token =
             sharedPreferences.getString(PreferenceKeys.PREFERENCE_AUTH_KEY, defaultValue)
-        Log.d("helllo", token.toString())
 
         if (token == null || token == "empty") {
-            graph.setStartDestination(R.id.navigation)
+            graph.startDestination = R.id.navigation
         } else {
             Log.d("token ", token)
-            graph.setStartDestination(R.id.mainFragment)
+            graph.startDestination = R.id.mainFragment
         }
         navController.graph = graph
 
@@ -91,7 +87,7 @@ abstract class BaseFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         // get the reference of the parent activity and call the setBottomNavigationVisibility method.
         if (activity is MainActivity) {
-            var mainActivity = activity as MainActivity
+            val mainActivity = activity as MainActivity
             mainActivity.setBottomNavigationVisibility(bottomNavigationViewVisibility)
         }
     }

@@ -26,8 +26,8 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     private val _complaintResponse = MutableLiveData<Response<ComplaintResult>>()
     val complaintResponse: LiveData<Response<ComplaintResult>> = _complaintResponse
 
-    var parentCategoryList: Stack<List<Category>> = Stack()
-    var parentOrganizationalUnitsList: Stack<List<OrganizationalUnits>> = Stack()
+    private var parentCategoryList: Stack<List<Category>> = Stack()
+    private var parentOrganizationalUnitsList: Stack<List<OrganizationalUnits>> = Stack()
 
     var organizationalUnitsList: MutableLiveData<List<OrganizationalUnits>?> = MutableLiveData()
     var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
@@ -35,22 +35,21 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
 
-    var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
-    private val _orgResponse = MutableLiveData<Category>()
-    val orgResponse: LiveData<Category> = _orgResponse
-    var test: Int = 0
+    private var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
 
-    var orgUnitList: List<OrganizationalUnits>? = null
-    var list: List<Category>? = null
+    private var orgUnitList: List<OrganizationalUnits>? = null
+    private var list: List<Category>? = null
 
     var isLeafNode: Boolean = false
     var isOrgLeafNode: Boolean = false
 
+    private val _clearRecyclerView = MutableLiveData<Boolean>()
+    val clearRecyclerView: LiveData<Boolean> = _clearRecyclerView
+
+
     private val _response = MutableLiveData<Category>()
     val response: LiveData<Category> = _response
 
-    private val _showSublist = MutableLiveData<Boolean>()
-    val showSublist: LiveData<Boolean> = _showSublist
 
     init {
         fetchCat()
@@ -59,26 +58,21 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
 
-    fun fetchOrg() {
-        viewModelScope.launch {
-            try {
-                Log.d("hehehe", "before fetching ord")
-                orgList!!.value = mainRepository.fetchOrganization()
-                Log.d("hehehe", orgList!!.value!!.size.toString())
-            } catch (e: java.lang.Exception) {
-                Log.d("hehehe", e.localizedMessage)
-            }
-        }
-    }
+//    fun fetchOrg() {
+//        viewModelScope.launch {
+//            try {
+//                orgList.value = mainRepository.fetchOrganization()
+//            } catch (e: java.lang.Exception) {
+//            }
+//        }
+//    }
 
 
-    fun fetchRequests() {
+    private fun fetchRequests() {
         viewModelScope.launch {
             try {
-                Log.d("hehehe", "before fetching requests")
-                requestList!!.value = mainRepository.fetchRequests()
+                requestList.value = mainRepository.fetchRequests()
             } catch (e: java.lang.Exception) {
-                Log.d("hehehe", e.localizedMessage)
             }
         }
     }
@@ -87,33 +81,25 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     fun fetchCat() {
         viewModelScope.launch {
             try {
-                Log.d("hehehe", "before fetching")
                 val category = mainRepository.fetchCategories()
                 list = listOf(category)
                 categoryList.value = mainRepository.fetchCategories().children
 
             } catch (e: Exception) {
-                Log.d("hehehe", e.localizedMessage)
             }
         }
     }
 
-    fun fetchOrgUnits() {
+    private fun fetchOrgUnits() {
         viewModelScope.launch {
             try {
-                Log.d("hehehe", "before fetching")
                 val organizationalUnits = mainRepository.fetchOrganizationalUnits()
                 orgUnitList = listOf(organizationalUnits)
                 organizationalUnitsList.value = mainRepository.fetchOrganizationalUnits().children
 
             } catch (e: Exception) {
-                Log.d("hehehe", e.localizedMessage)
             }
         }
-    }
-
-    fun showSublist() {
-        _showSublist.value = true
     }
 
     fun subList(category: Category) {
@@ -128,11 +114,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         organizationalUnitsList.value = organizationalUnits.children
     }
 
-    fun changeTest() {
-        test = 99
-
-    }
-
 
     fun clearData() {
         categoryList.value = null
@@ -140,18 +121,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         leafNodeCategoryId = 0
     }
 
-    fun clearOrgData() {
-//        organizationalUnitsList.value = null
-        orgId = 0
-    }
-
-//    fun getCategory(currentParentId: Long) {
-//        viewModelScope.launch {
-//            mainRepository.getCategory(currentParentId)
-//
-//        }
-//
-//    }
 
     fun sendRequest(
         managerName: String,
@@ -173,13 +142,13 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
     fun setAsParent() {
-        categoryList.value = parentCategoryList.pop() as List<Category>?
+        categoryList.value = parentCategoryList.pop()
 
     }
 
     fun setAsOrgParent() {
         organizationalUnitsList.value =
-            parentOrganizationalUnitsList.pop() as List<OrganizationalUnits>?
+            parentOrganizationalUnitsList.pop()
 
     }
 
@@ -195,7 +164,16 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         orgUnitList = null
         orgId = 0
         leafNodeCategoryId = 0
+        parentOrganizationalUnitsList.clear()
+        organizationalUnitsList.value = null
+        list = null
+        isLeafNode = false
+        isOrgLeafNode = false
         parentCategoryList.clear()
+        _clearRecyclerView.value = true
+        Log.d("fdsaf", "inside model right now")
+        Log.d("fdsaf", clearRecyclerView.value.toString())
+
 
     }
 

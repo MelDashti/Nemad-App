@@ -1,6 +1,5 @@
 package com.example.project.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.example.project.R
 import com.example.project.api.main.response.Requests
 import com.example.project.databinding.RequestListItemBinding
 
-class RequestItemAdapter() :
+class RequestItemAdapter :
     ListAdapter<Requests, RequestItemViewHolder>(RequestItemDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestItemViewHolder {
         return RequestItemViewHolder.from(parent)
@@ -39,7 +38,7 @@ class RequestItemDiffUtilCallback : DiffUtil.ItemCallback<Requests>() {
     }
 }
 
-class RequestItemViewHolder(val bind: RequestListItemBinding) :
+class RequestItemViewHolder(private val bind: RequestListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
     fun bind(requests: Requests) {
         bind.request = requests

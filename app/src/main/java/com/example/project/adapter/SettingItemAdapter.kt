@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.project.api.main.response.Requests
 import com.example.project.api.main.response.UserInfo
-import com.example.project.databinding.RequestListItemBinding
 import com.example.project.databinding.SettingListItemBinding
 
 class SettingItemAdapter(private val clickListener: SettingItemListener) :
@@ -38,7 +36,7 @@ class SettingItemDiffUtilCallback : DiffUtil.ItemCallback<UserInfo>() {
     }
 }
 
-class SettingItemViewHolder(val bind: SettingListItemBinding) :
+class SettingItemViewHolder(private val bind: SettingListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
     fun bind(userInfo: UserInfo, clickListener: SettingItemListener) {
         bind.clickListener = clickListener
