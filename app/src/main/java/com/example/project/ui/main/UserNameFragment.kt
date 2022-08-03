@@ -5,15 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.project.R
+import com.example.project.databinding.FragmentUserNameBinding
 
 class UserNameFragment : Fragment() {
+
+    lateinit var binding: FragmentUserNameBinding
+    val viewModel by activityViewModels<SettingsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_user_name, container, false)
+    ): View {
+        binding = FragmentUserNameBinding.inflate(inflater)
+        binding.confirmButton.setOnClickListener {
+            val firstName = binding.nameEditText.text.toString().trim()
+            val lastName = binding.surnameEditText.text.toString().trim()
+            viewModel.setUserName(firstName, lastName)
+
+        }
+
+
+        return binding.root
     }
 
 }

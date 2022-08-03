@@ -31,25 +31,25 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-
         //bottom navigation setup
+
         binding.bottomNavigation.setupWithNavController(navController)
 
         //set nav destinations for bottom navigation buttons
+
         binding.bottomNavigation.setOnItemSelectedListener {
-            Log.d("fdsaf", it.toString())
             Log.d("fdsaf", it.itemId.toString())
             if (it.itemId == R.id.mainFragment) {
                 Log.d("fdsaf", "before clearing data")
                 viewModel.clearAllData()
                 //                navController.graph.clear()
             }
+
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
             )
         }
         binding.bottomNavigation.selectedItemId = R.id.mainFragment
-
 
         // checking for token and choosing starting nav graph
         val sharedPreferences =
@@ -99,5 +99,4 @@ abstract class BaseFragment : Fragment() {
         }
     }
 }
-
 

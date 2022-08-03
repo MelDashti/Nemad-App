@@ -139,4 +139,9 @@
         android:id="@+id/nationalIdFragment"
         android:name="com.example.project.ui.main.NationalIdFragment"
         android:label="NationalIdFragment" />
+    <fragment
+        android:id="@+id/polls"
+        android:name="com.example.project.ui.main.Polls"
+        android:label="polls_fragment"
+        tools:layout="@layout/polls_fragment" />
 </navigation>

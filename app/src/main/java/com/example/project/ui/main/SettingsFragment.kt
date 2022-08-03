@@ -25,7 +25,7 @@ class SettingsFragment : Fragment() {
         binding = SettingsFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
         viewModel.settings.observe(viewLifecycleOwner, {
-            binding.userName.text = it!!.firstName.toString()
+            binding.userName.text = it!!.firstName.toString() + " " + it!!.lastName.toString()
             binding.nationalId.text = it.nationalId.toString()
         })
 

@@ -17,7 +17,7 @@
         android:title="تنظیمات" />
 
     <item
-        android:id="@+id/stats_page"
+        android:id="@+id/polls"
         android:enabled="true"
         android:icon="@drawable/stats_icon"
         android:title="نظرسنجی" />

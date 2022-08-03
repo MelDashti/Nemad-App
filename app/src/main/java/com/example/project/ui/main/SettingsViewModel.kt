@@ -31,5 +31,24 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
         authRepository.signout()
     }
 
+    fun setUserName(firstName: String, lastName: String) {
+        viewModelScope.launch {
+            authRepository.setUserName(firstName, lastName)
+        }
+    }
+
+    fun setNationalId(nationalId: String) {
+        viewModelScope.launch {
+            authRepository.setNationalId(nationalId)
+        }
+    }
+
+    fun setNewPassword(currentPassword: String, newPassword: String) {
+        viewModelScope.launch {
+            authRepository.setPassword(currentPassword, newPassword)
+        }
+
+    }
+
 
 }
