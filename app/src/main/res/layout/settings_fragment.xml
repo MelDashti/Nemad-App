@@ -229,9 +229,9 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:paddingEnd="16dp"
-                    android:textColor="@color/black"
-                    android:textAlignment="textEnd"
                     android:text="************"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -239,7 +239,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/password_title"
                     app:layout_constraintVertical_chainStyle="packed" />
 
-                <!--            android:text="@{request.title}"-->
                 <TextView
                     android:id="@+id/password_title"
                     android:layout_width="0dp"

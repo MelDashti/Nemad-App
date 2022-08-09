@@ -38,9 +38,6 @@ class MainFragment : BaseFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requireActivity().window.statusBarColor = requireActivity().getColor(R.color.white)
         }
@@ -57,8 +54,22 @@ class MainFragment : BaseFragment() {
             }
         })
 
+
         binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         addDecorationToGroupRecyclerView()
+
+        // search bar
+        viewModel.startSearch.observe(viewLifecycleOwner, {
+            initializeSearch()
+        })
+//
+//        viewModel.searchResultList.observe(viewLifecycleOwner, {
+//            categoryListAdapter.submitList(it)
+//        })
+
+        viewModel._query.observe(viewLifecycleOwner, {
+            viewModel.search(it)
+        })
 
 
         //floating action button
@@ -92,6 +103,8 @@ class MainFragment : BaseFragment() {
         }
 
 
+
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // Handle the back button event
             if (viewModel.categoryList.value.isNullOrEmpty()) {
@@ -112,6 +125,26 @@ class MainFragment : BaseFragment() {
         }
 
         return binding.root
+    }
+
+    private fun initializeSearch() {
+        val searchView = binding.searchBar
+        searchView.isIconified = false
+        searching(searchView)
+    }
+
+    private fun searching(search: androidx.appcompat.widget.SearchView) {
+        search.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchNow(newText)
+                return false
+            }
+        })
     }
 
 

@@ -33,6 +33,7 @@ class SettingsFragment : Fragment() {
             viewModel.signout()
             findNavController().navigate(R.id.action_settingsFragment_to_navigation)
         }
+        //signout section of the app
 
         binding.materialCardView.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_userNameFragment)

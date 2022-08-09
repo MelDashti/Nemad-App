@@ -1,14 +1,12 @@
 package com.example.project.ui.main
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.project.api.main.response.*
 import com.example.project.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.internal.concurrent.Task
 import retrofit2.Response
 import java.io.File
 import java.util.*
@@ -43,6 +41,25 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     var isLeafNode: Boolean = false
     var isOrgLeafNode: Boolean = false
 
+    private val _query = MutableLiveData<String>()
+    private val _startSearch = MutableLiveData<Boolean>()
+
+    // related to search
+    val searchResultList: LiveData<MutableList<Category>> =
+        Transformations.switchMap(_query, ::search)
+    val startSearch: LiveData<Boolean> = _startSearch
+
+    private fun search(query: String?): LiveData<MutableList<Category>> {
+        val result: MutableList<Category> = mutableListOf()
+        if (!query.isNullOrEmpty()) {
+            categoryList.value!!.forEach {
+                if (it.title!! == query)
+                    result.add(it)
+            }
+        }
+    }
+
+
     private val _clearRecyclerView = MutableLiveData<Boolean>()
     val clearRecyclerView: LiveData<Boolean> = _clearRecyclerView
 
@@ -55,6 +72,8 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         fetchCat()
         fetchOrgUnits()
         fetchRequests()
+        _startSearch.value = false
+        searchNow("")
     }
 
 
@@ -151,6 +170,19 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             parentOrganizationalUnitsList.pop()
 
     }
+
+    fun searchNow(query: String?) {
+        _query.value = query!!
+    }
+
+    fun startOrgSearch() {
+        _startSearch.value = true
+    }
+
+    fun startCategorySearch() {
+        _startSearch.value = true
+    }
+
 
     fun uploadFile(file: File) {
         viewModelScope.launch {

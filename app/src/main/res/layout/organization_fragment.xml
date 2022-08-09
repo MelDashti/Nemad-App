@@ -20,13 +20,34 @@
             android:layout_height="match_parent"
             android:background="@drawable/background">
 
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/ic_rect"
+                android:backgroundTint="@color/primaryColor"
+                android:clickable="true"
+                android:focusable="true"
+                android:iconifiedByDefault="false"
+                android:onClick="@{()->viewModel.startOrgSearch()}"
+                android:queryHint="Search For Tasks"
+                app:defaultQueryHint="Search For Tasks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <TextView
                 android:id="@+id/header"
                 style="?attr/textAppearanceHeadline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginRight="28dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="انتخاب واحد سازمانی"
@@ -34,7 +55,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -49,7 +70,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header"
                 tools:listitem="@layout/organization_list_item" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
