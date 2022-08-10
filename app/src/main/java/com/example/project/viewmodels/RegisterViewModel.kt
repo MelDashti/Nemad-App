@@ -47,7 +47,6 @@ class RegisterViewModel @Inject constructor(val authRepository: AuthRepository) 
                 Log.d("status", username)
                 _response.value = authRepository.register(username, password)
             } catch (e: Exception) {
-                Log.d("status", e.localizedMessage)
 
             }
         }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.project.R
 import com.example.project.databinding.FragmentUserNationalIdBinding
 import com.example.project.databinding.SettingsFragmentBinding
@@ -25,6 +26,8 @@ class NationalIdFragment : Fragment() {
         binding.confirmButton.setOnClickListener {
             val nationalID = binding.nationalIdEditText.text.toString().trim()
             viewModel.setNationalId(nationalID)
+            findNavController().popBackStack()
+            viewModel.fetchSettings()
         }
 
 

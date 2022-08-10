@@ -28,7 +28,12 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     private var parentOrganizationalUnitsList: Stack<List<OrganizationalUnits>> = Stack()
 
     var organizationalUnitsList: MutableLiveData<List<OrganizationalUnits>?> = MutableLiveData()
+    var organizationalUnitsListSearch: MutableLiveData<List<OrganizationalUnits>?> =
+        MutableLiveData()
+
+
     var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
+    var categoryListSearch: MutableLiveData<List<Category>?> = MutableLiveData()
 
 
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
@@ -43,21 +48,24 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     private val _query = MutableLiveData<String>()
     private val _startSearch = MutableLiveData<Boolean>()
+    private val _startOrgSearch = MutableLiveData<Boolean>()
 
     // related to search
-    val searchResultList: LiveData<MutableList<Category>> =
-        Transformations.switchMap(_query, ::search)
+//    val searchResultList: LiveData<MutableList<Category>> =
+//        Transformations.switchMap(_query, ::search)
     val startSearch: LiveData<Boolean> = _startSearch
-
-    private fun search(query: String?): LiveData<MutableList<Category>> {
-        val result: MutableList<Category> = mutableListOf()
-        if (!query.isNullOrEmpty()) {
-            categoryList.value!!.forEach {
-                if (it.title!! == query)
-                    result.add(it)
-            }
-        }
-    }
+    val startOrgSearch: LiveData<Boolean> = _startOrgSearch
+//
+//    private fun search(query: String?) {
+//        val result: MutableList<Category> = mutableListOf()
+//        if (!query.isNullOrEmpty()) {
+//            categoryList.value!!.forEach {
+//                if (it.title!! == query)
+//                    result.add(it)
+//            }
+//            categoryList.postValue(result)
+//        }
+//    }
 
 
     private val _clearRecyclerView = MutableLiveData<Boolean>()
@@ -73,7 +81,9 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         fetchOrgUnits()
         fetchRequests()
         _startSearch.value = false
+        _startOrgSearch.value = false
         searchNow("")
+        searchOrgNow("")
     }
 
 
@@ -102,7 +112,9 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             try {
                 val category = mainRepository.fetchCategories()
                 list = listOf(category)
-                categoryList.value = mainRepository.fetchCategories().children
+                val catVal = mainRepository.fetchCategories().children
+                categoryList.value = catVal
+                categoryListSearch.value = catVal
 
             } catch (e: Exception) {
             }
@@ -114,7 +126,8 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             try {
                 val organizationalUnits = mainRepository.fetchOrganizationalUnits()
                 orgUnitList = listOf(organizationalUnits)
-                organizationalUnitsList.value = mainRepository.fetchOrganizationalUnits().children
+                organizationalUnitsList.value = organizationalUnits.children
+                organizationalUnitsListSearch.value = organizationalUnits.children
 
             } catch (e: Exception) {
             }
@@ -125,12 +138,15 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         if (!categoryList.value.isNullOrEmpty())
             parentCategoryList.add(categoryList.value)
         categoryList.value = category.children
+        categoryListSearch.value = category.children
     }
 
     fun subOrgList(organizationalUnits: OrganizationalUnits) {
         if (!organizationalUnitsList.value.isNullOrEmpty())
             parentOrganizationalUnitsList.add(organizationalUnitsList.value)
+
         organizationalUnitsList.value = organizationalUnits.children
+        organizationalUnitsListSearch.value = organizationalUnits.children
     }
 
 
@@ -161,22 +177,61 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     }
 
     fun setAsParent() {
-        categoryList.value = parentCategoryList.pop()
+        val temp = parentCategoryList.pop()
+        categoryList.value = temp
+        categoryListSearch.value = temp
 
     }
 
     fun setAsOrgParent() {
-        organizationalUnitsList.value =
-            parentOrganizationalUnitsList.pop()
-
+        val temp = parentOrganizationalUnitsList.pop()
+        organizationalUnitsList.value = temp
+        organizationalUnitsListSearch.value = temp
     }
+
+    fun searchOrgNow(query: String?) {
+        _query.value = query!!
+        //make a copy of category list
+        if (!query.isNullOrEmpty())
+            organizationalUnitsList.value = searchOrgQuery(query)
+        else {
+        }
+    }
+
+    private fun searchOrgQuery(query: String): List<OrganizationalUnits> {
+        val newList: MutableList<OrganizationalUnits> = mutableListOf()
+        organizationalUnitsListSearch.value!!.forEach {
+            if (it.title!!.contains(query))
+                newList.add(it)
+        }
+        return newList
+    }
+
 
     fun searchNow(query: String?) {
         _query.value = query!!
+        //make a copy of category list
+        if (!query.isNullOrEmpty())
+            categoryList.value = searchQuery(query)
+        else {
+
+        }
+
+
     }
 
+    private fun searchQuery(query: String): List<Category> {
+        val newList: MutableList<Category> = mutableListOf()
+        categoryListSearch.value!!.forEach {
+            if (it.title!!.contains(query))
+                newList.add(it)
+        }
+        return newList
+    }
+
+
     fun startOrgSearch() {
-        _startSearch.value = true
+        _startOrgSearch.value = true
     }
 
     fun startCategorySearch() {
@@ -208,6 +263,15 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
 
     }
+
+    fun searchDone() {
+        _startSearch.value = false
+    }
+
+    fun searchOrgDone() {
+        _startSearch.value = false
+    }
+
 
 
 }

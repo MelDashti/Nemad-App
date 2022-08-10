@@ -1,6 +1,7 @@
 package com.example.project.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,18 +38,24 @@ class RegisterFragment : BaseFragment() {
         })
 
         viewModel.response.observe(viewLifecycleOwner, {
-            if (it.isSuccessful) {
+            Log.d("codeva", it.code().toString())
+            if (it.code() == 428) {
                 findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
                 Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()
+                Log.d("code", "428")
+            } else if (it.code() == 406) {
+                Toast.makeText(
+                    requireContext(),
+                    "کاربری با این نام کاربری پیش از این ثبت شده است.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("code", "406")
             } else {
                 Toast.makeText(requireContext(), "خطا سرور", Toast.LENGTH_SHORT).show()
             }
 
 
         })
-
-
-
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }

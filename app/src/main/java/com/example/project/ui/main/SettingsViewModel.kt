@@ -18,7 +18,7 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
         fetchSettings()
     }
 
-    private fun fetchSettings() {
+     fun fetchSettings() {
         viewModelScope.launch {
             settings.value = authRepository.getUserInfo()
 
@@ -26,6 +26,8 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
 
 
     }
+
+
 
     fun signout() {
         authRepository.signout()

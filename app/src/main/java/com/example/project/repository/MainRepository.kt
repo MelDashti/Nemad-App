@@ -20,8 +20,12 @@ class MainRepository @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
 
+    var list: List<Category>? = listOf()
+
     suspend fun fetchCategories(): Category {
-        return mainApiService.getCategories()
+        val category = mainApiService.getCategories()
+        list = category.children
+        return category
     }
 
     suspend fun fetchRequests(): MutableList<Requests> {
@@ -83,6 +87,8 @@ class MainRepository @Inject constructor(
         return mainApiService.sendMedia(partImage)
 
     }
+
+
 
 
 }

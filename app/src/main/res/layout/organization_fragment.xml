@@ -34,8 +34,8 @@
                 android:focusable="true"
                 android:iconifiedByDefault="false"
                 android:onClick="@{()->viewModel.startOrgSearch()}"
-                android:queryHint="Search For Tasks"
-                app:defaultQueryHint="Search For Tasks"
+                android:queryHint="جستجو"
+                app:defaultQueryHint="جستجو"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -107,11 +107,21 @@ class AuthRepository @Inject constructor(
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val response = authenticationApiService.createUser(requestBody)
+        if (response.code() == 428) {
+            Log.d("status", "required")
+            Log.d("status", response.errorBody().toString())
+        }
+
         if (response.isSuccessful) {
-            Log.d("status", response.message())
+            Log.d("status", response.body()!!.message.toString())
+            Log.d("status", "hello")
 
         } else {
             Log.e("status", response.message().toString())
+            Log.d("status", response.errorBody().toString())
+            Log.d("status", "noo")
+
+
         }
         return response
     }

@@ -47,6 +47,15 @@ class OrganizationFragment : Fragment() {
 
         })
 
+        // search bar
+        viewModel.startOrgSearch.observe(viewLifecycleOwner, {
+            if (it) {
+                initializeSearch()
+                viewModel.searchOrgDone()
+            }
+        })
+
+
         viewModel.organizationalUnitsList.observe(viewLifecycleOwner, {
             organizationItemAdapter.submitList(it)
         })
@@ -99,6 +108,25 @@ class OrganizationFragment : Fragment() {
             viewModel.setAsOrgParent()
 
         }
+    }
+
+    private fun initializeSearch() {
+        val searchView = binding.searchBar
+        searching(searchView)
+    }
+
+    private fun searching(search: androidx.appcompat.widget.SearchView) {
+        search.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchOrgNow(newText)
+                return false
+            }
+        })
     }
 
 

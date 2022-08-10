@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.project.R
 import com.example.project.databinding.FragmentUserNameBinding
 
@@ -24,7 +25,8 @@ class UserNameFragment : Fragment() {
             val firstName = binding.nameEditText.text.toString().trim()
             val lastName = binding.surnameEditText.text.toString().trim()
             viewModel.setUserName(firstName, lastName)
-
+            findNavController().popBackStack()
+            viewModel.fetchSettings()
         }
 
 

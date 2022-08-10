@@ -48,6 +48,7 @@ class MainFragment : BaseFragment() {
                 viewModel.isLeafNode = true
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
                 viewModel.leafNodeCategoryId = it.id
+
             } else {
                 // display list
                 viewModel.subList(it)
@@ -60,16 +61,19 @@ class MainFragment : BaseFragment() {
 
         // search bar
         viewModel.startSearch.observe(viewLifecycleOwner, {
-            initializeSearch()
+            if (it) {
+                initializeSearch()
+                viewModel.searchDone()
+            }
         })
 //
 //        viewModel.searchResultList.observe(viewLifecycleOwner, {
 //            categoryListAdapter.submitList(it)
 //        })
 
-        viewModel._query.observe(viewLifecycleOwner, {
-            viewModel.search(it)
-        })
+//        viewModel._query.observe(viewLifecycleOwner, {
+//            viewModel.search(it)
+//        })
 
 
         //floating action button
@@ -129,7 +133,6 @@ class MainFragment : BaseFragment() {
 
     private fun initializeSearch() {
         val searchView = binding.searchBar
-        searchView.isIconified = false
         searching(searchView)
     }
 
@@ -142,6 +145,7 @@ class MainFragment : BaseFragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.searchNow(newText)
+
                 return false
             }
         })

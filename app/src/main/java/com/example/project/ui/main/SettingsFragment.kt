@@ -1,5 +1,6 @@
 package com.example.project.ui.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,7 @@ class SettingsFragment : Fragment() {
         })
 
         binding.signoutButton.setOnClickListener {
-            viewModel.signout()
-            findNavController().navigate(R.id.action_settingsFragment_to_navigation)
+            showAlertDialog(it)
         }
         //signout section of the app
 
@@ -47,7 +47,22 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.action_settingsFragment_to_userPasswordFragment)
         }
 
+
         return binding.root
+    }
+
+    private fun showAlertDialog(it: View?) {
+        val builder = AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        //titles
+        builder.setTitle("خروج")
+        builder.setMessage("آیا مطمئن هستید که می خواهید از سیستم خارج شوید؟")
+        //buttons
+        builder.setPositiveButton("تایید") { _, _ ->
+            findNavController().navigate(R.id.action_settingsFragment_to_navigation)
+            viewModel.signout()
+        }
+        builder.setNegativeButton("انصراف", null)
+        builder.show()
     }
 
 
