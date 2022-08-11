@@ -10,62 +10,44 @@
             type="com.example.project.ui.main.MainViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coord"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:background="@drawable/ic_rect"
-                android:backgroundTint="@color/primaryColor"
-                android:clickable="true"
-                android:focusable="true"
-                android:iconifiedByDefault="false"
-                android:onClick="@{()->viewModel.startCategorySearch()}"
-                android:queryHint="جستجو"
-                app:defaultQueryHint="جستجو"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:padding="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_bar"
-                tools:listitem="@layout/category_list_item" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_button"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:layout_marginStart="27dp"
-            android:layout_marginBottom="80dp"
-            android:backgroundTint="#032886"
-            android:src="@drawable/add_white_24dp"
-            app:iconTint="@color/white"
-            app:tint="@color/white" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_rect"
+            android:backgroundTint="@color/primaryColor"
+            android:clickable="true"
+            android:focusable="true"
+            android:iconifiedByDefault="false"
+            android:onClick="@{()->viewModel.startCategorySearch()}"
+            android:queryHint="جستجو"
+            app:defaultQueryHint="جستجو"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            tools:listitem="@layout/category_list_item" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

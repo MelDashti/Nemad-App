@@ -23,7 +23,8 @@ class Requests {
     var employeeName: String? = null
     var comments: String? = null
     lateinit var id: String
-    var status : Int = 1
+    var status : Int = 0
+    var statusStr: String? = null
     var title: String? = null
     var organizationalUnit: OrganizationalUnits? = null
     var expanded: Boolean = false

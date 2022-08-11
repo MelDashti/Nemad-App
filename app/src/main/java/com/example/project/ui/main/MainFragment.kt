@@ -77,15 +77,13 @@ class MainFragment : BaseFragment() {
 
 
         //floating action button
-        binding.floatingButton.setOnClickListener {
 
-            if (!viewModel.categoryList.value.isNullOrEmpty()) {
-                categoryListAdapter.submitList(viewModel.categoryList.value)
-            } else {
-                viewModel.fetchCat()
-            }
-            binding.categoryRecyclerView.adapter = categoryListAdapter
-        }
+//            if (!viewModel.categoryList.value.isNullOrEmpty()) {
+//                categoryListAdapter.submitList(viewModel.categoryList.value)
+//            } else {
+//                viewModel.fetchCat()
+//            }
+        binding.categoryRecyclerView.adapter = categoryListAdapter
 
         viewModel.categoryList.observe(viewLifecycleOwner, {
             categoryListAdapter.submitList(it)

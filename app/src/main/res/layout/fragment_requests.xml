@@ -7,9 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.ui.main.MainViewModel" />
+            type="com.example.project.ui.main.RequestsViewModel" />
     </data>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coord"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,11 +40,11 @@
 
                 <TextView
                     android:id="@+id/header"
-                    android:layout_marginEnd="8dp"
                     style="?attr/textAppearanceHeadline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="8dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="درخواست های من"
                     android:textColor="#AD8700"
@@ -51,7 +55,6 @@
 
 
             </LinearLayout>
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/request_recycler_view"
@@ -70,4 +73,17 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="27dp"
+            android:layout_marginBottom="80dp"
+            android:backgroundTint="#032886"
+            android:src="@drawable/add_white_24dp"
+            app:iconTint="@color/white"
+            app:tint="@color/white" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

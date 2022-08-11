@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         //set nav destinations for bottom navigation buttons
 
         binding.bottomNavigation.setOnItemSelectedListener {
-            Log.d("fdsaf", it.itemId.toString())
-            if (it.itemId == R.id.mainFragment) {
-                Log.d("fdsaf", "before clearing data")
-                viewModel.clearAllData()
-                //                navController.graph.clear()
-            }
+//            Log.d("fdsaf", it.itemId.toString())
+//            if (it.itemId == R.id.mainFragment) {
+//                Log.d("fdsaf", "before clearing data")
+//                viewModel.clearAllData()
+//                //                navController.graph.clear()
+//            }
 
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             graph.startDestination = R.id.navigation
         } else {
             Log.d("token ", token)
-            graph.startDestination = R.id.mainFragment
+            graph.startDestination = R.id.homeFragment
         }
         navController.graph = graph
 
