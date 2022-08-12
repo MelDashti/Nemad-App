@@ -1,20 +1,27 @@
 package com.example.project.ui.main
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.BaseFragment
 import com.example.project.R
+import com.example.project.adapter.RequestItemAdapter
+import com.example.project.adapter.RequestItemListener
 import com.example.project.databinding.HomeFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
+
     override var bottomNavigationViewVisibility = View.VISIBLE
-    private lateinit var viewModel: HomeViewModel
+    val viewModel: RequestsViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
     lateinit var binding: HomeFragmentBinding
 
     override fun onCreateView(
@@ -25,6 +32,35 @@ class HomeFragment : BaseFragment() {
         binding.floatingButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mainFragment)
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireActivity().window.statusBarColor =
+                requireActivity().getColor(R.color.primaryColor)
+        }
+
+        viewModel.refreshRecentRequests()
+
+        val adapter = RequestItemAdapter(RequestItemListener {
+            viewModel.requests.value = it
+            findNavController().navigate(R.id.action_homeFragment_to_myRequestFragment)
+
+        })
+        binding.requestRecyclerView.adapter = adapter
+
+        viewModel.recentRequestList.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
+        })
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        itemDecorator.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                com.example.project.R.drawable.divider
+            )!!
+        )
+
+        binding.requestRecyclerView.addItemDecoration(itemDecorator)
+
+
         return binding.root
     }
 

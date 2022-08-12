@@ -16,75 +16,82 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/primaryColor"
-        android:onClick="@{()-> clickListener.onClick(request)}">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="6dp">
 
-        <LinearLayout
-            android:id="@+id/req_status"
-            android:layout_width="140dp"
-            android:layout_height="43dp"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/primaryColor"
+            android:onClick="@{()-> clickListener.onClick(request)}">
 
-            <ImageView
-                android:id="@+id/toggle"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="center_vertical"
-                android:scaleType="center"
-                android:src="@drawable/dropdown" />
+            <LinearLayout
+                android:id="@+id/req_status"
+                android:layout_width="140dp"
+                android:layout_height="43dp"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/toggle"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="center"
+                    android:src="@drawable/dropdown" />
+
+                <TextView
+                    android:id="@+id/status_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <!--            android:text="@{request.title}"-->
             <TextView
-                android:id="@+id/status_title"
-                android:layout_width="wrap_content"
+                android:id="@+id/item_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:maxLines="1"
+                android:paddingEnd="16dp"
+                android:text="@{request.organizationalUnit.title}"
                 android:textColor="@color/black"
-                android:textSize="11sp" />
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/req_status"
+                app:layout_constraintTop_toBottomOf="@+id/org_name"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        </LinearLayout>
+            <!--            android:text="@{request.title}"-->
+            <TextView
+                android:id="@+id/org_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxLines="1"
+                android:paddingEnd="16dp"
+                android:text="@{request.title}"
+                android:textColor="#032886"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <!--            android:text="@{request.title}"-->
-        <TextView
-            android:id="@+id/item_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="@{request.organizationalUnit.title}"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/req_status"
-            app:layout_constraintTop_toBottomOf="@+id/org_name"
-            app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--            android:text="@{request.title}"-->
-        <TextView
-            android:id="@+id/org_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:text="@{request.title}"
-            android:textColor="#032886"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

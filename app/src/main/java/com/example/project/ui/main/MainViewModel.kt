@@ -165,7 +165,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     ) {
         viewModelScope.launch {
 
-            mainRepository.sendComplaint(
+            _complaintResponse.value = mainRepository.sendComplaint(
                 managerName,
                 complaintHeader,
                 complaintText,
@@ -271,7 +271,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     fun searchOrgDone() {
         _startSearch.value = false
     }
-
 
 
 }

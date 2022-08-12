@@ -52,7 +52,6 @@
                 android:id="@+id/complaint_header_input_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:singleLine="true"
                 android:textSize="13sp" />
 

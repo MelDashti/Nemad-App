@@ -38,10 +38,6 @@ class MainFragment : BaseFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requireActivity().window.statusBarColor = requireActivity().getColor(R.color.white)
-        }
-
         val categoryListAdapter = CategoryItemAdapter(CategoryItemListener {
             //            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListFragment(it))
             if (it.children.isNullOrEmpty()) {

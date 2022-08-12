@@ -39,7 +39,6 @@ class RequestsFragment : Fragment() {
         // now use nav graph
         val adapter = RequestItemAdapter(RequestItemListener {
             viewModel.requests.value = it
-            Log.d("hahaa", viewModel.requests.value.toString())
             findNavController().navigate(R.id.action_requestsFragment_to_myRequestFragment)
 
         })

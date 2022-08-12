@@ -163,5 +163,8 @@
         <action
             android:id="@+id/action_homeFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myRequestFragment"
+            app:destination="@id/myRequestFragment" />
     </fragment>
 </navigation>

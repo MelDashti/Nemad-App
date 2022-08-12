@@ -34,8 +34,8 @@ class FormFragment : Fragment() {
         binding.sendRequest.setOnClickListener {
 
             val managerName = binding.managerNameTextInput.text.toString().trim()
-            val complaintHeader = binding.complaintHeaderInputText.toString().trim()
-            val complaintText = binding.complaintTextInput.toString().trim()
+            val complaintHeader = binding.complaintHeaderInputText.text.toString().trim()
+            val complaintText = binding.complaintTextInput.text.toString().trim()
             viewModel.sendRequest(
                 managerName,
                 complaintHeader,
@@ -46,13 +46,23 @@ class FormFragment : Fragment() {
         }
 
         viewModel.complaintResponse.observe(viewLifecycleOwner, {
+            Log.d("youo","na")
+
             if (it.isSuccessful) {
+                Log.d("youo","success")
                 Toast.makeText(
                     requireContext(),
                     "درخواست شما با موفقیت ارسال شد",
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
+            } else {
+                Log.d("youo","yep")
+
+                Toast.makeText(
+                    requireContext(),
+                    "خظا سرور",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         })

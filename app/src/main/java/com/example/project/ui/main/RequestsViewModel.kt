@@ -17,16 +17,34 @@ class RequestsViewModel @Inject constructor(val mainRepository: MainRepository) 
 
 
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
+    var recentRequestList: MutableLiveData<List<Requests>?> = MutableLiveData()
+
+
     var requests: MutableLiveData<Requests> = MutableLiveData()
 
     init {
         fetchRequests()
+//        fetchRecentRequests()
     }
 
     private fun fetchRequests() {
         viewModelScope.launch {
             try {
                 requestList.value = mainRepository.fetchRequests()
+            } catch (e: java.lang.Exception) {
+            }
+        }
+    }
+
+    fun refreshRecentRequests() {
+        fetchRecentRequests()
+    }
+
+
+    private fun fetchRecentRequests() {
+        viewModelScope.launch {
+            try {
+                recentRequestList.value = mainRepository.fetchRecentRequests()
             } catch (e: java.lang.Exception) {
             }
         }

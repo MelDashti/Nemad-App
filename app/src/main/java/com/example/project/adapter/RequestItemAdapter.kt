@@ -27,14 +27,14 @@ class RequestItemDiffUtilCallback : DiffUtil.ItemCallback<Requests>() {
         oldItem: Requests,
         newItem: Requests
     ): Boolean {
-        return oldItem === newItem
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
         oldItem: Requests,
         newItem: Requests
     ): Boolean {
-        return oldItem == newItem
+        return oldItem === newItem
     }
 }
 
@@ -43,7 +43,7 @@ class RequestItemViewHolder(private val bind: RequestListItemBinding) :
     fun bind(requests: Requests, clickListener: RequestItemListener) {
         bind.clickListener = clickListener
         bind.request = requests
-        Log.d("sdsd",requests.statusStr.toString())
+        Log.d("sdsd", requests.statusStr.toString())
         when (requests.statusStr) {
             "WaitingForAcceptance" -> {
                 bind.toggle.setImageResource(R.drawable.waitingforacceptance)

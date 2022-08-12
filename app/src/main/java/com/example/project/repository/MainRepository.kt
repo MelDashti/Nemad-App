@@ -32,6 +32,10 @@ class MainRepository @Inject constructor(
         return mainApiService.getRequests()
     }
 
+    suspend fun fetchRecentRequests(): MutableList<Requests>{
+        return mainApiService.getRequestsDesc()
+    }
+
 
     suspend fun fetchOrganizationalUnits(): OrganizationalUnits {
         return mainApiService.getOrganizationUnits()
@@ -48,7 +52,7 @@ class MainRepository @Inject constructor(
         orgId: Long,
         leafNodeCategoryId: Long,
         attachmentFiles: List<String>
-    ) {
+    ): Response<ComplaintResult> {
         val jsonObject = JSONObject()
 
         val attachmentFilesJson = JSONArray()
@@ -60,20 +64,20 @@ class MainRepository @Inject constructor(
         jsonObject.put("organizationalUnitId", orgId)
         jsonObject.put("employeeName", managerName)
         jsonObject.put("title", complaintHeader)
-        jsonObject.put("comment", complaintText)
+        jsonObject.put("comments", complaintText)
         jsonObject.put("attachmentFiles", attachmentFilesJson)
 
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        Log.d("request1123",requestBody.toString())
         val response = mainApiService.sendRequest(requestBody)
         if (response.isSuccessful) {
             Log.d("response", "Successful")
-
         } else {
             Log.d("response", response.errorBody().toString())
 
-
         }
+        return response
 
 
     }

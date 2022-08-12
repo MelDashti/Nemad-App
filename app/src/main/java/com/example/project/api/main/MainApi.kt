@@ -34,4 +34,10 @@ interface MainApiService {
     @GET("Citizen/Request")
     suspend fun getRequests(): MutableList<Requests>
 
+    @GET("Citizen/Request?PageSize=4&OrderBy.Column=sent&OrderBy.Type=desc")
+    suspend fun getRequestsDesc(): MutableList<Requests>
+
+
+
+
 }
