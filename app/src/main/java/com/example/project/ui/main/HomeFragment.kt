@@ -1,17 +1,13 @@
 package com.example.project.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.project.BaseFragment
 import com.example.project.R
-import com.example.project.databinding.FragmentMyRequestBinding
 import com.example.project.databinding.HomeFragmentBinding
-import com.example.project.databinding.HomeFragmentBindingImpl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,11 +24,7 @@ class HomeFragment : BaseFragment() {
         binding = HomeFragmentBinding.inflate(inflater)
         binding.floatingButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mainFragment)
-
         }
-
-
-
         return binding.root
     }
 

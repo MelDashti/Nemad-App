@@ -12,7 +12,6 @@
     </data>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,7 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:paddingEnd="16dp"
-            tools:text="این یک عنوان آزمایشی برای درخواست مورد نظر می باشد."
             android:text="@{viewModel.requests.title}"
             android:textColor="#032886"
             android:textSize="12sp"
@@ -69,25 +67,28 @@
             app:layout_constraintEnd_toEndOf="@+id/headerLayout"
             app:layout_constraintTop_toBottomOf="@+id/headerLayout"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="این یک عنوان آزمایشی برای درخواست مورد نظر می باشد." />
 
         <!--            android:text="@{request.title}"-->
         <TextView
             android:id="@+id/org_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxLines="1"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
             android:paddingEnd="16dp"
-            tools:text="تاریخ درخواست | سازمان مربوطه"
             android:text="@{viewModel.requests.organizationalUnit.title}"
             android:textColor="#6A6A6A"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/item_title"
+            app:layout_constraintStart_toStartOf="@+id/item_title"
             app:layout_constraintTop_toBottomOf="@+id/item_title"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="تاریخ درخواست | سازمان مربوطه" />
 
         <LinearLayout
             android:id="@+id/req_status"
@@ -106,19 +107,19 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                android:src="@drawable/dropdown" />
+                app:type="@{viewModel.requests.statusStr}" />
 
             <TextView
                 android:id="@+id/status_title"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
                 android:maxLines="1"
-                android:text="در انظار تایید"
+                tools:text="در انظار تایید"
                 android:textColor="@color/black"
                 android:textSize="11sp"
-                 />
+                app:status="@{viewModel.requests.statusStr}" />
         </LinearLayout>
 
 
@@ -151,7 +152,6 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
-                android:text="نوع درخواست:"
                 android:textColor="#032886"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -159,7 +159,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"
+                app:req_name="@{viewModel.requests.category.title}"
+                app:type="@{`req_type`}"
+                tools:text="@string/req_type" />
 
             <TextView
                 android:id="@+id/org_unit_name"
@@ -168,10 +171,12 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
-                android:text="واحد سازمانی: "
                 android:textColor="#032886"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:req_name="@{viewModel.requests.organizationalUnit.title}"
+                app:type="@{`org_unit_name`}"
+                tools:text="@string/org_unit_name" />
 
             <TextView
                 android:id="@+id/employee_name"
@@ -180,10 +185,12 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
-                android:text="نام کارمند: "
                 android:textColor="#032886"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:req_name="@{viewModel.requests.employeeName}"
+                app:type="@{`employee_name`}"
+                tools:text="@string/employee_name" />
 
             <TextView
                 android:id="@+id/req_code"
@@ -192,10 +199,12 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
-                android:text="کد پیگیری: "
                 android:textColor="#032886"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:req_name="@{viewModel.requests.trackingNumber}"
+                app:type="@{`req_code`}"
+                tools:text="@string/req_code" />
 
             <TextView
                 android:id="@+id/req_description"
@@ -203,10 +212,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:paddingEnd="16dp"
-                android:text="توضیحات درخواست:"
                 android:textColor="#032886"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:req_name="@{viewModel.requests.comments}"
+                app:type="@{`req_description`}"
+                tools:text="@string/req_description" />
 
 
         </LinearLayout>
@@ -248,6 +259,8 @@
         </LinearLayout>
 
 
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sendRequest"
             android:layout_width="0dp"
@@ -255,7 +268,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="120dp"
             android:backgroundTint="#AD8700"
-            android:text="ارسال درخواست"
+            android:text="ارسال امتیاز"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="100dp"
@@ -265,10 +278,6 @@
             app:layout_constraintVertical_chainStyle="packed">
 
         </com.google.android.material.button.MaterialButton>
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
