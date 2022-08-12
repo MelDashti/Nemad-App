@@ -151,6 +151,7 @@
             android:layout_marginStart="24dp"
             android:text="حداکثر حجم فایل ارسال 8 مگابایت فرمت های مجاز: jpg,ppt,doc,pdf"
             app:layout_constraintBottom_toBottomOf="@+id/uploadFile"
+            app:layout_constraintEnd_toEndOf="@+id/complaint_text"
             app:layout_constraintStart_toEndOf="@+id/uploadFile"
             app:layout_constraintTop_toTopOf="@+id/uploadFile"
             app:layout_constraintVertical_bias="0.666" />

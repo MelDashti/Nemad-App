@@ -28,10 +28,14 @@
 
             <action
                 android:id="@+id/action_WelcomeFragment_to_RegisterFragment"
-                app:destination="@id/RegisterFragment" />
+                app:destination="@id/RegisterFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
             <action
                 android:id="@+id/action_WelcomeFragment_to_loginFragment2"
-                app:destination="@id/loginFragment2" />
+                app:destination="@id/loginFragment2"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
 
         </fragment>
         <fragment
@@ -89,10 +93,14 @@
         android:label="RequestsFragment" >
         <action
             android:id="@+id/action_requestsFragment_to_myRequestFragment"
-            app:destination="@id/myRequestFragment" />
+            app:destination="@id/myRequestFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_requestsFragment_to_mainFragment"
-            app:destination="@id/navigation2" />
+            app:destination="@id/navigation2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -101,7 +109,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_navigation"
             app:destination="@id/navigation"
-            app:popUpTo="@+id/WelcomeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/navigation"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_settingsFragment_to_nationalIdFragment"
@@ -141,10 +151,14 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_mainFragment"
-            app:destination="@id/navigation2" />
+            app:destination="@id/navigation2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_homeFragment_to_myRequestFragment"
-            app:destination="@id/myRequestFragment" />
+            app:destination="@id/myRequestFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <navigation android:id="@+id/navigation2"
         app:startDestination="@id/mainFragment">
@@ -154,7 +168,9 @@
             android:label="MainFragment">
             <action
                 android:id="@+id/action_mainFragment_to_organizationFragment"
-                app:destination="@id/organizationFragment" />
+                app:destination="@id/organizationFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
 
         </fragment>
         <fragment
@@ -163,7 +179,9 @@
             android:label="OrganizationFragment">
             <action
                 android:id="@+id/action_organizationFragment_to_formFragment"
-                app:destination="@id/formFragment" />
+                app:destination="@id/formFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
         </fragment>
         <fragment
             android:id="@+id/formFragment"

@@ -58,8 +58,8 @@ class SettingsFragment : Fragment() {
         builder.setMessage("آیا مطمئن هستید که می خواهید از سیستم خارج شوید؟")
         //buttons
         builder.setPositiveButton("تایید") { _, _ ->
-            findNavController().navigate(R.id.action_settingsFragment_to_navigation)
             viewModel.signout()
+            findNavController().navigate(R.id.action_settingsFragment_to_navigation)
         }
         builder.setNegativeButton("انصراف", null)
         builder.show()
