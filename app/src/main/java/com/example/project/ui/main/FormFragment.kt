@@ -20,7 +20,7 @@ import com.example.project.util.FileUtil.from
 
 class FormFragment : Fragment() {
 
-    val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
+    val viewModel: MainViewModel by navGraphViewModels(R.id.navigation2) { defaultViewModelProviderFactory }
     lateinit var binding: FormFragmentBinding
     private var attachmentFiles: MutableList<String> = mutableListOf()
 

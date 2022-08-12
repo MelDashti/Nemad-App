@@ -21,5 +21,10 @@
         android:enabled="true"
         android:icon="@drawable/stats_icon"
         android:title="نظرسنجی" />
+    <item
+        android:id="@+id/navigation2"
+        android:title=""
+        android:visible="false" />
+
 
 </menu>

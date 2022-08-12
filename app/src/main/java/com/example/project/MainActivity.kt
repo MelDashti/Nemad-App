@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 it
             )
         }
-        binding.bottomNavigation.selectedItemId = R.id.mainFragment
+//        binding.bottomNavigation.selectedItemId = R.id.homeFragment
 
         // checking for token and choosing starting nav graph
         val sharedPreferences =

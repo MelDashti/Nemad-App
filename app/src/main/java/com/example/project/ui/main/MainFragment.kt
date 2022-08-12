@@ -18,6 +18,7 @@ import com.example.project.R
 import com.example.project.adapter.CategoryItemAdapter
 import com.example.project.adapter.CategoryItemListener
 import com.example.project.databinding.MainFragmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : BaseFragment() {
 
     override var bottomNavigationViewVisibility = View.VISIBLE
-    val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
+    val viewModel: MainViewModel by navGraphViewModels(R.id.navigation2) { defaultViewModelProviderFactory }
 
     //    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
@@ -37,6 +38,9 @@ class MainFragment : BaseFragment() {
         binding = MainFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+//        val navBar = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+//        navBar.menu.findItem(R.id.mainFragment).isChecked = true
 
         val categoryListAdapter = CategoryItemAdapter(CategoryItemListener {
             //            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListFragment(it))

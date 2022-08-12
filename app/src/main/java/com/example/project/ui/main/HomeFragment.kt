@@ -14,6 +14,7 @@ import com.example.project.R
 import com.example.project.adapter.RequestItemAdapter
 import com.example.project.adapter.RequestItemListener
 import com.example.project.databinding.HomeFragmentBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +31,12 @@ class HomeFragment : BaseFragment() {
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
         binding.floatingButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_mainFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_mainFragment)
+            val navBar =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            navBar.menu.findItem(R.id.navigation2).isChecked = true
+            val view: View = navBar.findViewById(R.id.navigation2)
+            view.performClick()
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -84,27 +84,6 @@
         </fragment>
     </navigation>
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.project.ui.main.MainFragment"
-        android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_organizationFragment"
-            app:destination="@id/organizationFragment" />
-
-    </fragment>
-    <fragment
-        android:id="@+id/formFragment"
-        android:name="com.example.project.ui.main.FormFragment"
-        android:label="FormFragment" />
-    <fragment
-        android:id="@+id/organizationFragment"
-        android:name="com.example.project.ui.main.OrganizationFragment"
-        android:label="OrganizationFragment" >
-        <action
-            android:id="@+id/action_organizationFragment_to_formFragment"
-            app:destination="@id/formFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/requestsFragment"
         android:name="com.example.project.ui.main.RequestsFragment"
         android:label="RequestsFragment" >
@@ -113,7 +92,7 @@
             app:destination="@id/myRequestFragment" />
         <action
             android:id="@+id/action_requestsFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/navigation2" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -162,9 +141,33 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/navigation2" />
         <action
             android:id="@+id/action_homeFragment_to_myRequestFragment"
             app:destination="@id/myRequestFragment" />
     </fragment>
+    <navigation android:id="@+id/navigation2"
+        app:startDestination="@id/mainFragment">
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.example.project.ui.main.MainFragment"
+            android:label="MainFragment">
+            <action
+                android:id="@+id/action_mainFragment_to_organizationFragment"
+                app:destination="@id/organizationFragment" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/organizationFragment"
+            android:name="com.example.project.ui.main.OrganizationFragment"
+            android:label="OrganizationFragment">
+            <action
+                android:id="@+id/action_organizationFragment_to_formFragment"
+                app:destination="@id/formFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/formFragment"
+            android:name="com.example.project.ui.main.FormFragment"
+            android:label="FormFragment" />
+    </navigation>
 </navigation>
