@@ -70,7 +70,20 @@ class AuthRepository @Inject constructor(
     }
 
 
-    suspend fun verifyCode() {
+    suspend fun verifyCode(username: String, password: String, verificationCode: String) {
+
+        val jsonObject = JSONObject()
+        jsonObject.put("username", username)
+        jsonObject.put("password", password)
+        jsonObject.put("verificationCode", verificationCode)
+        // Convert JSONObject to String
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val response = authenticationApiService.verify(requestBody)
+        if (response.isSuccessful) {
+            Log.d("status2", "Successful")
+            Log.d("status2", response.message().toString())
+        } else Log.d("status", "Failed")
 
 
     }
@@ -128,6 +141,20 @@ class AuthRepository @Inject constructor(
 
     fun signout() {
         sharedPreferences.edit().clear().apply()
+    }
+
+    fun sendPhoneNumber(phoneNo: String) {
+//        val jsonObject = JSONObject()
+//        jsonObject.put("firstName", firstName)
+//        jsonObject.put("lastName", lastName)
+//        // Convert JSONObject to String
+//        val jsonObjectString = jsonObject.toString()
+//
+//        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+//        val response = authenticationApiService.setUserInfo(requestBody)
+//        if (response.isSuccessful) {
+//            Log.d("status", "Successful")
+//        } else Log.d("status", "Failed")
     }
 
 

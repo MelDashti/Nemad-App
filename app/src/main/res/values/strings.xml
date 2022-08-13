@@ -32,4 +32,6 @@
     <string name="req_code">کد پیگیری:</string>
     <string name="employee_name">نام کارمند:</string>
     <string name="req_description">توضیحات درخواست:</string>
+    <string name="signup_question">اکانت کاربری ندارید؟</string>
+    <string name="signup_confirmation">هم اکنون ثبت نام کنید</string>
 </resources>

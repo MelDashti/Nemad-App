@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.viewmodels.RegisterViewModel" />
+            type="com.example.project.viewmodels.AuthSharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,18 +17,19 @@
         android:background="@drawable/background"
         tools:context=".ui.auth.RegisterFragment">
 
+
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+            app:srcCompat="@drawable/back" />
 
 
         <TextView
@@ -38,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="22dp"
             android:fontFamily="sans-serif-condensed"
             android:text="ثبت نام کاربر جدید"
             android:textSize="16sp"
@@ -54,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
 
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="22dp"
             android:background="#F7F8F9"
 
             android:hint="تلفن همراه"
@@ -83,7 +84,6 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:background="#F7F8F9"
             android:hint="رمز عبور"
             app:boxCornerRadiusBottomEnd="24dp"
@@ -91,7 +91,7 @@
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/code"
             app:layout_constraintStart_toStartOf="@+id/backButton"
             app:layout_constraintTop_toBottomOf="@+id/code"
             app:layout_constraintVertical_bias="0.0">
@@ -113,7 +113,6 @@
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
 
-            android:layout_marginRight="16dp"
             android:background="#F7F8F9"
             android:hint="تکرار رمز عبور"
             android:singleLine="true"
@@ -122,7 +121,7 @@
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/password_text_input"
             app:layout_constraintStart_toStartOf="@+id/backButton"
             app:layout_constraintTop_toBottomOf="@+id/password_text_input"
             app:layout_constraintVertical_bias="0.0">
@@ -156,23 +155,6 @@
 
         </com.google.android.material.button.MaterialButton>
 
-        <TextView
-            android:id="@+id/guest_button"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:text="اکانت کاربری ندارید؟هم اکنون ثبت نام کنید"
-            android:textColor="#35C2C1"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

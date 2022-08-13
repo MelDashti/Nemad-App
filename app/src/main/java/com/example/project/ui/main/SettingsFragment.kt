@@ -29,30 +29,25 @@ class SettingsFragment : Fragment() {
             binding.userName.text = it!!.firstName.toString() + " " + it!!.lastName.toString()
             binding.nationalId.text = it.nationalId.toString()
         })
-
         binding.signoutButton.setOnClickListener {
             showAlertDialog(it)
         }
         //signout section of the app
-
         binding.materialCardView.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_userNameFragment)
         }
-
         binding.materialCardView2.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_nationalIdFragment)
         }
-
         binding.materialCardView3.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_userPasswordFragment)
         }
-
-
         return binding.root
     }
 
     private fun showAlertDialog(it: View?) {
-        val builder = AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val builder =
+            AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
         //titles
         builder.setTitle("خروج")
         builder.setMessage("آیا مطمئن هستید که می خواهید از سیستم خارج شوید؟")

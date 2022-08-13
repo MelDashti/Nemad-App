@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentRegisterBinding
-import com.example.project.viewmodels.RegisterViewModel
+import com.example.project.ui.main.MainViewModel
+import com.example.project.viewmodels.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,8 +21,7 @@ class RegisterFragment : BaseFragment() {
 
     override var bottomNavigationViewVisibility = View.GONE
     lateinit var binding: FragmentRegisterBinding
-    val viewModel: RegisterViewModel by viewModels()
-
+    val viewModel: AuthSharedViewModel by navGraphViewModels(R.id.navigation) { defaultViewModelProviderFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +35,11 @@ class RegisterFragment : BaseFragment() {
         viewModel.onClickRegister.observe(viewLifecycleOwner, {
             val username = binding.phoneEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
+            viewModel._userPass.postValue(Pair(username, password))
             viewModel.register(username, password)
         })
 
-        viewModel.response.observe(viewLifecycleOwner, {
-            Log.d("codeva", it.code().toString())
+        viewModel.registerResponse.observe(viewLifecycleOwner, {
             if (it.code() == 428) {
                 findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
                 Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()

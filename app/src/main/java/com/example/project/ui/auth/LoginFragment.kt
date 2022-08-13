@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentLoginBinding
-import com.example.project.viewmodels.LoginViewModel
+import com.example.project.ui.main.MainViewModel
+import com.example.project.viewmodels.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +20,7 @@ class LoginFragment : BaseFragment() {
 
     override var bottomNavigationViewVisibility = View.GONE
     lateinit var binding: FragmentLoginBinding
-    val viewModel: LoginViewModel by viewModels()
+    val viewModel: AuthSharedViewModel by navGraphViewModels(R.id.navigation) { defaultViewModelProviderFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,19 @@ class LoginFragment : BaseFragment() {
                 findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
             } else (Toast.makeText(requireContext(), "ورود ناموفق بود", Toast.LENGTH_SHORT)).show()
         })
+
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment2_to_rememberPasswordFragment)
+        }
+
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+
+        binding.registerQuestion.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment2_to_RegisterFragment)
+        }
 
         return binding.root
     }

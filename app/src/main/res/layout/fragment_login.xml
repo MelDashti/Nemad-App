@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.viewmodels.LoginViewModel" />
+            type="com.example.project.viewmodels.AuthSharedViewModel" />
     </data>
 
 
@@ -17,6 +17,19 @@
         android:background="@drawable/background"
         tools:context=".ui.auth.LoginFragment">
 
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/code_header"
@@ -39,9 +52,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_edit_text"
-                android:singleLine="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,10 +80,10 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_edit_text"
-                android:inputType="textPassword"
-                android:singleLine="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,14 +95,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="رمز عبور خود را فراموش کرده اید؟"
-            android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textColor="#6A707C"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/hint"
             app:layout_constraintTop_toBottomOf="@+id/hint"
-            app:layout_constraintVertical_bias="0.0">
-
-        </TextView>
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -101,7 +113,7 @@
             android:onClick="@{()->viewModel.onLoginClicked()}"
             android:text="ورود"
             android:textAllCaps="false"
-            android:textSize="22sp"
+            android:textSize="18sp"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,16 +126,16 @@
         </com.google.android.material.button.MaterialButton>
 
         <TextView
-            android:id="@+id/guest_button"
+            android:id="@+id/register_question"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="اکانت کاربری ندارید؟هم اکنون ثبت نام کنید"
-            android:textColor="#35C2C1"
-            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
             android:textStyle="bold"
+            app:colored_text="@{@string/signup_confirmation}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.project.viewmodels.ResetViewModel" />
+            type="com.example.project.viewmodels.AuthSharedViewModel" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,12 +19,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/code_header"
-            android:layout_width="match_parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:background="#F7F8F9"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:background="#F7F8F9"
             android:hint="Enter Password"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,20 +34,20 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_edit_text"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/repeat_new_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:background="#F7F8F9"
             android:hint="Repeat Password"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,24 +58,24 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_edit_text"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
-            app:cornerRadius="50dp"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:text="تایید"
             android:onClick="@{()->viewModel.onLoginClicked()}"
+            android:text="تایید"
             android:textAllCaps="false"
             android:textSize="22sp"
+            app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -104,7 +103,6 @@
             app:layout_constraintStart_toStartOf="parent">
 
         </TextView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

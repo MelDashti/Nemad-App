@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.WelcomeFragment">
+    tools:context=".ui.auth.WelcomeFragment"
+    >
 
     <ImageView
+
         android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +19,9 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -66,15 +70,15 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_up_button"
-            app:cornerRadius="50dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="57dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:textSize="17sp"
             android:text="ثبت نام"
+            android:textSize="17sp"
+            app:cornerRadius="50dp"
             app:layout_constraintBottom_toTopOf="@+id/guest_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -83,14 +87,14 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_in_button"
-            app:cornerRadius="50dp"
             android:layout_width="0dp"
             android:layout_height="57dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:textAllCaps="false"
             android:text="ورود به حساب کربری"
+            android:textAllCaps="false"
             android:textSize="17sp"
+            app:cornerRadius="50dp"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -108,10 +112,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="8dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
             android:text="@string/as_guest"
             android:textColor="#35C2C1"
+            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -119,5 +123,5 @@
 
         </TextView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

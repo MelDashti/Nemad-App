@@ -9,9 +9,6 @@ import com.example.project.R
 
 class ResetFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ResetFragment()
-    }
 
 
     override fun onCreateView(

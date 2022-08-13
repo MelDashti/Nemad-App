@@ -15,6 +15,9 @@ import retrofit2.http.PUT
 
 interface AuthenticationApiService {
 
+    @POST("Authenticate/Verify")
+    suspend fun verify(@Body requestBody: RequestBody): Response<ResponseBody>
+
     @GET("Authenticate/Me")
     suspend fun getUserInfo(): UserInfo
 

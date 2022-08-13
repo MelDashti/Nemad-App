@@ -56,6 +56,17 @@ fun ImageView.setSrc(type: String?) {
 }
 
 
+@BindingAdapter("colored_text")
+fun TextView.setTextColor(string: String?) {
+    val phoneCodeColor = ContextCompat.getColor(this.context, R.color.hint_color)
+    val text = SpannableStringBuilder().append(context.getString(R.string.signup_question))
+    text.color(phoneCodeColor) {
+        append(" $string")
+    }
+    this.text = text
+}
+
+
 @BindingAdapter(value = ["app:req_name", "app:type"], requireAll = false)
 fun TextView.setTextVal(req_name: String?, type: String) {
 

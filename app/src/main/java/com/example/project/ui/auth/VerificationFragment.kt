@@ -9,15 +9,18 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.example.project.R
 import com.example.project.databinding.VerificationFragmentBinding
-import com.example.project.viewmodels.VerificationViewModel
+import com.example.project.ui.main.MainViewModel
+import com.example.project.viewmodels.AuthSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class VerificationFragment : Fragment() {
 
 
-    val viewModel: VerificationViewModel by viewModels()
+    val viewModel: AuthSharedViewModel by navGraphViewModels(R.id.navigation) { defaultViewModelProviderFactory }
     lateinit var binding: VerificationFragmentBinding
 
     override fun onCreateView(
@@ -40,8 +43,12 @@ class VerificationFragment : Fragment() {
             }
         }
 
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+
+        viewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
             } else {
 
