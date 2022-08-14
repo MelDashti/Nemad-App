@@ -42,7 +42,7 @@
             android:id="@+id/loginFragment2"
             android:name="com.example.project.ui.auth.LoginFragment"
             android:label="LoginFragment"
-            tools:layout="@layout/fragment_login" >
+            tools:layout="@layout/fragment_login">
             <action
                 android:id="@+id/action_loginFragment2_to_rememberPasswordFragment"
                 app:destination="@id/rememberPasswordFragment" />
@@ -65,33 +65,44 @@
             android:id="@+id/rememberPasswordFragment"
             android:name="com.example.project.ui.auth.RememberPasswordFragment"
             android:label="RememberPasswordFragment"
-            tools:layout="@layout/remember_password_fragment"
-            >
+            tools:layout="@layout/remember_password_fragment">
             <action
                 android:id="@+id/action_rememberPasswordFragment_to_resetFragment"
                 app:destination="@id/resetFragment" />
+            <action
+                android:id="@+id/action_rememberPasswordFragment_to_verificationFragment"
+                app:destination="@id/verificationFragment" />
         </fragment>
         <fragment
             android:id="@+id/verificationFragment"
             android:name="com.example.project.ui.auth.VerificationFragment"
             android:label="VerificationFragment"
-            tools:layout="@layout/verification_fragment"
-            />
+            tools:layout="@layout/verification_fragment">
+            <action
+                android:id="@+id/action_verificationFragment_to_loginFragment2"
+                app:destination="@id/loginFragment2"
+                app:popUpTo="@id/loginFragment2" />
+            <action
+                android:id="@+id/action_verificationFragment_to_resetFragment"
+                app:destination="@id/resetFragment" />
+        </fragment>
         <fragment
             android:id="@+id/resetFragment"
             android:name="com.example.project.ui.auth.ResetFragment"
             android:label="ResetFragment"
-            tools:layout="@layout/reset_fragment"
-            >
+            tools:layout="@layout/reset_fragment">
             <action
                 android:id="@+id/action_resetFragment_to_verificationFragment"
                 app:destination="@id/verificationFragment" />
+            <action
+                android:id="@+id/action_resetFragment_to_loginFragment2"
+                app:destination="@id/loginFragment2" />
         </fragment>
     </navigation>
     <fragment
         android:id="@+id/requestsFragment"
         android:name="com.example.project.ui.main.RequestsFragment"
-        android:label="RequestsFragment" >
+        android:label="RequestsFragment">
         <action
             android:id="@+id/action_requestsFragment_to_myRequestFragment"
             app:destination="@id/myRequestFragment"
@@ -106,7 +117,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.project.ui.main.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_navigation"
             app:destination="@id/navigation"
@@ -149,7 +160,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.project.ui.main.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_mainFragment"
             app:destination="@id/navigation2"
@@ -161,7 +172,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
-    <navigation android:id="@+id/navigation2"
+    <navigation
+        android:id="@+id/navigation2"
         app:startDestination="@id/mainFragment">
         <fragment
             android:id="@+id/mainFragment"

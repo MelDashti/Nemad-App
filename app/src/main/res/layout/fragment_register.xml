@@ -140,7 +140,6 @@
             android:layout_height="62dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:onClick="@{()->viewModel.onClickRegister()}"
             android:text="ثبت نام"
             android:textAllCaps="false"
             android:textSize="22sp"

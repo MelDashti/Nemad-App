@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.project.BaseFragment
@@ -30,19 +31,21 @@ class RegisterFragment : BaseFragment() {
 
         binding = FragmentRegisterBinding.inflate(inflater)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.onClickRegister.observe(viewLifecycleOwner, {
+        binding.register.setOnClickListener {
             val username = binding.phoneEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
             viewModel._userPass.postValue(Pair(username, password))
             viewModel.register(username, password)
-        })
+        }
 
-        viewModel.registerResponse.observe(viewLifecycleOwner, {
+        viewModel.registerResponse.observe(viewLifecycleOwner, Observer {
+            Log.d("jello", "why")
             if (it.code() == 428) {
                 findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
                 Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()
+                viewModel.verificationType = 0
                 Log.d("code", "428")
             } else if (it.code() == 406) {
                 Toast.makeText(

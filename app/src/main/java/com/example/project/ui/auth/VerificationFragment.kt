@@ -1,6 +1,7 @@
 package com.example.project.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,9 @@ class VerificationFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                viewModel.verify(code)
+                if (viewModel.verificationType == 0)
+                    viewModel.verify(code)
+                else viewModel.verifyResetPass(code)
             }
         }
 
@@ -49,11 +52,39 @@ class VerificationFragment : Fragment() {
 
 
         viewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
+            Log.d("verification","na")
+
             if (it.isSuccessful) {
+                Toast.makeText(requireContext(), "verification was successful", Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigate(R.id.action_verificationFragment_to_loginFragment2)
             } else {
+                Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
+                    .show()
+
 
             }
         })
+
+        viewModel.verifyResetResponse.observe(viewLifecycleOwner, Observer {
+            Log.d("verification","na")
+
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    requireContext(),
+                    "Verification was successful, Please Enter New Password",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                findNavController().navigate(R.id.action_verificationFragment_to_resetFragment)
+            } else {
+                Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
+                    .show()
+
+
+            }
+        })
+
 
 
 

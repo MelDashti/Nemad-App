@@ -4,25 +4,29 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.databinding.FragmentWelcomeBinding
+import com.example.project.viewmodels.AuthSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WelcomeFragment : BaseFragment() {
 
-    private var _binding: FragmentWelcomeBinding? = null
-    private val binding get() = _binding!!
-
+    lateinit var binding: FragmentWelcomeBinding
     override var bottomNavigationViewVisibility = View.GONE
+    val viewModel: AuthSharedViewModel by navGraphViewModels(R.id.navigation) { defaultViewModelProviderFactory }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-
-        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         binding.signUpButton.setOnClickListener {
             findNavController().navigate(R.id.action_WelcomeFragment_to_RegisterFragment)
         }

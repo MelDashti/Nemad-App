@@ -1,10 +1,12 @@
 package com.example.project.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.project.R
@@ -29,8 +31,28 @@ class RememberPasswordFragment : Fragment() {
         }
 
         binding.register.setOnClickListener {
-            binding.mobileNumberEditText.text.toString().trim()
+            val phoneNo = binding.mobileNumberEditText.text.toString().trim()
+            viewModel.sendPhoneNumber(phoneNo)
         }
+
+        viewModel.rememberPass.observe(viewLifecycleOwner, {
+            if (it.code() == 428) {
+                findNavController().navigate(R.id.action_rememberPasswordFragment_to_verificationFragment)
+                viewModel.verificationType = 1
+                Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()
+                Log.d("code", "428")
+            } else if (it.code() == 406) {
+                Toast.makeText(
+                    requireContext(),
+                    "",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.d("code", "406")
+            } else {
+                Toast.makeText(requireContext(), "خطا سرور", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
 
         return binding.root

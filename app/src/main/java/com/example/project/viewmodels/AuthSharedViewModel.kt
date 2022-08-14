@@ -3,6 +3,7 @@ package com.example.project.viewmodels
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.project.api.auth.responses.AuthenticationResult
+import com.example.project.api.auth.responses.RememberPassResult
 import com.example.project.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthSharedViewModel @Inject constructor(val authRepository: AuthRepository) : ViewModel() {
 
+    var verificationType = 0
     private val _onClickConfirm = MutableLiveData<Boolean>()
     val onClickConfirm: LiveData<Boolean> = _onClickConfirm
 
@@ -22,8 +24,23 @@ class AuthSharedViewModel @Inject constructor(val authRepository: AuthRepository
     private val _verifyResponse = MutableLiveData<Response<ResponseBody>>()
     val verifyResponse: LiveData<Response<ResponseBody>> = _verifyResponse
 
+
+    private val _passwordChangedResponse = MutableLiveData<Response<ResponseBody>>()
+    val passwordChangedResponse: LiveData<Response<ResponseBody>> = _passwordChangedResponse
+
+
+    private val _verifyResetResponse = MutableLiveData<Response<RememberPassResult>>()
+    val verifyResetResponse: LiveData<Response<RememberPassResult>> = _verifyResetResponse
+
+    private var token: String? = null
+
+    private val _rememberPass = MutableLiveData<Response<ResponseBody>>()
+    val rememberPass: LiveData<Response<ResponseBody>> = _rememberPass
+
     var _userPass: MutableLiveData<Pair<String, String>> = MutableLiveData()
 
+
+    var _userName: MutableLiveData<String> = MutableLiveData()
 
     private val _onClickRegister = MutableLiveData<Boolean>()
 
@@ -87,18 +104,50 @@ class AuthSharedViewModel @Inject constructor(val authRepository: AuthRepository
 
     fun verify(code: String) {
         viewModelScope.launch {
+            Log.d("verification", "hello")
             try {
-                authRepository.verifyCode(_userPass.value!!.first, _userPass.value!!.second, code)
+                _verifyResponse.value = authRepository.verifyCode(
+                    _userPass.value!!.first,
+                    _userPass.value!!.second,
+                    code
+                )
             } catch (e: java.lang.Exception) {
             }
         }
     }
 
     fun sendPhoneNumber(phoneNo: String) {
+        _userName.value = phoneNo
         viewModelScope.launch {
-            authRepository.sendPhoneNumber(phoneNo)
-
+            _rememberPass.value = authRepository.sendPhoneNumber(phoneNo)
         }
+    }
+
+    fun verifyResetPass(code: String) {
+        Log.d("verification", "hello2")
+        viewModelScope.launch {
+            try {
+                Log.d("verification", "hello2")
+                val response = authRepository.verifyResetPass(
+                    _userName.value!!, "string",
+                    code
+                )
+                _verifyResetResponse.value = response
+                token = response.body()!!.token
+
+            } catch (e: java.lang.Exception) {
+
+            }
+        }
+    }
+
+    fun resetPassword(password: String) {
+        viewModelScope.launch {
+
+            _passwordChangedResponse.value =
+                authRepository.resetPassword(_userName.value!!, password, token)
+        }
+
     }
 
 

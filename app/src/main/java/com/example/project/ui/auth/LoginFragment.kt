@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment() {
 
         binding = FragmentLoginBinding.inflate(inflater)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.loginButtonCLicked.observe(viewLifecycleOwner, {
             val username = binding.usernameEditText.text.toString().trim()
