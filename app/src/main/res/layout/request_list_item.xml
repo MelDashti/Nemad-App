@@ -9,6 +9,8 @@
             name="clickListener"
             type="com.example.project.adapter.RequestItemListener" />
 
+
+
         <variable
             name="request"
             type="com.example.project.api.main.response.Requests" />

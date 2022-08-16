@@ -2,8 +2,15 @@ package com.example.project.repository
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.project.adapter.PassengersDataSource
 import com.example.project.api.main.MainApiService
 import com.example.project.api.main.response.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -32,7 +39,7 @@ class MainRepository @Inject constructor(
         return mainApiService.getRequests()
     }
 
-    suspend fun fetchRecentRequests(): MutableList<Requests>{
+    suspend fun fetchRecentRequests(): MutableList<Requests> {
         return mainApiService.getRequestsDesc()
     }
 
@@ -69,7 +76,7 @@ class MainRepository @Inject constructor(
 
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-        Log.d("request1123",requestBody.toString())
+        Log.d("request1123", requestBody.toString())
         val response = mainApiService.sendRequest(requestBody)
         if (response.isSuccessful) {
             Log.d("response", "Successful")
@@ -92,7 +99,12 @@ class MainRepository @Inject constructor(
 
     }
 
+    fun fetchPagedReq(viewModelScope: CoroutineScope): Flow<PagingData<Requests>> {
+        return Pager(PagingConfig(pageSize = 10)) {
+            PassengersDataSource(mainApiService)
+        }.flow.cachedIn(viewModelScope)
 
+    }
 
 
 }

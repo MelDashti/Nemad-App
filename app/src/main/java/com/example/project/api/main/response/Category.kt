@@ -30,7 +30,14 @@ class Requests {
     var organizationalUnit: OrganizationalUnits? = null
     var category: Category? = null
     var expanded: Boolean = false
+    var proceedings: List<Proceeding>? = null
 
+}
+
+class Proceeding() {
+    var id: String? = null
+    var dateTime: String? = null
+    var comments: String? = null
 }
 
 

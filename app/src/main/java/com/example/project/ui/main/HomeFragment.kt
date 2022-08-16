@@ -31,7 +31,6 @@ class HomeFragment : BaseFragment() {
     ): View {
         binding = HomeFragmentBinding.inflate(inflater)
         binding.floatingButton.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_mainFragment)
             val navBar =
                 requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
             navBar.menu.findItem(R.id.navigation2).isChecked = true

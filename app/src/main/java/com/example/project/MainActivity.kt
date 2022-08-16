@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
             graph.startDestination = R.id.homeFragment
         }
         navController.graph = graph
-
     }
 
 

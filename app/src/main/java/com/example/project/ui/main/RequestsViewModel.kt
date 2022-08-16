@@ -1,19 +1,23 @@
 package com.example.project.ui.main
 
-import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.example.project.adapter.PassengersDataSource
+import com.example.project.api.main.MainApiService
 import com.example.project.api.main.response.*
 import com.example.project.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.internal.concurrent.Task
-import retrofit2.Response
-import java.io.File
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class RequestsViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
+class RequestsViewModel @Inject constructor(
+    val mainRepository: MainRepository,
+    val mainApiService: MainApiService
+) : ViewModel() {
 
 
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
@@ -21,6 +25,18 @@ class RequestsViewModel @Inject constructor(val mainRepository: MainRepository) 
 
 
     var requests: MutableLiveData<Requests> = MutableLiveData()
+
+
+    var requestsPagedList = mainRepository.fetchPagedReq(viewModelScope)
+
+    var lolList = Pager(PagingConfig(pageSize = 10)) {
+        PassengersDataSource(mainApiService)
+    }.flow.cachedIn(viewModelScope)
+
+
+    private fun fetchPagedReq() {
+
+    }
 
     init {
         fetchRequests()
