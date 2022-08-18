@@ -23,7 +23,7 @@ class Requests {
     var employeeName: String? = null
     var comments: String? = null
     lateinit var id: String
-    var status: Int = 0
+    var status: Long = 0L
     var statusStr: String? = null
     var title: String? = null
     var trackingNumber: String? = null
@@ -36,8 +36,8 @@ class Requests {
 
 class Proceeding() {
     var id: String? = null
-    var dateTime: String? = null
-    var comments: String? = null
+    var dateTime: String? = "تاریخ: 26 مرداد 1401و 15:42"
+    var comments: String? = "دیتا تستی"
 }
 
 

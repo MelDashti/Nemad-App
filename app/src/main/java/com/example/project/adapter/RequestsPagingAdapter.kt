@@ -39,27 +39,6 @@ class RequestsPagingAdapter(private val clickListener: RequestItemListener) :
             with(binding) {
                 request = requests
                 clickListener = clickListener2
-                itemTitle.text = "hazards"
-                when (requests.statusStr) {
-                    "WaitingForAcceptance" -> {
-                        toggle.setImageResource(R.drawable.waitingforacceptance)
-                        statusTitle.text = "در انتزار تایید"
-                    }
-                    "WaitingForConfirmation" -> {
-                        toggle.setImageResource(R.drawable.waitingforconfirmation)
-                        statusTitle.text = "بررسی شده"
-                    }
-
-                    "UnderOrganizationalInspection" -> {
-                        toggle.setImageResource(R.drawable.underorganizatoininspection)
-                        statusTitle.text = "در حال بررسی"
-                    }
-                    "Done" -> {
-                        toggle.setImageResource(R.drawable.done)
-                        statusTitle.text = "انجام شده"
-                    }
-                }
-
             }
     }
 

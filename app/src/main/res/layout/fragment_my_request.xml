@@ -102,7 +102,7 @@
                 android:layout_height="36dp"
                 android:layout_gravity="center_vertical"
                 android:scaleType="center"
-                app:type="@{viewModel.requests.statusStr}" />
+                app:type="@{viewModel.requests.status}" />
 
             <TextView
                 android:id="@+id/status_title"
@@ -113,7 +113,7 @@
                 android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="11sp"
-                app:status="@{viewModel.requests.statusStr}"
+                app:status="@{viewModel.requests.status}"
                 tools:text="در انظار تایید" />
         </LinearLayout>
 
@@ -251,33 +251,138 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="78dp"
             android:backgroundTint="#AD8700"
             android:text="ارسال امتیاز"
             android:textAllCaps="false"
             android:textSize="16sp"
+            android:visibility="gone"
             app:cornerRadius="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/line1"
-            app:layout_constraintVertical_chainStyle="packed">
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/line1">
 
         </com.google.android.material.button.MaterialButton>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/objectionButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="78dp"
+            android:backgroundTint="#FF0000"
+            android:text="اعتراض"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            android:visibility="gone"
+            app:cornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/confrim"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@+id/proceedings_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/confrim"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confrim"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginBottom="78dp"
+            android:backgroundTint="#AD8700"
+            android:text="تایید"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:cornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/proceedings_recycler_view"
+            app:layout_constraintStart_toEndOf="@+id/objectionButton"
+            app:layout_constraintTop_toBottomOf="@+id/proceedings_recycler_view">
+
+
+        </com.google.android.material.button.MaterialButton>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/proceedings_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="120dp"
             android:background="@color/primaryColor"
             android:orientation="vertical"
             android:padding="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sendRequest"
             app:layout_constraintEnd_toEndOf="@+id/action_taken_header"
             app:layout_constraintStart_toStartOf="@+id/line1"
             app:layout_constraintTop_toBottomOf="@+id/action_taken_header"
             tools:listitem="@layout/proceedings_list_item" />
 
+
+        <LinearLayout
+            android:id="@+id/ratingLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/proceedings_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/proceedings_recycler_view"
+            app:layout_constraintTop_toBottomOf="@+id/proceedings_recycler_view"
+            app:layout_constraintVertical_bias="0.13999999">
+
+            <TextView
+                android:id="@+id/ratingLeftHeader"
+                style="?attr/textAppearanceHeadline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="خیلی بد"
+                android:textColor="#AD8700"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:progressTint="#AD8700"
+                android:rating="0"
+
+                android:stepSize="1" />
+
+            <TextView
+                android:id="@+id/ratingRightHeader"
+                style="?attr/textAppearanceHeadline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="عالی"
+                android:textColor="#AD8700"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,22 +10,30 @@ import com.example.project.R
 
 
 @BindingAdapter("status")
-fun TextView.setSrc(type: String?) {
+fun TextView.setSrc(type: Long?) {
 
     var text = ""
     when (type) {
-        "WaitingForAcceptance" -> {
+        0L -> {
+//            bind.toggle.setImageResource(R.drawable.waitingforacceptance)
             text = "در انتزار تایید"
         }
-        "WaitingForConfirmation" -> {
-            text = "بررسی شده"
-        }
-
-        "UnderOrganizationalInspection" -> {
+        1L -> {
+//            bind.toggle.setImageResource(R.drawable.underorganizatoininspection)
             text = "در حال بررسی"
         }
-        "Done" -> {
-            text = "انجام شده"
+
+        2L -> {
+//            bind.toggle.setImageResource(R.drawable.waitingforconfirmation)
+            text = "بررسی شده"
+        }
+        3L -> {
+//            bind.toggle.setImageResource(R.drawable.underorganizatoininspection)
+            text = "برسسی مجدد "
+        }
+        4L -> {
+//            bind.toggle.setImageResource(R.drawable.done)
+            text = "پایان یافته"
         }
     }
 
@@ -35,23 +43,26 @@ fun TextView.setSrc(type: String?) {
 
 
 @BindingAdapter("type")
-fun ImageView.setSrc(type: String?) {
-
+fun ImageView.setSrc(type: Long?) {
     when (type) {
-        "WaitingForAcceptance" -> {
+        0L -> {
             this.setImageResource(R.drawable.waitingforacceptance)
         }
-        "WaitingForConfirmation" -> {
-            this.setImageResource(R.drawable.waitingforconfirmation)
-        }
-
-        "UnderOrganizationalInspection" -> {
+        1L -> {
             this.setImageResource(R.drawable.underorganizatoininspection)
         }
-        "Done" -> {
+
+        2L -> {
+            this.setImageResource(R.drawable.waitingforconfirmation)
+        }
+        3L -> {
+            this.setImageResource(R.drawable.underorganizatoininspection)
+        }
+        4L -> {
             this.setImageResource(R.drawable.done)
         }
     }
+
 
 }
 

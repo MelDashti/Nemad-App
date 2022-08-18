@@ -43,28 +43,6 @@ class RequestItemViewHolder(private val bind: RequestListItemBinding) :
     fun bind(requests: Requests, clickListener: RequestItemListener) {
         bind.clickListener = clickListener
         bind.request = requests
-        Log.d("sdsd", requests.statusStr.toString())
-        when (requests.statusStr) {
-            "WaitingForAcceptance" -> {
-                bind.toggle.setImageResource(R.drawable.waitingforacceptance)
-                bind.statusTitle.text = "در انتزار تایید"
-            }
-            "WaitingForConfirmation" -> {
-                bind.toggle.setImageResource(R.drawable.waitingforconfirmation)
-                bind.statusTitle.text = "بررسی شده"
-            }
-
-            "UnderOrganizationalInspection" -> {
-                bind.toggle.setImageResource(R.drawable.underorganizatoininspection)
-                bind.statusTitle.text = "در حال بررسی"
-            }
-            "Done" -> {
-                bind.toggle.setImageResource(R.drawable.done)
-                bind.statusTitle.text = "انجام شده"
-            }
-        }
-
-
     }
 
     companion object {

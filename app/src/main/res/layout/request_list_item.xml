@@ -10,7 +10,6 @@
             type="com.example.project.adapter.RequestItemListener" />
 
 
-
         <variable
             name="request"
             type="com.example.project.api.main.response.Requests" />
@@ -46,7 +45,7 @@
                     android:layout_height="36dp"
                     android:layout_gravity="center_vertical"
                     android:scaleType="center"
-                    android:src="@drawable/dropdown" />
+                    app:type="@{request.status}" />
 
                 <TextView
                     android:id="@+id/status_title"
@@ -55,7 +54,8 @@
                     android:layout_gravity="center"
                     android:maxLines="1"
                     android:textColor="@color/black"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    app:status="@{request.status}" />
 
             </LinearLayout>
 

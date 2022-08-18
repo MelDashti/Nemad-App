@@ -66,4 +66,16 @@ class RequestsViewModel @Inject constructor(
         }
     }
 
+    fun sendRating() {
+        viewModelScope.launch {
+            try {
+
+
+            } catch (e: java.lang.Exception) {
+
+            }
+        }
+
+    }
+
 }
