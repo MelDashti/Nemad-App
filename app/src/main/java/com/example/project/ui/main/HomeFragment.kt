@@ -1,5 +1,6 @@
 package com.example.project.ui.main
 
+import android.R.attr
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,12 @@ import com.example.project.adapter.RequestItemListener
 import com.example.project.databinding.HomeFragmentBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import android.graphics.BlurMaskFilter
+
+import android.R.attr.radius
+
+
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -62,6 +69,8 @@ class HomeFragment : BaseFragment() {
                 com.example.project.R.drawable.divider
             )!!
         )
+
+
 
         binding.requestRecyclerView.addItemDecoration(itemDecorator)
 

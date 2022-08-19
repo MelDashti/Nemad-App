@@ -9,6 +9,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primaryColor">#D9D9D9</color>
+    <color name="error">#E53935</color>
+    <color name="successful">#42A646</color>
     <color name="req_text_color">#6A6A6A</color>
     <color name="hint_color">#35C2C1</color>
 </resources>

@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class VerificationFragment : Fragment() {
 
-
     val viewModel: AuthSharedViewModel by navGraphViewModels(R.id.navigation) { defaultViewModelProviderFactory }
     lateinit var binding: VerificationFragmentBinding
 
@@ -39,6 +38,7 @@ class VerificationFragment : Fragment() {
                     "Please Enter The Verification Code",
                     Toast.LENGTH_SHORT
                 ).show()
+
             } else {
                 if (viewModel.verificationType == 0)
                     viewModel.verify(code)
@@ -52,8 +52,6 @@ class VerificationFragment : Fragment() {
 
 
         viewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("verification","na")
-
             if (it.isSuccessful) {
                 Toast.makeText(requireContext(), "verification was successful", Toast.LENGTH_SHORT)
                     .show()
@@ -61,14 +59,10 @@ class VerificationFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
                     .show()
-
-
             }
         })
 
         viewModel.verifyResetResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("verification","na")
-
             if (it.isSuccessful) {
                 Toast.makeText(
                     requireContext(),
@@ -81,12 +75,8 @@ class VerificationFragment : Fragment() {
                 Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
                     .show()
 
-
             }
         })
-
-
-
 
         return binding.root
     }

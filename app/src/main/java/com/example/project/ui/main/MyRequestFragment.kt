@@ -36,7 +36,6 @@ class MyRequestFragment : Fragment() {
         adapter.submitList(arr)
 
         if (viewModel.requests.value?.proceedings?.isEmpty() == true) {
-
         }
 
         if (viewModel.requests.value!!.status == 4L) {
@@ -45,8 +44,8 @@ class MyRequestFragment : Fragment() {
         }
 
         if (viewModel.requests.value!!.status == 2L) {
-            binding.confrim.visibility=View.VISIBLE
-            binding.objectionButton.visibility=View.VISIBLE
+            binding.confrim.visibility = View.VISIBLE
+            binding.objectionButton.visibility = View.VISIBLE
         }
 
 

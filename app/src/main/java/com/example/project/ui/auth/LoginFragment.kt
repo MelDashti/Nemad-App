@@ -1,10 +1,12 @@
 package com.example.project.ui.auth
 
+import android.graphics.Color.BLACK
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
@@ -13,6 +15,7 @@ import com.example.project.R
 import com.example.project.databinding.FragmentLoginBinding
 import com.example.project.ui.main.MainViewModel
 import com.example.project.viewmodels.AuthSharedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,9 +42,16 @@ class LoginFragment : BaseFragment() {
 
         viewModel.response.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
-                Toast.makeText(requireContext(), "ورود با موفقیت", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "ورود با موفقیت انجام شد", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.successful)
+                    )
+                    .show()
                 findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
-            } else (Toast.makeText(requireContext(), "ورود ناموفق بود", Toast.LENGTH_SHORT)).show()
+            } else
+                Snackbar.make(binding.root, "ورود ناموفق بود", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.error)).show()
         })
 
         binding.forgotPassword.setOnClickListener {

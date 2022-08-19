@@ -46,17 +46,17 @@ class FormFragment : Fragment() {
         }
 
         viewModel.complaintResponse.observe(viewLifecycleOwner, {
-            Log.d("youo","na")
+            Log.d("youo", "na")
 
             if (it.isSuccessful) {
-                Log.d("youo","success")
+                Log.d("youo", "success")
                 Toast.makeText(
                     requireContext(),
                     "درخواست شما با موفقیت ارسال شد",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                Log.d("youo","yep")
+                Log.d("youo", "yep")
 
                 Toast.makeText(
                     requireContext(),
@@ -105,9 +105,7 @@ class FormFragment : Fragment() {
             sActivityResultLauncher.launch(data)
         }
 
-        binding.backButton.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
 
 
         return binding.root

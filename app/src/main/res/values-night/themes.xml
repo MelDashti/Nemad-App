@@ -3,6 +3,8 @@
     <style name="Theme.Project" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <!--        <item name="android:background">@drawable/background</item>-->
+        <item name="android:fontFamily">@font/iranyekanfont</item>
+        <item name="fontFamily">@font/iranyekanfont</item>
         <item name="colorPrimary">#032886</item>
         <item name="colorPrimaryVariant">#FFFFFF</item>
         <item name="colorOnPrimary">@color/white</item>

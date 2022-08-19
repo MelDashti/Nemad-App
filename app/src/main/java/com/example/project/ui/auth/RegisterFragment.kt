@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.example.project.R
 import com.example.project.databinding.FragmentRegisterBinding
 import com.example.project.ui.main.MainViewModel
 import com.example.project.viewmodels.AuthSharedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,21 +43,35 @@ class RegisterFragment : BaseFragment() {
         }
 
         viewModel.registerResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("jello", "why")
             if (it.code() == 428) {
                 findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
-                Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.successful)
+                    )
+                    .show()
                 viewModel.verificationType = 0
-                Log.d("code", "428")
             } else if (it.code() == 406) {
-                Toast.makeText(
-                    requireContext(),
+
+                Snackbar.make(
+                    binding.root,
                     "کاربری با این نام کاربری پیش از این ثبت شده است.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d("code", "406")
+                    Snackbar.LENGTH_LONG
+                )
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.error)
+                    )
+                    .show()
             } else {
-                Toast.makeText(requireContext(), "خطا سرور", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    binding.root,
+                    "خطا سرور",
+                    Snackbar.LENGTH_LONG
+                )
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.error)
+                    )
+                    .show()
             }
 
 

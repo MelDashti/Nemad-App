@@ -1,6 +1,7 @@
 package com.example.project.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.BlurMaskFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter

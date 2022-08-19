@@ -57,12 +57,12 @@
 
             android:layout_marginEnd="22dp"
             android:background="#F7F8F9"
-
-            android:hint="تلفن همراه"
             app:boxCornerRadiusBottomEnd="24dp"
+
             app:boxCornerRadiusBottomStart="24dp"
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/backButton"
@@ -73,6 +73,8 @@
                 android:id="@+id/phone_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:hint="تلفن همراه"
                 android:inputType="number"
                 android:singleLine="true" />
 
@@ -85,11 +87,11 @@
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:background="#F7F8F9"
-            android:hint="رمز عبور"
             app:boxCornerRadiusBottomEnd="24dp"
             app:boxCornerRadiusBottomStart="24dp"
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/code"
             app:layout_constraintStart_toStartOf="@+id/backButton"
@@ -100,6 +102,8 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:hint="رمز عبور"
                 android:inputType="textPassword"
                 android:singleLine="true" />
 
@@ -112,14 +116,13 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-
             android:background="#F7F8F9"
-            android:hint="تکرار رمز عبور"
             android:singleLine="true"
             app:boxCornerRadiusBottomEnd="24dp"
             app:boxCornerRadiusBottomStart="24dp"
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/password_text_input"
             app:layout_constraintStart_toStartOf="@+id/backButton"
@@ -129,6 +132,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="تکرار رمز عبور"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -137,19 +141,19 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="59dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:text="ثبت نام"
             android:textAllCaps="false"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header"
-            app:layout_constraintVertical_bias="0.68"
+            app:layout_constraintTop_toBottomOf="@+id/repeatPassword"
             app:layout_constraintVertical_chainStyle="packed">
 
         </com.google.android.material.button.MaterialButton>

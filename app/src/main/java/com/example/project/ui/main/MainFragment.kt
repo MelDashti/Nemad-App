@@ -39,11 +39,8 @@ class MainFragment : BaseFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-//        val navBar = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-//        navBar.menu.findItem(R.id.mainFragment).isChecked = true
 
         val categoryListAdapter = CategoryItemAdapter(CategoryItemListener {
-            //            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToListFragment(it))
             if (it.children.isNullOrEmpty()) {
                 viewModel.isLeafNode = true
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
@@ -153,7 +150,7 @@ class MainFragment : BaseFragment() {
     private fun addDecorationToGroupRecyclerView() {
         val dividerItemDecoration = DividerItemDecoration(
             context,
-            DividerItemDecoration.HORIZONTAL
+            DividerItemDecoration.VERTICAL
         )
         dividerItemDecoration.setDrawable(
             ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!

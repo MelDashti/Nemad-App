@@ -53,8 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="24dp"
-            android:background="#F7F8F9"
-            android:hint="عنوان شکایت"
+            android:background="#80D9D9D9"
+            app:boxStrokeColor="#80D9D9D9"
+            app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/header"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +67,7 @@
                 android:id="@+id/complaint_header_input_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:hint="عنوان شکایت"
                 android:singleLine="true"
                 android:textSize="13sp" />
 
@@ -76,8 +79,10 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:background="#F7F8F9"
-            android:hint="نام مسؤول مربوطه"
+            android:background="#80D9D9D9"
+            app:hintEnabled="false"
+            app:boxStrokeColor="#80D9D9D9"
+            app:boxStrokeWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/complaint_header"
             app:layout_constraintStart_toStartOf="@+id/complaint_header"
@@ -88,6 +93,7 @@
                 android:id="@+id/manager_name_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:hint="نام مسؤول مربوطه"
                 android:singleLine="true"
                 android:textSize="13sp" />
 
@@ -100,10 +106,10 @@
             android:layout_width="0dp"
             android:layout_height="156dp"
             android:layout_marginTop="16dp"
-            android:background="#F7F8F9"
-
-
-            android:hint="متن شکایت"
+            android:background="#80D9D9D9"
+            app:boxStrokeColor="#80D9D9D9"
+            app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/manager_name"
             app:layout_constraintStart_toStartOf="@+id/manager_name"
@@ -115,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
+                android:hint="متن شکایت"
                 android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -126,7 +133,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:text="ارسال درخواست"
+            android:text="ارسال"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="100dp"
@@ -134,7 +141,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/complaint_text"
             app:layout_constraintTop_toBottomOf="@+id/uploadedFileName"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.38"
             app:layout_constraintVertical_chainStyle="packed">
 
         </com.google.android.material.button.MaterialButton>
@@ -180,25 +187,6 @@
             app:layout_constraintEnd_toEndOf="@+id/complaint_text"
             app:layout_constraintStart_toStartOf="@+id/uploadFile"
             app:layout_constraintTop_toBottomOf="@+id/uploadFile" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/backButton"
-            android:layout_width="110dp"
-            android:layout_height="58dp"
-            android:layout_gravity="bottom|start"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="80dp"
-            android:backgroundTint="#AD8700"
-            android:text="بازگشت"
-            android:textAllCaps="false"
-            android:textSize="14sp"
-            app:cornerRadius="100dp"
-            app:icon="@drawable/ic_backicon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/sendRequest"
-            app:layout_constraintTop_toBottomOf="@+id/sendRequest"
-            app:layout_constraintVertical_chainStyle="packed"/>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
