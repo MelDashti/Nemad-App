@@ -1,8 +1,8 @@
 package com.example.project.api.main.response
 
 class ComplaintResult {
-    var status: String? = null
-    var message: String? = null
+    var trackingNumber: String? = null
+    var title: String? = null
 }
 
 class MediaResponse {

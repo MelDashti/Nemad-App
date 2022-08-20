@@ -55,11 +55,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="#F7F8F9"
-            android:hint="لطفا کد را وارد کنید"
             app:boxCornerRadiusBottomEnd="24dp"
             app:boxCornerRadiusBottomStart="24dp"
             app:boxCornerRadiusTopEnd="24dp"
             app:boxCornerRadiusTopStart="24dp"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,7 @@
                 android:id="@+id/code_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="لطفا کد را وارد کنید"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,8 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.84000003"
+            app:layout_constraintTop_toBottomOf="@+id/code"
             app:layout_constraintVertical_chainStyle="packed">
 
         </com.google.android.material.button.MaterialButton>

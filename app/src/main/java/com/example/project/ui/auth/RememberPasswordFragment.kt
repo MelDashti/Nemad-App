@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.RememberPasswordFragmentBinding
 import com.example.project.ui.main.MainViewModel
 import com.example.project.viewmodels.AuthSharedViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class RememberPasswordFragment : Fragment() {
 
@@ -36,11 +38,13 @@ class RememberPasswordFragment : Fragment() {
         }
 
         viewModel.rememberPass.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled()?.let {
             if (it.code() == 428) {
                 findNavController().navigate(R.id.action_rememberPasswordFragment_to_verificationFragment)
                 viewModel.verificationType = 1
-                Toast.makeText(requireContext(), "کد ارسال شد", Toast.LENGTH_SHORT).show()
-                Log.d("code", "428")
+                Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.error)).show()
             } else if (it.code() == 406) {
                 Toast.makeText(
                     requireContext(),
@@ -52,7 +56,7 @@ class RememberPasswordFragment : Fragment() {
                 Toast.makeText(requireContext(), "خطا سرور", Toast.LENGTH_SHORT).show()
             }
 
-        })
+        }})
 
 
         return binding.root

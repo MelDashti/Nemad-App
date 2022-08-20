@@ -9,6 +9,19 @@ import androidx.databinding.BindingAdapter
 import com.example.project.R
 
 
+@BindingAdapter("details")
+fun TextView.setDetails(details: Pair<String?, String?>?) {
+    val phoneCodeColor = ContextCompat.getColor(this.context, R.color.req_text_color)
+    val text = SpannableStringBuilder()
+
+    if (details != null) {
+        text.append(context.getString((R.string.string_detail))).append(details.first).append()
+            .append(context.getString((R.string.complaint_number))).append(details.second)
+    }
+    this.text = text
+}
+
+
 @BindingAdapter("status")
 fun TextView.setSrc(type: Long?) {
 

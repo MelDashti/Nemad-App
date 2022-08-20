@@ -34,9 +34,11 @@ class ResetFragment : Fragment() {
         }
 
         viewModel.passwordChangedResponse.observe(viewLifecycleOwner, {
-            if (it.isSuccessful) {
-                Toast.makeText(requireContext(), "Password Changed", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_resetFragment_to_loginFragment2)
+            it.getContentIfNotHandled()?.let {
+                if (it.isSuccessful) {
+                    Toast.makeText(requireContext(), "Password Changed", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_resetFragment_to_loginFragment2)
+                }
             }
         })
 

@@ -51,7 +51,7 @@
             android:id="@+id/complaint_header"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:background="#80D9D9D9"
             app:boxStrokeColor="#80D9D9D9"
@@ -77,7 +77,7 @@
             android:id="@+id/manager_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="#80D9D9D9"
             app:hintEnabled="false"
@@ -92,7 +92,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/manager_name_text_input"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="نام مسؤول مربوطه"
                 android:singleLine="true"
                 android:textSize="13sp" />
@@ -130,7 +130,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sendRequest"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="54dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:text="ارسال"

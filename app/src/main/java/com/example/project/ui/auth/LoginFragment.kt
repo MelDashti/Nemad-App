@@ -41,6 +41,7 @@ class LoginFragment : BaseFragment() {
         })
 
         viewModel.response.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled()?.let {
             if (it.isSuccessful) {
                 Snackbar.make(binding.root, "ورود با موفقیت انجام شد", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(
@@ -52,7 +53,7 @@ class LoginFragment : BaseFragment() {
                 Snackbar.make(binding.root, "ورود ناموفق بود", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(
                         ContextCompat.getColor(requireContext(), R.color.error)).show()
-        })
+        }})
 
         binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment2_to_rememberPasswordFragment)

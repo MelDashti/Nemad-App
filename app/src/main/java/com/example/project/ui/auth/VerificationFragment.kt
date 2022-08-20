@@ -52,29 +52,37 @@ class VerificationFragment : Fragment() {
 
 
         viewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                Toast.makeText(requireContext(), "verification was successful", Toast.LENGTH_SHORT)
-                    .show()
-                findNavController().navigate(R.id.action_verificationFragment_to_loginFragment2)
-            } else {
-                Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
-                    .show()
+            it.getContentIfNotHandled()?.let {
+                if (it.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        "verification was successful",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    findNavController().navigate(R.id.action_verificationFragment_to_loginFragment2)
+                } else {
+                    Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         })
 
         viewModel.verifyResetResponse.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                Toast.makeText(
-                    requireContext(),
-                    "Verification was successful, Please Enter New Password",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-                findNavController().navigate(R.id.action_verificationFragment_to_resetFragment)
-            } else {
-                Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
-                    .show()
+            it.getContentIfNotHandled()?.let {
+                if (it.isSuccessful) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Verification was successful, Please Enter New Password",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    findNavController().navigate(R.id.action_verificationFragment_to_resetFragment)
+                } else {
+                    Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
+                        .show()
 
+                }
             }
         })
 

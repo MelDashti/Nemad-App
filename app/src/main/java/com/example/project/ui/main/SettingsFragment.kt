@@ -45,6 +45,7 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+
     private fun showAlertDialog(it: View?) {
         val builder =
             AlertDialog.Builder(context, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)

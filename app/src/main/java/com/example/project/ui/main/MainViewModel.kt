@@ -15,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(val mainRepository: MainRepository) : ViewModel() {
 
+    var complaintInfo: Pair<String?, String?> = Pair("", "")
     var orgId: Long = 0
     var leafNodeCategoryId: Long = 0
 
@@ -165,7 +166,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     ) {
         viewModelScope.launch {
 
-            _complaintResponse.value = mainRepository.sendComplaint(
+            val response = mainRepository.sendComplaint(
                 managerName,
                 complaintHeader,
                 complaintText,
@@ -173,6 +174,19 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
                 leafNodeCategoryId,
                 attachmentFiles
             )
+
+            if (response.isSuccessful) complaintInfo =
+                Pair(
+                    response.body()!!.title.toString(), response.body()!!.trackingNumber.toString()
+                )
+
+            Log.d("hfdahs", complaintInfo.first.toString())
+            Log.d("hfdahs", complaintInfo.second.toString())
+
+
+            _complaintResponse.postValue(response)
+
+
         }
     }
 

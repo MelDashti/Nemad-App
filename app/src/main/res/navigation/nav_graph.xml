@@ -57,11 +57,6 @@
 
         </fragment>
         <fragment
-            android:id="@+id/forgetPasswordFragment"
-            android:name="com.example.project.ui.auth.ForgetPasswordFragment"
-            android:label="fragment_forget_password"
-            tools:layout="@layout/fragment_forget_password" />
-        <fragment
             android:id="@+id/rememberPasswordFragment"
             android:name="com.example.project.ui.auth.RememberPasswordFragment"
             android:label="RememberPasswordFragment"
@@ -199,6 +194,15 @@
         <fragment
             android:id="@+id/formFragment"
             android:name="com.example.project.ui.main.FormFragment"
-            android:label="FormFragment" />
+            android:label="FormFragment" >
+            <action
+                android:id="@+id/action_formFragment_to_requestConfirmation2"
+                app:destination="@id/requestConfirmation2"
+                app:popUpTo="@id/homeFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/requestConfirmation2"
+            android:name="com.example.project.ui.main.RequestConfirmation"
+            android:label="RequestConfirmation" />
     </navigation>
 </navigation>

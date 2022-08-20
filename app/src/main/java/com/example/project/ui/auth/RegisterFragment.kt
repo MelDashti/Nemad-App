@@ -42,39 +42,45 @@ class RegisterFragment : BaseFragment() {
             viewModel.register(username, password)
         }
 
-        viewModel.registerResponse.observe(viewLifecycleOwner, Observer {
-            if (it.code() == 428) {
-                findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
-                Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.successful)
-                    )
-                    .show()
-                viewModel.verificationType = 0
-            } else if (it.code() == 406) {
+        viewModel.registerResponse.observe(viewLifecycleOwner, Observer { event ->
+            event.getContentIfNotHandled()?.let {
+                when {
+                    it.code() == 428 -> {
+                        findNavController().navigate(R.id.action_RegisterFragment_to_verificationFragment)
+                        Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
+                            .setBackgroundTint(
+                                ContextCompat.getColor(requireContext(), R.color.successful)
+                            )
+                            .show()
+                        viewModel.verificationType = 0
+                    }
+                    it.code() == 406 -> {
 
-                Snackbar.make(
-                    binding.root,
-                    "کاربری با این نام کاربری پیش از این ثبت شده است.",
-                    Snackbar.LENGTH_LONG
-                )
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.error)
-                    )
-                    .show()
-            } else {
-                Snackbar.make(
-                    binding.root,
-                    "خطا سرور",
-                    Snackbar.LENGTH_LONG
-                )
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.error)
-                    )
-                    .show()
+                        Snackbar.make(
+                            binding.root,
+                            "کاربری با این نام کاربری پیش از این ثبت شده است.",
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setBackgroundTint(
+                                ContextCompat.getColor(requireContext(), R.color.error)
+                            )
+                            .show()
+                    }
+                    else -> {
+                        Snackbar.make(
+                            binding.root,
+                            "خطا سرور",
+                            Snackbar.LENGTH_LONG
+                        )
+                            .setBackgroundTint(
+                                ContextCompat.getColor(requireContext(), R.color.error)
+                            )
+                            .show()
+                    }
+                }
+
+
             }
-
-
         })
         binding.backButton.setOnClickListener {
             findNavController().popBackStack()

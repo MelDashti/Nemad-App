@@ -28,10 +28,12 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="req_type">نوع درخواست: </string>
+    <string name="string_detail">شهروند محترم شکایت شما با عنوان </string>
+    <string name="complaint_number">ثبت و به واحد مربوطه ارسال گردید. کد پیگیری شکایت: </string>
     <string name="org_unit_name">واحد سازمانی:</string>
     <string name="req_code">کد پیگیری:</string>
     <string name="employee_name">نام کارمند:</string>
     <string name="req_description">توضیحات درخواست:</string>
     <string name="signup_question">اکانت کاربری ندارید؟</string>
-    <string name="signup_confirmation">هم اکنون ثبت نام کنید</string>
+    <string name="signup_confirmation">هم اکنون ثبت نام کنید!</string>
 </resources>

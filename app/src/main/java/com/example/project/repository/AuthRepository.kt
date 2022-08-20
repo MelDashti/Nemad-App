@@ -42,7 +42,7 @@ class AuthRepository @Inject constructor(
     }
 
 
-    suspend fun setUserName(firstName: String, lastName: String) {
+    suspend fun setUserName(firstName: String, lastName: String): Response<ResponseBody> {
         val jsonObject = JSONObject()
         jsonObject.put("firstName", firstName)
         jsonObject.put("lastName", lastName)
@@ -56,18 +56,17 @@ class AuthRepository @Inject constructor(
             Log.d("status", "Successful")
         } else Log.d("status", "Failed")
 
+        return response
     }
 
-    suspend fun setNationalId(nationalId: String) {
+    suspend fun setNationalId(nationalId: String): Response<ResponseBody> {
         val jsonObject = JSONObject()
         jsonObject.put("nationalId", nationalId)
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
         val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
         val response = authenticationApiService.setUserInfo(requestBody)
-        if (response.isSuccessful) {
-            Log.d("status", "national id set")
-        } else Log.d("status", "failed")
+        return response
     }
 
 
@@ -176,7 +175,11 @@ class AuthRepository @Inject constructor(
         return response
     }
 
-    suspend fun resetPassword(value: String, password: String, token: String?): Response<ResponseBody> {
+    suspend fun resetPassword(
+        value: String,
+        password: String,
+        token: String?
+    ): Response<ResponseBody> {
         Log.d("status2", "Successful")
         val jsonObject = JSONObject()
         jsonObject.put("username", value)

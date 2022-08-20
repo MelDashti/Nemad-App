@@ -62,9 +62,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/primaryColor">
-
+                android:layout_height="50dp">
 
                 <ImageView
                     android:id="@+id/toggle"
@@ -81,14 +79,16 @@
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:maxLines="1"
+                    android:textDirection="anyRtl"
                     android:paddingEnd="16dp"
                     android:textColor="@color/black"
+
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/toggle"
+                    app:layout_constraintEnd_toEndOf="@+id/name_title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/name_title"
                     app:layout_constraintVertical_chainStyle="packed" />
 
@@ -101,14 +101,24 @@
                     android:maxLines="1"
                     android:paddingEnd="16dp"
                     android:text="نام خانوادگی"
+                    android:textAlignment="textStart"
                     android:textColor="#032886"
                     android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     app:layout_constraintVertical_chainStyle="packed" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="179dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -131,8 +141,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/primaryColor">
+                android:layout_height="50dp">
 
 
                 <ImageView
@@ -151,13 +160,14 @@
                     android:id="@+id/national_id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="end"
                     android:maxLines="1"
                     android:paddingEnd="16dp"
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/toggle2"
+                    app:layout_constraintStart_toStartOf="@+id/national_id_title"
                     app:layout_constraintTop_toBottomOf="@+id/national_id_title"
                     app:layout_constraintVertical_chainStyle="packed" />
 
@@ -175,9 +185,19 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
                     app:layout_constraintVertical_chainStyle="packed" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="179dp" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -199,8 +219,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/primaryColor">
+                android:layout_height="50dp">
 
 
                 <ImageView
@@ -219,15 +238,14 @@
                     android:id="@+id/password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="end"
                     android:maxLines="1"
                     android:paddingEnd="16dp"
                     android:text="************"
-                    android:textAlignment="textEnd"
                     android:textColor="@color/black"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/toggle3"
                     app:layout_constraintTop_toBottomOf="@+id/password_title"
                     app:layout_constraintVertical_chainStyle="packed" />
 

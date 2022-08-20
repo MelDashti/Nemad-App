@@ -15,7 +15,9 @@ import com.example.project.databinding.FormFragmentBinding
 import android.app.Activity
 import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.content.ContextCompat
 import com.example.project.util.FileUtil.from
+import com.google.android.material.snackbar.Snackbar
 
 
 class FormFragment : Fragment() {
@@ -46,23 +48,24 @@ class FormFragment : Fragment() {
         }
 
         viewModel.complaintResponse.observe(viewLifecycleOwner, {
-            Log.d("youo", "na")
 
             if (it.isSuccessful) {
-                Log.d("youo", "success")
-                Toast.makeText(
-                    requireContext(),
-                    "درخواست شما با موفقیت ارسال شد",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Log.d("youo", it.body()?.trackingNumber.toString())
+                Snackbar.make(binding.root, "درخواست شما با موفقیت ارسال شد", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.successful)
+                    )
+                    .show()
+                findNavController().navigate(R.id.action_formFragment_to_requestConfirmation2)
+
             } else {
                 Log.d("youo", "yep")
 
-                Toast.makeText(
-                    requireContext(),
-                    "خظا سرور",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Snackbar.make(binding.root, "خطا سرور", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.error)
+                    )
+                    .show()
             }
 
         })
