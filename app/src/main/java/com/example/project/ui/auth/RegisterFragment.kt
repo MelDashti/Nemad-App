@@ -36,10 +36,42 @@ class RegisterFragment : BaseFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.register.setOnClickListener {
+
             val username = binding.phoneEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
-            viewModel._userPass.postValue(Pair(username, password))
-            viewModel.register(username, password)
+            val repeatPassword = binding.repeatPasswordEditText.text.toString().trim()
+            when {
+                username.length != 11 -> {
+                    binding.phoneEditText.error =
+                        "شماره تلفن همراه باید شامل ۱۱ رقم باشد و با ۰۹ شروع شود"
+                }
+                username.substring(0, 2) != "09" -> {
+                    binding.phoneEditText.error =
+                        "شماره تلفن همراه باید شامل ۱۱ رقم باشد و با ۰۹ شروع شود"
+                }
+                username.isEmpty() -> {
+                    binding.phoneEditText.error = "این فیلد الزامی است"
+                }
+                password.isEmpty() -> {
+                    binding.passwordEditText.error = "این فیلد الزامی است"
+                }
+                repeatPassword.isEmpty() -> {
+                    binding.repeatPasswordEditText.error = "این فیلد الزامی است"
+                }
+                password.length < 6 || !password.contains("[0-9]".toRegex()) -> {
+                    binding.passwordEditText.error =
+                        "کلم عبور باید شامل حداقل ۶ کاراکتر باشد و شامل حداقل یک حرف عددی باشد"
+                }
+                repeatPassword != password -> {
+                    binding.repeatPasswordEditText.error =
+                        "تکرار کلمه عبور با کلمه عبور همخوانی ندارد."
+                }
+                else -> {
+                    viewModel._userPass.postValue(Pair(username, password))
+                    viewModel.register(username, password)
+                }
+            }
+
         }
 
         viewModel.registerResponse.observe(viewLifecycleOwner, Observer { event ->

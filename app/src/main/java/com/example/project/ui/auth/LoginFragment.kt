@@ -34,26 +34,36 @@ class LoginFragment : BaseFragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.loginButtonCLicked.observe(viewLifecycleOwner, {
+        binding.register.setOnClickListener {
             val username = binding.usernameEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
-            viewModel.login(username, password)
-        })
+            when {
+                username.isEmpty() -> {
+                    binding.usernameEditText.error = "Please Enter Name"
+                }
+                password.isEmpty() -> {
+                    binding.passwordEditText.error = "Please Enter Password"
+                }
+                else -> viewModel.login(username, password)
+            }
+        }
 
         viewModel.response.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let {
-            if (it.isSuccessful) {
-                Snackbar.make(binding.root, "ورود با موفقیت انجام شد", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.successful)
-                    )
-                    .show()
-                findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
-            } else
-                Snackbar.make(binding.root, "ورود ناموفق بود", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.error)).show()
-        }})
+                if (it.isSuccessful) {
+                    Snackbar.make(binding.root, "ورود با موفقیت انجام شد", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.successful)
+                        )
+                        .show()
+                    findNavController().navigate(R.id.action_loginFragment2_to_homeFragment)
+                } else
+                    Snackbar.make(binding.root, "خطا احراز هویت! اطلاعات ورودی نادرست است.", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.error)
+                        ).show()
+            }
+        })
 
         binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment2_to_rememberPasswordFragment)

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"
-            android:src="@drawable/shutterstock_777352759_1"
+            android:src="@drawable/welcomepic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,10 +65,10 @@
         <ImageView
             android:id="@+id/logo"
             style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
-            android:textAlignment="center"
+            android:layout_width="336dp"
+            android:layout_height="226dp"
+
+            android:src="@drawable/lg_nemad_1"
             android:textAllCaps="true"
             android:textSize="20sp"
             android:textStyle="bold"

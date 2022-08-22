@@ -17,6 +17,8 @@ import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.adapter.CategoryItemAdapter
 import com.example.project.adapter.CategoryItemListener
+import com.example.project.adapter.CategoryListItemAdapter
+import com.example.project.adapter.CategoryListItemListener
 import com.example.project.databinding.MainFragmentBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +54,19 @@ class MainFragment : BaseFragment() {
             }
         })
 
+        val categoryListViewAdapter = CategoryListItemAdapter(CategoryListItemListener {
+            if (it.children.isNullOrEmpty()) {
+                viewModel.isLeafNode = true
+                findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
+                viewModel.leafNodeCategoryId = it.id
+
+            } else {
+                // display list
+                viewModel.subList(it)
+            }
+
+        })
+
 
         binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         addDecorationToGroupRecyclerView()
@@ -63,6 +78,13 @@ class MainFragment : BaseFragment() {
                 viewModel.searchDone()
             }
         })
+
+        binding.searchBar.setOnClickListener {
+            viewModel.searchDone()
+            initializeSearch()
+        }
+
+
 //
 //        viewModel.searchResultList.observe(viewLifecycleOwner, {
 //            categoryListAdapter.submitList(it)
@@ -83,6 +105,7 @@ class MainFragment : BaseFragment() {
         binding.categoryRecyclerView.adapter = categoryListAdapter
 
         viewModel.categoryList.observe(viewLifecycleOwner, {
+
             categoryListAdapter.submitList(it)
         })
 
@@ -119,10 +142,7 @@ class MainFragment : BaseFragment() {
             } else {
                 viewModel.setAsParent()
             }
-
-
         }
-
         return binding.root
     }
 
@@ -130,6 +150,7 @@ class MainFragment : BaseFragment() {
         val searchView = binding.searchBar
         searching(searchView)
     }
+
 
     private fun searching(search: androidx.appcompat.widget.SearchView) {
         search.setOnQueryTextListener(object :

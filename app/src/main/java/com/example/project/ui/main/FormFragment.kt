@@ -32,19 +32,25 @@ class FormFragment : Fragment() {
     ): View {
         binding = FormFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.sendRequest.setOnClickListener {
 
             val managerName = binding.managerNameTextInput.text.toString().trim()
             val complaintHeader = binding.complaintHeaderInputText.text.toString().trim()
             val complaintText = binding.complaintTextInput.text.toString().trim()
-            viewModel.sendRequest(
-                managerName,
-                complaintHeader,
-                complaintText,
-                attachmentFiles.toList()
-            )
-
+            when {
+                managerName.isEmpty() -> binding.managerNameTextInput.error = "این فیلد الزامی است"
+                complaintHeader.isEmpty() -> binding.complaintHeaderInputText.error =
+                    "این فیلد الزامی است"
+                complaintText.isEmpty() -> binding.complaintTextInput.error = "این فیلد الزامی است"
+                else -> viewModel.sendRequest(
+                    managerName,
+                    complaintHeader,
+                    complaintText,
+                    attachmentFiles.toList()
+                )
+            }
         }
 
         viewModel.complaintResponse.observe(viewLifecycleOwner, {

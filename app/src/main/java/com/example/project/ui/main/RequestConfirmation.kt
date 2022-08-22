@@ -5,6 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.project.BaseFragment
 import com.example.project.R
@@ -13,9 +17,8 @@ import com.example.project.util.setDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RequestConfirmation : BaseFragment() {
+class RequestConfirmation : Fragment() {
 
-    override var bottomNavigationViewVisibility = View.VISIBLE
     val viewModel: MainViewModel by navGraphViewModels(R.id.navigation2) { defaultViewModelProviderFactory }
     private lateinit var binding: FragmentRequestConfirmationBinding
 
@@ -26,11 +29,18 @@ class RequestConfirmation : BaseFragment() {
     ): View {
         binding = FragmentRequestConfirmationBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-        Log.d("fadsads", viewModel.complaintInfo.first.toString())
-        Log.d("fadsads", viewModel.complaintInfo.second.toString())
+        binding.lifecycleOwner = this
+
         binding.uploadFileDescription.setDetails(viewModel.complaintInfo)
 
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            // Handle the back button event
+            findNavController().popBackStack(R.id.homeFragment, false)
+        }
 
+        binding.sendRequest.setOnClickListener {
+            findNavController().popBackStack(R.id.homeFragment, false)
+        }
 
 
         return binding.root

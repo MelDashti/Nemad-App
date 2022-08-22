@@ -15,8 +15,8 @@ fun TextView.setDetails(details: Pair<String?, String?>?) {
     val text = SpannableStringBuilder()
 
     if (details != null) {
-        text.append(context.getString((R.string.string_detail))).append(details.first).append()
-            .append(context.getString((R.string.complaint_number))).append(details.second)
+        text.append(context.getString((R.string.string_detail))).append(" ").append(details.first).append()
+            .append(context.getString((R.string.complaint_number))).append(" ").append(details.second)
     }
     this.text = text
 }

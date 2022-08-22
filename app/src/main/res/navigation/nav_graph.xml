@@ -198,7 +198,7 @@
             <action
                 android:id="@+id/action_formFragment_to_requestConfirmation2"
                 app:destination="@id/requestConfirmation2"
-                app:popUpTo="@id/homeFragment" />
+             />
         </fragment>
         <fragment
             android:id="@+id/requestConfirmation2"
