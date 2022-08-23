@@ -106,5 +106,9 @@ class MainRepository @Inject constructor(
 
     }
 
+    suspend fun fetchCurrentReq(id: String): Requests? {
+        return mainApiService.getCurrentReq(id)
+    }
+
 
 }

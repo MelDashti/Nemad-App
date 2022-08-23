@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.R
@@ -16,6 +17,7 @@ import com.example.project.adapter.ProceedingItemAdapter
 import com.example.project.api.main.response.Proceeding
 import com.example.project.databinding.FragmentMyRequestBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyRequestFragment : Fragment() {
@@ -32,10 +34,14 @@ class MyRequestFragment : Fragment() {
         binding.lifecycleOwner = this
         val adapter = ProceedingItemAdapter()
         binding.proceedingsRecyclerView.adapter = adapter
-        val arr = mutableListOf<Proceeding>(Proceeding(), Proceeding(), Proceeding())
-        adapter.submitList(arr)
+//        val arr = mutableListOf<Proceeding>(Proceeding(), Proceeding(), Proceeding())
+//        adapter.submitList(arr)
 
-        if (viewModel.requests.value?.proceedings?.isEmpty() == true) {
+//        if (viewModel.requests.value?.proceedings?.isEmpty() == true) {
+//        }
+
+        lifecycleScope.launch {
+            viewModel.fetchCurrentReq()
         }
 
         if (viewModel.requests.value!!.status == 4L) {
@@ -74,10 +80,10 @@ class MyRequestFragment : Fragment() {
         binding.proceedingsRecyclerView.addItemDecoration(itemDecorator)
 
 
-// proceedings is empty on server, so for the time being I have commented this
-//        viewModel.requests.observe(viewLifecycleOwner, {
-//            adapter.submitList(it.proceedings)
-//        })
+//        proceedings is empty on server, so for the time being I have commented this
+        viewModel.requests.observe(viewLifecycleOwner, {
+            adapter.submitList(it.proceedings)
+        })
 
 
         return binding.root

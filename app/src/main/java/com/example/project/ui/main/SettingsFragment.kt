@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.SettingsFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
-    val viewModel: SettingsViewModel by viewModels()
+    val viewModel: SettingsViewModel by navGraphViewModels(R.id.navigation3) { defaultViewModelProviderFactory }
     private lateinit var binding: SettingsFragmentBinding
 
 
@@ -25,6 +27,8 @@ class SettingsFragment : Fragment() {
     ): View {
         binding = SettingsFragmentBinding.inflate(inflater)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         viewModel.settings.observe(viewLifecycleOwner, {
             binding.userName.text = it!!.firstName.toString() + " " + it!!.lastName.toString()
             binding.nationalId.text = it.nationalId.toString()

@@ -34,6 +34,9 @@ interface MainApiService {
     @GET("Citizen/Request")
     suspend fun getRequests(): MutableList<Requests>
 
+    @GET("Citizen/Request/{id}")
+    suspend fun getCurrentReq(@Path("id") id: String ): Requests
+
     @GET("Citizen/Request?OrderBy.Column=sent&OrderBy.Type=desc")
     suspend fun getRequestData(
         @Query("PageNumber") PageNumber: Int,

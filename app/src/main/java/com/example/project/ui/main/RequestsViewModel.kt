@@ -19,24 +19,24 @@ class RequestsViewModel @Inject constructor(
     val mainApiService: MainApiService
 ) : ViewModel() {
 
-
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
     var recentRequestList: MutableLiveData<List<Requests>?> = MutableLiveData()
-
-
     var requests: MutableLiveData<Requests> = MutableLiveData()
-
-
     var requestsPagedList = mainRepository.fetchPagedReq(viewModelScope)
-
     var lolList = Pager(PagingConfig(pageSize = 10)) {
         PassengersDataSource(mainApiService)
     }.flow.cachedIn(viewModelScope)
 
 
-    private fun fetchPagedReq() {
-
+    suspend fun fetchCurrentReq() {
+        viewModelScope.launch {
+            try {
+                requests.value = mainRepository.fetchCurrentReq(requests.value!!.id)
+            } catch (e: java.lang.Exception) {
+            }
+        }
     }
+
 
     init {
         fetchRequests()

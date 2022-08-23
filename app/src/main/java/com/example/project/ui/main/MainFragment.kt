@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project.BaseFragment
 import com.example.project.R
 import com.example.project.adapter.CategoryItemAdapter
@@ -68,18 +69,28 @@ class MainFragment : BaseFragment() {
         })
 
 
-        binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        addDecorationToGroupRecyclerView()
 
-        // search bar
-        viewModel.startSearch.observe(viewLifecycleOwner, {
-            if (it) {
-                initializeSearch()
-                viewModel.searchDone()
-            }
-        })
+        if (viewModel.isRootNode) {
+            binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+            addDecorationToGroupRecyclerView()
+            binding.categoryRecyclerView.adapter = categoryListAdapter
+        } else {
+            binding.categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            addDecorationToListViewRecyclerView()
+            binding.categoryRecyclerView.adapter = categoryListViewAdapter
+        }
+
+
+//        // search bar
+//        viewModel.startSearch.observe(viewLifecycleOwner, {
+//            if (it) {
+//                initializeSearch()
+//                viewModel.searchDone()
+//            }
+//        })
 
         binding.searchBar.setOnClickListener {
+            binding.searchBar.isIconified = false
             viewModel.searchDone()
             initializeSearch()
         }
@@ -102,11 +113,14 @@ class MainFragment : BaseFragment() {
 //            } else {
 //                viewModel.fetchCat()
 //            }
-        binding.categoryRecyclerView.adapter = categoryListAdapter
+
 
         viewModel.categoryList.observe(viewLifecycleOwner, {
 
-            categoryListAdapter.submitList(it)
+            if (viewModel.isRootNode)
+                categoryListAdapter.submitList(it)
+            else categoryListViewAdapter.submitList(it)
+
         })
 
 //        viewModel.clearRecyclerView.observe(viewLifecycleOwner, {
@@ -125,8 +139,6 @@ class MainFragment : BaseFragment() {
         }
 
 
-
-
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             // Handle the back button event
             if (viewModel.categoryList.value.isNullOrEmpty()) {
@@ -138,7 +150,7 @@ class MainFragment : BaseFragment() {
 
             if (currentParentId == parentNodeId.toLong()) {
                 viewModel.clearData()
-
+                findNavController().popBackStack()
             } else {
                 viewModel.setAsParent()
             }
@@ -150,7 +162,6 @@ class MainFragment : BaseFragment() {
         val searchView = binding.searchBar
         searching(searchView)
     }
-
 
     private fun searching(search: androidx.appcompat.widget.SearchView) {
         search.setOnQueryTextListener(object :
@@ -178,6 +189,17 @@ class MainFragment : BaseFragment() {
         )
 
         binding.categoryRecyclerView.addItemDecoration(dividerItemDecoration)
+    }
+
+    private fun addDecorationToListViewRecyclerView() {
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        itemDecorator.setDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.divider
+            )!!
+        )
+        binding.categoryRecyclerView.addItemDecoration(itemDecorator)
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.project.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Response
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) : ViewModel() {
@@ -24,7 +26,7 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
 
 
     private val _userNationalIdResponse = MutableLiveData<Event<Response<ResponseBody>>>()
-    val userNationalIdResponse: LiveData<Event<Response<ResponseBody>>> = _userNameResponse
+    val userNationalIdResponse: LiveData<Event<Response<ResponseBody>>> = _userNationalIdResponse
 
     init {
         fetchSettings()
@@ -37,7 +39,9 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
 
     fun fetchSettings() {
         viewModelScope.launch {
-            settings.value = authRepository.getUserInfo()
+            val userInfo = authRepository.getUserInfo()
+            Log.d("vfads",userInfo.firstName.toString())
+            settings.value = userInfo
         }
     }
 

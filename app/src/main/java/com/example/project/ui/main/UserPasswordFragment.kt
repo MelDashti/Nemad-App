@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.FragmentUserPasswordBinding
 
 class UserPasswordFragment : Fragment() {
 
+    val viewModel: SettingsViewModel by navGraphViewModels(R.id.navigation3) { defaultViewModelProviderFactory }
     lateinit var binding: FragmentUserPasswordBinding
-    val viewModel: SettingsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

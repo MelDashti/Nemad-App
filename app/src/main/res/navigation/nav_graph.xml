@@ -110,39 +110,6 @@
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.project.ui.main.SettingsFragment"
-        android:label="SettingsFragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_navigation"
-            app:destination="@id/navigation"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popUpTo="@+id/navigation"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_settingsFragment_to_nationalIdFragment"
-            app:destination="@id/nationalIdFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_userNameFragment"
-            app:destination="@id/userNameFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_userPasswordFragment"
-            app:destination="@id/userPasswordFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userNameFragment"
-        android:name="com.example.project.ui.main.UserNameFragment"
-        android:label="UserNameFragment" />
-    <fragment
-        android:id="@+id/userPasswordFragment"
-        android:name="com.example.project.ui.main.UserPasswordFragment"
-        android:label="UserPasswordFragment" />
-    <fragment
-        android:id="@+id/nationalIdFragment"
-        android:name="com.example.project.ui.main.NationalIdFragment"
-        android:label="NationalIdFragment" />
-    <fragment
         android:id="@+id/polls"
         android:name="com.example.project.ui.main.PollsFragment"
         android:label="polls_fragment"
@@ -204,5 +171,40 @@
             android:id="@+id/requestConfirmation2"
             android:name="com.example.project.ui.main.RequestConfirmation"
             android:label="RequestConfirmation" />
+    </navigation>
+    <navigation android:id="@+id/navigation3"
+        app:startDestination="@id/settingsFragment">
+        <fragment
+            android:id="@+id/userPasswordFragment"
+            android:name="com.example.project.ui.main.UserPasswordFragment"
+            android:label="UserPasswordFragment" />
+        <fragment
+            android:id="@+id/userNameFragment"
+            android:name="com.example.project.ui.main.UserNameFragment"
+            android:label="UserNameFragment" />
+        <fragment
+            android:id="@+id/nationalIdFragment"
+            android:name="com.example.project.ui.main.NationalIdFragment"
+            android:label="NationalIdFragment" />
+        <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.example.project.ui.main.SettingsFragment"
+            android:label="SettingsFragment">
+            <action
+                android:id="@+id/action_settingsFragment_to_navigation"
+                app:destination="@id/navigation"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+             />
+            <action
+                android:id="@+id/action_settingsFragment_to_nationalIdFragment"
+                app:destination="@id/nationalIdFragment" />
+            <action
+                android:id="@+id/action_settingsFragment_to_userNameFragment"
+                app:destination="@id/userNameFragment" />
+            <action
+                android:id="@+id/action_settingsFragment_to_userPasswordFragment"
+                app:destination="@id/userPasswordFragment" />
+        </fragment>
     </navigation>
 </navigation>

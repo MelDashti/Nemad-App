@@ -1,6 +1,7 @@
 package com.example.project.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.FragmentUserNameBinding
 import com.google.android.material.snackbar.Snackbar
@@ -17,7 +19,8 @@ import com.google.android.material.snackbar.Snackbar
 class UserNameFragment : Fragment() {
 
     lateinit var binding: FragmentUserNameBinding
-    val viewModel by activityViewModels<SettingsViewModel>()
+    val viewModel: SettingsViewModel by navGraphViewModels(R.id.navigation3) { defaultViewModelProviderFactory }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +29,7 @@ class UserNameFragment : Fragment() {
         binding = FragmentUserNameBinding.inflate(inflater)
         binding.viewModel = viewModel
 
+
         binding.nameEditText.setText(viewModel.settings.value?.firstName)
         binding.surnameEditText.setText(viewModel.settings.value?.lastName)
 
@@ -33,7 +37,6 @@ class UserNameFragment : Fragment() {
             val firstName = binding.nameEditText.text.toString().trim()
             val lastName = binding.surnameEditText.text.toString().trim()
             viewModel.setUserName(firstName, lastName)
-            viewModel.fetchSettings()
         }
 
         viewModel.userNameResponse.observe(viewLifecycleOwner, Observer {
@@ -49,9 +52,7 @@ class UserNameFragment : Fragment() {
                             ContextCompat.getColor(requireContext(), R.color.successful)
                         )
                         .show()
-                    val firstName = binding.nameEditText.text.toString().trim()
-                    val lastName = binding.surnameEditText.text.toString().trim()
-                    viewModel.updateUserName(firstName, lastName)
+                    viewModel.fetchSettings()
                     findNavController().popBackStack()
                 } else {
                     Snackbar.make(

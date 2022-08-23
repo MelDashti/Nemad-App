@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.FragmentUserNationalIdBinding
 import com.example.project.databinding.SettingsFragmentBinding
@@ -17,21 +18,25 @@ import com.google.android.material.snackbar.Snackbar
 class NationalIdFragment : Fragment() {
 
     lateinit var binding: FragmentUserNationalIdBinding
-    val viewModel by activityViewModels<SettingsViewModel>()
+    val viewModel: SettingsViewModel by navGraphViewModels(R.id.navigation3) { defaultViewModelProviderFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentUserNationalIdBinding.inflate(inflater)
+        binding.viewModel = viewModel
 
         binding.confirmButton.setOnClickListener {
             val nationalID = binding.nationalIdEditText.text.toString().trim()
-            viewModel.setNationalId(nationalID)
-            viewModel.fetchSettings()
+            if (nationalID.length != 10) binding.nationalIdEditText.error =
+                "کد ملی باید شامل ۱۰ کاراکتر عددی باشد"
+            else {
+                viewModel.setNationalId(nationalID)
+            }
         }
 
-        viewModel.userNameResponse.observe(viewLifecycleOwner, {
+        viewModel.userNationalIdResponse.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let {
                 if (it.isSuccessful) {
                     Snackbar.make(
@@ -43,7 +48,9 @@ class NationalIdFragment : Fragment() {
                             ContextCompat.getColor(requireContext(), R.color.successful)
                         )
                         .show()
+                    viewModel.fetchSettings()
                     findNavController().popBackStack()
+
                 } else {
                     Snackbar.make(
                         binding.root,

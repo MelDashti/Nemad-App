@@ -45,6 +45,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     private var list: List<Category>? = null
 
     var isLeafNode: Boolean = false
+    var isRootNode: Boolean = false
     var isOrgLeafNode: Boolean = false
 
     private val _query = MutableLiveData<String>()

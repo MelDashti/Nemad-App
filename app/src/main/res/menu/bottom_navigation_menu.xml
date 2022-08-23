@@ -11,7 +11,7 @@
         android:icon="@drawable/note_icon"
         android:title="درخواست ها" />
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/navigation3"
         android:enabled="true"
         android:icon="@drawable/user_edit_icon"
         android:title="تنظیمات" />
