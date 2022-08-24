@@ -4,10 +4,22 @@ import android.text.SpannableStringBuilder
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.core.text.color
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.example.project.R
 
+
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    val img = BASE_URL_IMG + imgUrl
+    img.let {
+        val imgUri = img.toUri().buildUpon().scheme("https").build()
+        Glide.with(imgView.context)
+            .load(imgUri).into(imgView)
+    }
+}
 
 @BindingAdapter("details")
 fun TextView.setDetails(details: Pair<String?, String?>?) {
@@ -15,8 +27,10 @@ fun TextView.setDetails(details: Pair<String?, String?>?) {
     val text = SpannableStringBuilder()
 
     if (details != null) {
-        text.append(context.getString((R.string.string_detail))).append(" ").append(details.first).append()
-            .append(context.getString((R.string.complaint_number))).append(" ").append(details.second)
+        text.append(context.getString((R.string.string_detail))).append(" ").append(details.first)
+            .append()
+            .append(context.getString((R.string.complaint_number))).append(" ")
+            .append(details.second)
     }
     this.text = text
 }

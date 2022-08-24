@@ -7,6 +7,8 @@ class ComplaintResult {
 
 class MediaResponse {
     var id: String? = null
+    var url: String? = null
+
 }
 
 

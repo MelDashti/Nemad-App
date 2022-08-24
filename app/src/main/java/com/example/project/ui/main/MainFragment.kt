@@ -31,7 +31,6 @@ class MainFragment : BaseFragment() {
     override var bottomNavigationViewVisibility = View.VISIBLE
     val viewModel: MainViewModel by navGraphViewModels(R.id.navigation2) { defaultViewModelProviderFactory }
 
-    //    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(
@@ -60,7 +59,6 @@ class MainFragment : BaseFragment() {
                 viewModel.isLeafNode = true
                 findNavController().navigate(R.id.action_mainFragment_to_organizationFragment)
                 viewModel.leafNodeCategoryId = it.id
-
             } else {
                 // display list
                 viewModel.subList(it)
@@ -70,7 +68,7 @@ class MainFragment : BaseFragment() {
 
 
 
-        if (viewModel.isRootNode) {
+        if (viewModel.checkIfRootNode()) {
             binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             addDecorationToGroupRecyclerView()
             binding.categoryRecyclerView.adapter = categoryListAdapter
@@ -106,21 +104,21 @@ class MainFragment : BaseFragment() {
 //        })
 
 
-        //floating action button
-
-//            if (!viewModel.categoryList.value.isNullOrEmpty()) {
-//                categoryListAdapter.submitList(viewModel.categoryList.value)
-//            } else {
-//                viewModel.fetchCat()
-//            }
 
 
         viewModel.categoryList.observe(viewLifecycleOwner, {
 
-            if (viewModel.isRootNode)
+            if (viewModel.checkIfRootNode()) {
+                binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                addDecorationToGroupRecyclerView()
+                binding.categoryRecyclerView.adapter = categoryListAdapter
                 categoryListAdapter.submitList(it)
-            else categoryListViewAdapter.submitList(it)
-
+            } else {
+                binding.categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                addDecorationToListViewRecyclerView()
+                binding.categoryRecyclerView.adapter = categoryListViewAdapter
+                categoryListViewAdapter.submitList(it)
+            }
         })
 
 //        viewModel.clearRecyclerView.observe(viewLifecycleOwner, {
@@ -130,11 +128,20 @@ class MainFragment : BaseFragment() {
 
 
         if (viewModel.isLeafNode) {
-            binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-            addDecorationToGroupRecyclerView()
-            if (!viewModel.categoryList.value.isNullOrEmpty())
-                categoryListAdapter.submitList(viewModel.categoryList.value)
-            binding.categoryRecyclerView.adapter = categoryListAdapter
+            if (viewModel.checkIfRootNode()) {
+                binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                addDecorationToGroupRecyclerView()
+                if (!viewModel.categoryList.value.isNullOrEmpty())
+                    categoryListAdapter.submitList(viewModel.categoryList.value)
+                binding.categoryRecyclerView.adapter = categoryListAdapter
+            } else {
+                binding.categoryRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                addDecorationToListViewRecyclerView()
+                if (!viewModel.categoryList.value.isNullOrEmpty())
+                    categoryListViewAdapter.submitList(viewModel.categoryList.value)
+                binding.categoryRecyclerView.adapter = categoryListViewAdapter
+            }
+
             viewModel.isLeafNode = false
         }
 
@@ -143,11 +150,11 @@ class MainFragment : BaseFragment() {
             // Handle the back button event
             if (viewModel.categoryList.value.isNullOrEmpty()) {
                 findNavController().popBackStack()
-
             }
+
+
             val parentNodeId = 1
             val currentParentId = viewModel.categoryList.value?.get(0)?.parentId
-
             if (currentParentId == parentNodeId.toLong()) {
                 viewModel.clearData()
                 findNavController().popBackStack()
@@ -188,6 +195,9 @@ class MainFragment : BaseFragment() {
             ContextCompat.getDrawable(requireContext(), R.drawable.divider)!!
         )
 
+        while (binding.categoryRecyclerView.itemDecorationCount > 0) {
+            binding.categoryRecyclerView.removeItemDecorationAt(0);
+        }
         binding.categoryRecyclerView.addItemDecoration(dividerItemDecoration)
     }
 
@@ -199,8 +209,10 @@ class MainFragment : BaseFragment() {
                 R.drawable.divider
             )!!
         )
+        while (binding.categoryRecyclerView.itemDecorationCount > 0) {
+            binding.categoryRecyclerView.removeItemDecorationAt(0);
+        }
         binding.categoryRecyclerView.addItemDecoration(itemDecorator)
     }
-
 
 }

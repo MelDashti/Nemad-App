@@ -45,7 +45,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     private var list: List<Category>? = null
 
     var isLeafNode: Boolean = false
-    var isRootNode: Boolean = false
     var isOrgLeafNode: Boolean = false
 
     private val _query = MutableLiveData<String>()
@@ -86,6 +85,16 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         _startOrgSearch.value = false
         searchNow("")
         searchOrgNow("")
+    }
+
+
+    fun checkIfRootNode(): Boolean {
+        var rootNode = categoryList.value?.get(0)?.parentId
+        return when (rootNode) {
+            1L -> true
+            null -> true
+            else -> false
+        }
     }
 
 

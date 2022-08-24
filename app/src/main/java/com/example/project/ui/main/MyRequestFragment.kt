@@ -40,14 +40,17 @@ class MyRequestFragment : Fragment() {
 //        if (viewModel.requests.value?.proceedings?.isEmpty() == true) {
 //        }
 
+
         lifecycleScope.launch {
             viewModel.fetchCurrentReq()
         }
+
 
         if (viewModel.requests.value!!.status == 4L) {
             binding.ratingLayout.visibility = View.VISIBLE
             binding.sendRequest.visibility = View.VISIBLE
         }
+
 
         if (viewModel.requests.value!!.status == 2L) {
             binding.confrim.visibility = View.VISIBLE
@@ -66,8 +69,8 @@ class MyRequestFragment : Fragment() {
                 binding.sendRequest.visibility = View.GONE
                 Toast.makeText(requireContext(), "ممنون", Toast.LENGTH_SHORT).show()
             }
-
         }
+
 
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(

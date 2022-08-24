@@ -14,8 +14,10 @@ import com.example.project.R
 import com.example.project.databinding.FormFragmentBinding
 import android.app.Activity
 import android.net.Uri
+import android.widget.ListAdapter
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.content.ContextCompat
+import com.example.project.adapter.MediaFileAdapter
 import com.example.project.util.FileUtil.from
 import com.google.android.material.snackbar.Snackbar
 
@@ -76,12 +78,17 @@ class FormFragment : Fragment() {
 
         })
 
+
+        val adapter = MediaFileAdapter()
+        binding.uploadedFileRecyclerVIew.adapter = adapter
+
         viewModel.mediaResponse.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
                 val mediaId = it.body()!!.id.toString()
                 Toast.makeText(requireContext(), "Uploaded Successfully", Toast.LENGTH_SHORT).show()
                 attachmentFiles.add(mediaId)
-                binding.uploadedFileName.text = attachmentFiles.toString()
+//                binding.uploadedFileName.text = attachmentFiles.toString()
+                adapter.submitList(listOf(it.body()))
 
             } else Toast.makeText(requireContext(), "Upload Failed", Toast.LENGTH_SHORT).show()
         })

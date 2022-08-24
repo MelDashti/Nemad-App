@@ -61,8 +61,8 @@
             app:cornerRadius="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/uploadedFileName"
-            app:layout_constraintTop_toBottomOf="@+id/uploadedFileName"
+            app:layout_constraintStart_toStartOf="@+id/uploadedFileRecyclerVIew"
+            app:layout_constraintTop_toBottomOf="@+id/uploadedFileRecyclerVIew"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintVertical_chainStyle="packed">
 
@@ -80,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/header" />
 
         <TextView
-            android:id="@+id/uploadedFileName"
+            android:id="@+id/uploadedFileRecyclerVIew"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginTop="16dp"
