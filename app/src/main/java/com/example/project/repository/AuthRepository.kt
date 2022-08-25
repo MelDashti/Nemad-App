@@ -149,7 +149,17 @@ class AuthRepository @Inject constructor(
     }
 
     suspend fun sendPhoneNumber(phoneNo: String): Response<ResponseBody> {
-        val response = authenticationApiService.rememberPassword(phoneNo)
+        Log.d("status2", "Successful")
+        val jsonObject = JSONObject()
+        jsonObject.put("username", phoneNo)
+        // Convert JSONObject to String
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val response = authenticationApiService.rememberPassword(requestBody)
+        if (response.isSuccessful) {
+            Log.d("status2", "Successful")
+            Log.d("status2", response.message().toString())
+        } else Log.d("status", "Failed")
         return response
     }
 

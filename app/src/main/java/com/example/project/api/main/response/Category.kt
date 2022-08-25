@@ -5,10 +5,7 @@ class ComplaintResult {
     var title: String? = null
 }
 
-class MediaResponse {
-    var id: String? = null
-    var url: String? = null
-
+class MediaResponse(var id: String? = null, var url: String? = null, var title: String?) {
 }
 
 
@@ -27,6 +24,7 @@ class Requests {
     lateinit var id: String
     var status: Long = 0L
     var statusStr: String? = null
+    var rating : Long = 0L
     var title: String? = null
     var trackingNumber: String? = null
     var organizationalUnit: OrganizationalUnits? = null
@@ -40,6 +38,13 @@ class Proceeding() {
     var id: String? = null
     var dateTime: String? = "تاریخ: 26 مرداد 1401و 15:42"
     var comments: String? = "دیتا تستی"
+    var attachments: List<Attachment>? = null
+
+}
+
+class Attachment() {
+    var url: String? = null
+    var title: String? = null
 }
 
 

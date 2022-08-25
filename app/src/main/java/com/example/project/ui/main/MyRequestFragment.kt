@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.R
+import com.example.project.adapter.MediaFileAdapter
 import com.example.project.adapter.ProceedingItemAdapter
 import com.example.project.api.main.response.Proceeding
 import com.example.project.databinding.FragmentMyRequestBinding
@@ -56,6 +57,7 @@ class MyRequestFragment : Fragment() {
             binding.confrim.visibility = View.VISIBLE
             binding.objectionButton.visibility = View.VISIBLE
         }
+
 
 
         binding.sendRequest.setOnClickListener {

@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project.api.main.response.MediaResponse
 import com.example.project.api.main.response.OrganizationalUnits
 import com.example.project.api.main.response.Proceeding
 import com.example.project.databinding.OrganizationListItemBinding
 import com.example.project.databinding.ProceedingsListItemBinding
 
-class ProceedingItemAdapter : ListAdapter<Proceeding, ProceedingItemViewHolder>(ProceedingItemDiffUtilCallback()) {
+class ProceedingItemAdapter :
+    ListAdapter<Proceeding, ProceedingItemViewHolder>(ProceedingItemDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProceedingItemViewHolder {
         return ProceedingItemViewHolder.from(parent)
     }
@@ -41,6 +43,16 @@ class ProceedingItemViewHolder(private val bind: ProceedingsListItemBinding) :
     RecyclerView.ViewHolder(bind.root) {
     fun bind(proceeding: Proceeding) {
         bind.proceeding = proceeding
+        val adapterFiles = MediaFileAdapter()
+        bind.uploadedFileRecyclerVIew.adapter = adapterFiles
+        var list = mutableListOf<MediaResponse>()
+
+        proceeding.attachments?.forEach {
+            list.add(MediaResponse(title = it.title, url = it.url))
+        }
+
+        adapterFiles.submitList(list)
+
     }
 
     companion object {

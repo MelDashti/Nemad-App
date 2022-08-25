@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.example.project.R
 import com.example.project.databinding.ResetFragmentBinding
 import com.example.project.viewmodels.AuthSharedViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ResetFragment : Fragment() {
 
@@ -36,7 +38,11 @@ class ResetFragment : Fragment() {
         viewModel.passwordChangedResponse.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let {
                 if (it.isSuccessful) {
-                    Toast.makeText(requireContext(), "Password Changed", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "رمز عبور شما با موفقیت تغییر یافت.", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.successful)
+                        )
+                        .show()
                     findNavController().navigate(R.id.action_resetFragment_to_loginFragment2)
                 }
             }

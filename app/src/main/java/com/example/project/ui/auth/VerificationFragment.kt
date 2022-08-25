@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.example.project.R
 import com.example.project.databinding.VerificationFragmentBinding
 import com.example.project.ui.main.MainViewModel
 import com.example.project.viewmodels.AuthSharedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,11 +35,12 @@ class VerificationFragment : Fragment() {
         binding.register.setOnClickListener {
             val code = binding.codeEditText.text.toString().trim()
             if (code.isNullOrEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please Enter The Verification Code",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Snackbar.make(binding.root,  "لطفاً کد ارسالی به تلفن همراه خود را وارد نمایید.", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.successful)
+                    )
+                    .show()
+
 
             } else {
                 if (viewModel.verificationType == 0)

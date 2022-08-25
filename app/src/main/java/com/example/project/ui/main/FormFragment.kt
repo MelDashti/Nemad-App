@@ -14,10 +14,13 @@ import com.example.project.R
 import com.example.project.databinding.FormFragmentBinding
 import android.app.Activity
 import android.net.Uri
+import android.opengl.Visibility
+import android.view.WindowManager
 import android.widget.ListAdapter
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.content.ContextCompat
 import com.example.project.adapter.MediaFileAdapter
+import com.example.project.api.main.response.MediaResponse
 import com.example.project.util.FileUtil.from
 import com.google.android.material.snackbar.Snackbar
 
@@ -27,6 +30,7 @@ class FormFragment : Fragment() {
     val viewModel: MainViewModel by navGraphViewModels(R.id.navigation2) { defaultViewModelProviderFactory }
     lateinit var binding: FormFragmentBinding
     private var attachmentFiles: MutableList<String> = mutableListOf()
+    private var selectFiles: MutableList<MediaResponse> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +82,10 @@ class FormFragment : Fragment() {
 
         })
 
+        if (selectFiles.isEmpty()) {
+            binding.uploadedFileRecyclerVIew.visibility = View.INVISIBLE
+        }
+
 
         val adapter = MediaFileAdapter()
         binding.uploadedFileRecyclerVIew.adapter = adapter
@@ -85,10 +93,15 @@ class FormFragment : Fragment() {
         viewModel.mediaResponse.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
                 val mediaId = it.body()!!.id.toString()
-                Toast.makeText(requireContext(), "Uploaded Successfully", Toast.LENGTH_SHORT).show()
                 attachmentFiles.add(mediaId)
 //                binding.uploadedFileName.text = attachmentFiles.toString()
-                adapter.submitList(listOf(it.body()))
+                if (binding.uploadedFileRecyclerVIew.visibility == View.INVISIBLE) {
+                    binding.uploadedFileRecyclerVIew.visibility = View.VISIBLE
+                }
+
+                selectFiles.add(it.body()!!)
+                adapter.submitList(selectFiles)
+                adapter.notifyDataSetChanged()
 
             } else Toast.makeText(requireContext(), "Upload Failed", Toast.LENGTH_SHORT).show()
         })

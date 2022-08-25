@@ -21,6 +21,21 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
+@BindingAdapter("orgphoto")
+fun setImgOrg(imgView: ImageView, imgUrl: String?) {
+    if (imgUrl.isNullOrEmpty()){
+
+    }
+    val img = BASE_URL_IMG + imgUrl
+    img.let {
+        val imgUri = img.toUri().buildUpon().scheme("https").build()
+        Glide.with(imgView.context)
+            .load(imgUri).into(imgView)
+    }
+}
+
+
+
 @BindingAdapter("details")
 fun TextView.setDetails(details: Pair<String?, String?>?) {
     val phoneCodeColor = ContextCompat.getColor(this.context, R.color.req_text_color)
@@ -33,6 +48,12 @@ fun TextView.setDetails(details: Pair<String?, String?>?) {
             .append(details.second)
     }
     this.text = text
+}
+
+@BindingAdapter("persiandate")
+fun TextView.setDate(date: String) {
+    val phoneCodeColor = ContextCompat.getColor(this.context, R.color.req_text_color)
+    val text = SpannableStringBuilder()
 }
 
 

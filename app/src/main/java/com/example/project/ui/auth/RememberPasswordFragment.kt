@@ -44,7 +44,7 @@ class RememberPasswordFragment : Fragment() {
                 viewModel.verificationType = 1
                 Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.error)).show()
+                        ContextCompat.getColor(requireContext(), R.color.successful)).show()
             } else if (it.code() == 406) {
                 Toast.makeText(
                     requireContext(),

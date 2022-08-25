@@ -13,10 +13,10 @@ import retrofit2.http.*
 
 interface AuthenticationApiService {
 
-    @GET("Authenticate/ForgotPasswordAppUser")
-    suspend fun rememberPassword(@Query("username") username: String): Response<ResponseBody>
+    @POST("Authenticate/ForgotPasswordAppUser")
+    suspend fun rememberPassword(@Body requestBody: RequestBody): Response<ResponseBody>
 
-    @POST("Authenticate/ForgotPassword")
+    @POST("Authenticate/RequestToken")
     suspend fun verifyResetPass(@Body requestBody: RequestBody): Response<RememberPassResult>
 
     @POST("Authenticate/Verify")

@@ -13,7 +13,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="147dp"
+        android:layout_height="167dp"
         android:padding="8dp"
         app:cardCornerRadius="10dp">
 
@@ -67,7 +67,7 @@
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
-                android:text="@{proceeding.dateTime}"
+                app:persiandate="@{proceeding.dateTime}"
                 android:textColor="#032886"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -81,7 +81,7 @@
             <TextView
                 android:id="@+id/item_comments"
                 android:layout_width="0dp"
-                android:layout_height="46dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
                 android:paddingEnd="16dp"
@@ -97,17 +97,20 @@
                 app:layout_constraintVertical_chainStyle="packed" />
 
 
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/uploadedFileRecyclerVIew"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/primaryColor"
-                android:gravity="center"
-                android:text="فاقد پیوست"
-                android:layout_marginBottom="12dp"
-                android:textAlignment="center"
+                android:background="#80D9D9D9"
+                android:padding="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintEnd_toEndOf="@+id/item_comments"
+                app:layout_constraintStart_toStartOf="@+id/item_comments"
                 app:layout_constraintTop_toBottomOf="@+id/item_comments" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
