@@ -104,8 +104,6 @@ class MainFragment : BaseFragment() {
 //        })
 
 
-
-
         viewModel.categoryList.observe(viewLifecycleOwner, {
 
             if (viewModel.checkIfRootNode()) {
@@ -151,7 +149,6 @@ class MainFragment : BaseFragment() {
             if (viewModel.categoryList.value.isNullOrEmpty()) {
                 findNavController().popBackStack()
             }
-
 
             val parentNodeId = 1
             val currentParentId = viewModel.categoryList.value?.get(0)?.parentId

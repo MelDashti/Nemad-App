@@ -1,6 +1,7 @@
 package com.example.project.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -46,12 +47,16 @@ class ProceedingItemViewHolder(private val bind: ProceedingsListItemBinding) :
         val adapterFiles = MediaFileAdapter()
         bind.uploadedFileRecyclerVIew.adapter = adapterFiles
         var list = mutableListOf<MediaResponse>()
-
         proceeding.attachments?.forEach {
             list.add(MediaResponse(title = it.title, url = it.url))
         }
-
-        adapterFiles.submitList(list)
+        if (list.isEmpty()) {
+            bind.uploadedFileRecyclerVIew.visibility = View.INVISIBLE
+        } else {
+            bind.uploadedFileRecyclerVIew.visibility = View.VISIBLE
+            adapterFiles.submitList(list)
+            bind.uploadedFileName.visibility = View.INVISIBLE
+        }
 
     }
 

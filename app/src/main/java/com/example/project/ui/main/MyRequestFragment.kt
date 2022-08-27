@@ -10,6 +10,7 @@ import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.R
@@ -58,6 +59,10 @@ class MyRequestFragment : Fragment() {
             binding.objectionButton.visibility = View.VISIBLE
         }
 
+
+        binding.confrim.setOnClickListener {
+            findNavController().navigate(R.id.action_myRequestFragment_to_myDialog)
+        }
 
 
         binding.sendRequest.setOnClickListener {

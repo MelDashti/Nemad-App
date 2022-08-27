@@ -35,7 +35,11 @@ class VerificationFragment : Fragment() {
         binding.register.setOnClickListener {
             val code = binding.codeEditText.text.toString().trim()
             if (code.isNullOrEmpty()) {
-                Snackbar.make(binding.root,  "لطفاً کد ارسالی به تلفن همراه خود را وارد نمایید.", Snackbar.LENGTH_LONG)
+                Snackbar.make(
+                    binding.root,
+                    "لطفاً کد ارسالی به تلفن همراه خود را وارد نمایید.",
+                    Snackbar.LENGTH_LONG
+                )
                     .setBackgroundTint(
                         ContextCompat.getColor(requireContext(), R.color.successful)
                     )

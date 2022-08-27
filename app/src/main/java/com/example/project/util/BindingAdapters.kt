@@ -1,14 +1,20 @@
 package com.example.project.util
 
+import android.annotation.SuppressLint
 import android.text.SpannableStringBuilder
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.net.ParseException
 import androidx.core.net.toUri
 import androidx.core.text.color
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.project.R
+import com.example.project.api.main.response.Requests
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 
 @BindingAdapter("imageUrl")
@@ -23,7 +29,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
 @BindingAdapter("orgphoto")
 fun setImgOrg(imgView: ImageView, imgUrl: String?) {
-    if (imgUrl.isNullOrEmpty()){
+    if (imgUrl.isNullOrEmpty()) {
 
     }
     val img = BASE_URL_IMG + imgUrl
@@ -33,7 +39,6 @@ fun setImgOrg(imgView: ImageView, imgUrl: String?) {
             .load(imgUri).into(imgView)
     }
 }
-
 
 
 @BindingAdapter("details")
@@ -53,7 +58,27 @@ fun TextView.setDetails(details: Pair<String?, String?>?) {
 @BindingAdapter("persiandate")
 fun TextView.setDate(date: String) {
     val phoneCodeColor = ContextCompat.getColor(this.context, R.color.req_text_color)
-    val text = SpannableStringBuilder()
+    val dateString = date.substring(0, 10)
+    val persianDate = PersianDate()
+    val persianDateFormat = PersianDateFormat()
+    val string = persianDateFormat.parseGrg(dateString, "yyyy-MM-dd")
+    Log.d("haha22", string.toString())
+    this.text = string.toString()
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("dateorg")
+fun TextView.setDate(request: Requests) {
+    Log.d("haha22", request.sent.toString())
+    val date = request.sent.toString()
+    val dateString = request.sent?.substring(0, 10)
+    val persianDateFormat = PersianDateFormat()
+    Log.d("haha22", dateString.toString())
+    val string = persianDateFormat.parseGrg(dateString, "yyyy-MM-dd")
+    string.hour = date.substring(11, 13).toInt()
+    string.minute = date.substring(14, 16).toInt()
+    Log.d("haha22", string.toString())
+    this.text = string.toString().substring(0,24) + " | " + request.organizationalUnit!!.title
 }
 
 

@@ -25,6 +25,7 @@ class Requests {
     var status: Long = 0L
     var statusStr: String? = null
     var rating : Long = 0L
+    var sent: String? = null
     var title: String? = null
     var trackingNumber: String? = null
     var organizationalUnit: OrganizationalUnits? = null

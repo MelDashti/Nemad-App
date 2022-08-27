@@ -19,7 +19,6 @@ class RequestsViewModel @Inject constructor(
     val mainApiService: MainApiService
 ) : ViewModel() {
 
-    var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
     var recentRequestList: MutableLiveData<List<Requests>?> = MutableLiveData()
     var requests: MutableLiveData<Requests> = MutableLiveData()
     var requestsPagedList = mainRepository.fetchPagedReq(viewModelScope)
@@ -39,18 +38,9 @@ class RequestsViewModel @Inject constructor(
 
 
     init {
-        fetchRequests()
-//        fetchRecentRequests()
+        fetchRecentRequests()
     }
 
-    private fun fetchRequests() {
-        viewModelScope.launch {
-            try {
-                requestList.value = mainRepository.fetchRequests()
-            } catch (e: java.lang.Exception) {
-            }
-        }
-    }
 
     fun refreshRecentRequests() {
         fetchRecentRequests()

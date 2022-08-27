@@ -46,9 +46,10 @@ class FormFragment : Fragment() {
             val complaintHeader = binding.complaintHeaderInputText.text.toString().trim()
             val complaintText = binding.complaintTextInput.text.toString().trim()
             when {
-                managerName.isEmpty() -> binding.managerNameTextInput.error = "این فیلد الزامی است"
                 complaintHeader.isEmpty() -> binding.complaintHeaderInputText.error =
                     "این فیلد الزامی است"
+                managerName.isEmpty() -> binding.managerNameTextInput.error = "این فیلد الزامی است"
+
                 complaintText.isEmpty() -> binding.complaintTextInput.error = "این فیلد الزامی است"
                 else -> viewModel.sendRequest(
                     managerName,
@@ -84,6 +85,8 @@ class FormFragment : Fragment() {
 
         if (selectFiles.isEmpty()) {
             binding.uploadedFileRecyclerVIew.visibility = View.INVISIBLE
+            binding.uploadedFileName.visibility = View.VISIBLE
+
         }
 
 
@@ -97,6 +100,7 @@ class FormFragment : Fragment() {
 //                binding.uploadedFileName.text = attachmentFiles.toString()
                 if (binding.uploadedFileRecyclerVIew.visibility == View.INVISIBLE) {
                     binding.uploadedFileRecyclerVIew.visibility = View.VISIBLE
+                    binding.uploadedFileName.visibility = View.INVISIBLE
                 }
 
                 selectFiles.add(it.body()!!)
