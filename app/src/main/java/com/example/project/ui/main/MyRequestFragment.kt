@@ -39,7 +39,6 @@ class MyRequestFragment : Fragment() {
             viewModel.fetchCurrentReq()
         }
 
-
         if (viewModel.requests.value!!.status == 4L && viewModel.requests.value!!.rating == 0L) {
             binding.sendRequest.visibility = View.VISIBLE
         }
