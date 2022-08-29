@@ -1,29 +1,27 @@
 package com.example.project.ui.main
 
+import android.app.ActionBar
 import android.os.Bundle
-import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.project.R
-import com.example.project.adapter.MediaFileAdapter
 import com.example.project.adapter.ProceedingItemAdapter
-import com.example.project.api.main.response.Proceeding
 import com.example.project.databinding.FragmentMyRequestBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyRequestFragment : Fragment() {
-
     val viewModel: RequestsViewModel by navGraphViewModels(R.id.nav_graph) { defaultViewModelProviderFactory }
     lateinit var binding: FragmentMyRequestBinding
 
@@ -36,28 +34,47 @@ class MyRequestFragment : Fragment() {
         binding.lifecycleOwner = this
         val adapter = ProceedingItemAdapter()
         binding.proceedingsRecyclerView.adapter = adapter
-//        val arr = mutableListOf<Proceeding>(Proceeding(), Proceeding(), Proceeding())
-//        adapter.submitList(arr)
-
-//        if (viewModel.requests.value?.proceedings?.isEmpty() == true) {
-//        }
-
 
         lifecycleScope.launch {
             viewModel.fetchCurrentReq()
         }
 
 
-        if (viewModel.requests.value!!.status == 4L) {
-            binding.ratingLayout.visibility = View.VISIBLE
+        if (viewModel.requests.value!!.status == 4L && viewModel.requests.value!!.rating == 0L) {
             binding.sendRequest.visibility = View.VISIBLE
         }
 
 
-        if (viewModel.requests.value!!.status == 2L) {
+        if (viewModel.requests.value!!.status == 2L && viewModel.requests.value!!.rating == 0L) {
             binding.confrim.visibility = View.VISIBLE
             binding.objectionButton.visibility = View.VISIBLE
         }
+
+        if (viewModel.requests.value!!.rating == 0L) {
+            binding.ratings.visibility = View.GONE
+        } else {
+            binding.ratingBar2.rating = viewModel.requests.value!!.rating.toFloat()
+
+        }
+
+        viewModel.showSnackbar.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                Snackbar.make(binding.root, "عملیات با موفقیت انجام شد", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(
+                        ContextCompat.getColor(requireContext(), R.color.successful)
+                    )
+                    .show()
+                binding.ratings.visibility = View.VISIBLE
+                binding.ratingBar2.rating = viewModel.requests.value!!.rating.toFloat()
+                binding.confrim.visibility = View.GONE
+                binding.objectionButton.visibility = View.GONE
+                binding.sendRequest.visibility = View.GONE
+                viewModel.refreshRecentRequests()
+
+                viewModel.showSnackbarDone()
+            }
+
+        })
 
 
         binding.confrim.setOnClickListener {
@@ -66,16 +83,7 @@ class MyRequestFragment : Fragment() {
 
 
         binding.sendRequest.setOnClickListener {
-            val rating = binding.ratingBar.rating
-            Log.d("hdafh", binding.ratingBar.rating.toString())
-            if (rating == 0F) {
-                Toast.makeText(requireContext(), "امتیازی دریافت نشد", Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.sendRating()
-                binding.ratingLayout.visibility = View.GONE
-                binding.sendRequest.visibility = View.GONE
-                Toast.makeText(requireContext(), "ممنون", Toast.LENGTH_SHORT).show()
-            }
+            findNavController().navigate(R.id.action_myRequestFragment_to_myDialog)
         }
 
 

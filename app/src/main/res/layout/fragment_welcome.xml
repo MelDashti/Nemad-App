@@ -75,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48000002"
+            app:layout_constraintVertical_bias="0.45"
             app:layout_constraintVertical_chainStyle="packed">
 
         </ImageView>
@@ -85,10 +85,12 @@
             android:id="@+id/sign_up_button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="57dp"
+            android:layout_height="56dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="ثبت نام"
             android:textSize="17sp"
             app:cornerRadius="50dp"
@@ -102,9 +104,11 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/sign_in_button"
             android:layout_width="0dp"
-            android:layout_height="57dp"
+            android:layout_height="56dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="ورود به پنل کاربری"
             android:textAllCaps="false"
             android:textSize="17sp"

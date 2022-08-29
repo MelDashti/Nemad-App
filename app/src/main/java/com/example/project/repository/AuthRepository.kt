@@ -27,9 +27,9 @@ class AuthRepository @Inject constructor(
     }
 
 
-    suspend fun setPassword(currentPassword: String, newPassword: String) {
+    suspend fun setPassword(currentPassword: String, newPassword: String): Response<ResponseBody> {
         val jsonObject = JSONObject()
-        jsonObject.put("currentPassword", currentPassword)
+        jsonObject.put("oldPassword", currentPassword)
         jsonObject.put("newPassword", newPassword)
         // Convert JSONObject to String
         val jsonObjectString = jsonObject.toString()
@@ -39,6 +39,7 @@ class AuthRepository @Inject constructor(
         if (response.isSuccessful) {
             Log.d("status", "password set")
         } else Log.d("status", "failed")
+        return response
     }
 
 

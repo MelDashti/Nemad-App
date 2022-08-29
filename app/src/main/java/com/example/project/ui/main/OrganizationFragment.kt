@@ -35,13 +35,11 @@ class OrganizationFragment : Fragment() {
             // navigate to form fragment
 
             if (it.children.isNullOrEmpty()) {
-                Log.d("hello", "empty")
                 viewModel.isOrgLeafNode = true
                 findNavController().navigate(R.id.action_organizationFragment_to_formFragment)
                 viewModel.orgId = it.id
             } else {
                 // display list
-                Log.d("hello", "nope")
                 viewModel.subOrgList(it)
             }
 
@@ -112,6 +110,8 @@ class OrganizationFragment : Fragment() {
 
     private fun initializeSearch() {
         val searchView = binding.searchBar
+        binding.searchBar.isIconified = false
+        viewModel.searchOrgDone()
         searching(searchView)
     }
 

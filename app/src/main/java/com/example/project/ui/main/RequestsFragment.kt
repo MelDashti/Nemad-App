@@ -42,9 +42,7 @@ class RequestsFragment : Fragment() {
         })
         binding.requestRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.requestRecyclerView.setHasFixedSize(true)
-
         binding.requestRecyclerView.adapter = pagedAdapter
-
         lifecycleScope.launch {
             viewModel.lolList.collectLatest { pagedData ->
                 pagedAdapter.submitData(pagedData)

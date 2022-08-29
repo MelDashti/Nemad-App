@@ -4,6 +4,7 @@ package com.example.project.api.main
 import com.example.project.api.main.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -22,6 +23,9 @@ interface MainApiService {
     @GET("common/organizationalunit")
     suspend fun getOrganizationUnits(): OrganizationalUnits
 
+    @GET("common/OrganizationalUnit/{id}")
+    suspend fun getCurrentOrganizationUnits(@Path("id") id: Long?): OrganizationalUnits
+
     @POST("Citizen/Request")
     suspend fun sendRequest(@Body requestBody: RequestBody): Response<ComplaintResult>
 
@@ -34,8 +38,17 @@ interface MainApiService {
     @GET("Citizen/Request")
     suspend fun getRequests(): MutableList<Requests>
 
+    @PUT("Citizen/Request/{id}")
+    suspend fun setRating(
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<ResponseBody>
+
     @GET("Citizen/Request/{id}")
-    suspend fun getCurrentReq(@Path("id") id: String ): Requests
+    suspend fun getCurrentReq(@Path("id") id: String): Requests
+
+    @PUT("Authenticate/Me")
+    suspend fun setUserInfo(@Body requestBody: RequestBody): Response<ResponseBody>
 
     @GET("Citizen/Request?OrderBy.Column=sent&OrderBy.Type=desc")
     suspend fun getRequestData(

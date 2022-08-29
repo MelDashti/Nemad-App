@@ -19,6 +19,7 @@ import javax.inject.Inject
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.ResponseBody
 import org.json.JSONArray
 import retrofit2.Response
 
@@ -108,6 +109,25 @@ class MainRepository @Inject constructor(
 
     suspend fun fetchCurrentReq(id: String): Requests? {
         return mainApiService.getCurrentReq(id)
+    }
+
+    suspend fun sendRating(reqId: String, rating: Long): Response<ResponseBody> {
+        val jsonObject = JSONObject()
+        jsonObject.put("rating", rating)
+        jsonObject.put("isConfirmed", true)
+        // Convert JSONObject to String
+        val jsonObjectString = jsonObject.toString()
+        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        val response = mainApiService.setRating(reqId, requestBody)
+        if (response.isSuccessful) {
+            Log.d("status", "rating Send")
+        } else Log.d("status", "failed")
+        return response
+
+    }
+
+    suspend fun fetchCurrentOrganizationalUnits(parentId: Long?): OrganizationalUnits {
+        return mainApiService.getCurrentOrganizationUnits(parentId)
     }
 
 

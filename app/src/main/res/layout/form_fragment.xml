@@ -134,6 +134,8 @@
             android:layout_height="54dp"
             android:layout_marginBottom="75dp"
             android:text="ثبت شکایت"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:cornerRadius="100dp"

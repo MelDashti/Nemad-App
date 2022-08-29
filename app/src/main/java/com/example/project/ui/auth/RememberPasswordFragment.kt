@@ -39,24 +39,39 @@ class RememberPasswordFragment : Fragment() {
 
         viewModel.rememberPass.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let {
-            if (it.code() == 428) {
-                findNavController().navigate(R.id.action_rememberPasswordFragment_to_verificationFragment)
-                viewModel.verificationType = 1
-                Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(
-                        ContextCompat.getColor(requireContext(), R.color.successful)).show()
-            } else if (it.code() == 406) {
-                Toast.makeText(
-                    requireContext(),
-                    "",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.d("code", "406")
-            } else {
-                Toast.makeText(requireContext(), "خطا سرور", Toast.LENGTH_SHORT).show()
-            }
+                if (it.code() == 428) {
+                    findNavController().navigate(R.id.action_rememberPasswordFragment_to_verificationFragment)
+                    viewModel.verificationType = 1
+                    Snackbar.make(binding.root, "کد ارسال شد", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.successful)
+                        ).show()
+                } else if (it.code() == 406) {
+                    Toast.makeText(
+                        requireContext(),
+                        "",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.d("code", "406")
+                } else if (it.code() == 400) {
+                    Snackbar.make(
+                        binding.root,
+                        "کاربری با این مشخصات ثبت نشده است.",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.error)
+                        ).show()
 
-        }})
+                } else {
+                    Snackbar.make(binding.root, "خطا سرور", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.error)
+                        ).show()
+                }
+
+            }
+        })
 
 
         return binding.root

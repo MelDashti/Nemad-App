@@ -187,7 +187,6 @@
                 tools:text="@string/employee_name" />
 
 
-
             <TextView
                 android:id="@+id/req_code"
                 android:layout_width="match_parent"
@@ -203,29 +202,59 @@
                 tools:text="@string/req_code" />
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/ratings"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:maxLines="1"-->
-<!--                android:paddingEnd="16dp"-->
-<!--                android:textColor="#032886"-->
-<!--                android:textSize="12sp"-->
-<!--                android:textStyle="bold"-->
-<!--                app:type="@{`req_code`}"-->
-<!--                tools:text="@string/req_code" />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ratings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+
+                <RatingBar
+                    android:id="@+id/ratingBar2"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:numStars="5"
+                    android:progressTint="#AD8700"
+                    android:rating="0"
+                    android:stepSize="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ratingsText"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ratingsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:maxLines="1"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="16dp"
+                    android:text="امتیاز:"
+                    android:textColor="#032886"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/req_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:paddingEnd="16dp"
                 android:textColor="#032886"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"
                 app:req_name="@{viewModel.requests.comments}"
                 app:type="@{`req_description`}"
                 tools:text="@string/req_description" />
@@ -269,6 +298,8 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="78dp"
             android:backgroundTint="#AD8700"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="ارسال امتیاز"
             android:textAllCaps="false"
             android:textSize="16sp"
@@ -290,6 +321,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="78dp"
             android:backgroundTint="#FF0000"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="اعتراض"
             android:textAllCaps="false"
             android:textSize="16sp"
@@ -311,6 +344,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="78dp"
             android:backgroundTint="#AD8700"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="تایید"
             android:textAllCaps="false"
             android:textSize="16sp"
@@ -334,7 +369,7 @@
             app:layout_constraintBottom_toTopOf="@+id/sendRequest"
             app:layout_constraintEnd_toEndOf="@+id/action_taken_header"
             app:layout_constraintHeight_default="wrap"
-            app:layout_constraintHeight_max="250dp"
+            app:layout_constraintHeight_max="270dp"
             app:layout_constraintStart_toStartOf="@+id/line1"
             app:layout_constraintTop_toBottomOf="@+id/action_taken_header"
             app:layout_constraintVertical_bias="0.0">
@@ -357,60 +392,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/ratingLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/layout_container"
-            app:layout_constraintStart_toStartOf="@+id/layout_container"
-            app:layout_constraintTop_toBottomOf="@+id/layout_container"
-            app:layout_constraintVertical_bias="0.13999999">
-
-            <TextView
-                android:id="@+id/ratingLeftHeader"
-                style="?attr/textAppearanceHeadline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="خیلی بد"
-                android:textColor="#AD8700"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:progressTint="#AD8700"
-                android:rating="0"
-
-                android:stepSize="1" />
-
-            <TextView
-                android:id="@+id/ratingRightHeader"
-                style="?attr/textAppearanceHeadline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="عالی"
-                android:textColor="#AD8700"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

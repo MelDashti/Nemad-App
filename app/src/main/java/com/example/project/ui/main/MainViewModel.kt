@@ -76,15 +76,12 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
     private val _response = MutableLiveData<Category>()
     val response: LiveData<Category> = _response
 
-
     init {
         fetchCat()
         fetchOrgUnits()
         fetchRequests()
         _startSearch.value = false
         _startOrgSearch.value = false
-        searchNow("")
-        searchOrgNow("")
     }
 
 
@@ -144,6 +141,21 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             }
         }
     }
+
+    private fun fetchCurrentOrgUnits() {
+        viewModelScope.launch {
+            try {
+                val organizationalUnits =
+                    mainRepository.fetchCurrentOrganizationalUnits(organizationalUnitsList.value!![0].parentId)
+                orgUnitList = listOf(organizationalUnits)
+                organizationalUnitsList.value = organizationalUnits.children
+                organizationalUnitsListSearch.value = organizationalUnits.children
+
+            } catch (e: Exception) {
+            }
+        }
+    }
+
 
     fun subList(category: Category) {
         if (!categoryList.value.isNullOrEmpty())
@@ -219,6 +231,10 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         if (!query.isNullOrEmpty())
             organizationalUnitsList.value = searchOrgQuery(query)
         else {
+//            organizationalUnitsList.value = organizationalUnitsListSearch.value
+            if (organizationalUnitsList.value!![0].parentId == null) fetchOrgUnits()
+            else
+                fetchCurrentOrgUnits()
         }
     }
 

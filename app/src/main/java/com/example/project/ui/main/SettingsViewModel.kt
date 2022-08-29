@@ -24,6 +24,9 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
     private val _userNameResponse = MutableLiveData<Event<Response<ResponseBody>>>()
     val userNameResponse: LiveData<Event<Response<ResponseBody>>> = _userNameResponse
 
+    private val _userPassResponse = MutableLiveData<Event<Response<ResponseBody>>>()
+    val userPassResponse: LiveData<Event<Response<ResponseBody>>> = _userPassResponse
+
 
     private val _userNationalIdResponse = MutableLiveData<Event<Response<ResponseBody>>>()
     val userNationalIdResponse: LiveData<Event<Response<ResponseBody>>> = _userNationalIdResponse
@@ -40,7 +43,7 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
     fun fetchSettings() {
         viewModelScope.launch {
             val userInfo = authRepository.getUserInfo()
-            Log.d("vfads",userInfo.firstName.toString())
+            Log.d("vfads", userInfo.firstName.toString())
             settings.value = userInfo
         }
     }
@@ -64,7 +67,8 @@ class SettingsViewModel @Inject constructor(val authRepository: AuthRepository) 
 
     fun setNewPassword(currentPassword: String, newPassword: String) {
         viewModelScope.launch {
-            authRepository.setPassword(currentPassword, newPassword)
+            _userPassResponse.value =
+                Event(authRepository.setPassword(currentPassword, newPassword))
         }
 
     }

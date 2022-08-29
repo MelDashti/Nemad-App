@@ -20,8 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import android.graphics.BlurMaskFilter
 
 import android.R.attr.radius
-
-
+import android.util.Log
 
 
 @AndroidEntryPoint
@@ -59,7 +58,11 @@ class HomeFragment : BaseFragment() {
         })
         binding.requestRecyclerView.adapter = adapter
 
+
+
         viewModel.recentRequestList.observe(viewLifecycleOwner, {
+            if (it!!.isNotEmpty())
+                binding.uploadedFileName.visibility = View.GONE
             adapter.submitList(it)
         })
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)

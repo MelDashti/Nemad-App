@@ -61,16 +61,21 @@ class VerificationFragment : Fragment() {
         viewModel.verifyResponse.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 if (it.isSuccessful) {
-                    Toast.makeText(
-                        requireContext(),
-                        "verification was successful",
-                        Toast.LENGTH_SHORT
+                    Snackbar.make(
+                        binding.root,
+                        "تایید شماره تلفن همراه با موفقیت انجام شد",
+                        Snackbar.LENGTH_LONG
                     )
-                        .show()
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.successful)
+                        ).show()
+
                     findNavController().navigate(R.id.action_verificationFragment_to_loginFragment2)
                 } else {
-                    Toast.makeText(requireContext(), "verification failed", Toast.LENGTH_SHORT)
-                        .show()
+                    Snackbar.make(binding.root, "کد ورودی نامعتبر است.", Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.error)
+                        ).show()
                 }
             }
         })
