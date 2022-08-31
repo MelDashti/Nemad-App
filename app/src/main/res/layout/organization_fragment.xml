@@ -31,17 +31,17 @@
                 android:layout_marginEnd="27dp"
                 android:background="@drawable/ic_rect"
                 android:backgroundTint="@color/transparent"
-                android:layoutDirection="rtl"
-                android:clickable="true"
-                android:focusable="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:iconifiedByDefault="false"
+                android:layoutDirection="rtl"
                 android:onClick="@{()->viewModel.startOrgSearch()}"
                 android:queryHint="جستجو"
                 app:defaultQueryHint="جستجو"
-                app:searchIcon="@drawable/searchicon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:searchIcon="@drawable/searchicon" />
 
 
             <TextView
@@ -78,8 +78,8 @@
                 android:id="@+id/organization_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical"
                 android:layout_marginBottom="52dp"
+                android:orientation="vertical"
                 android:padding="28dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -10,158 +10,166 @@
             type="com.example.project.viewmodels.AuthSharedViewModel" />
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        tools:context=".ui.auth.LoginFragment">
+
+        android:fillViewport="true">
 
 
-        <ImageView
-            android:id="@+id/logo"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="206dp"
-            android:layout_height="138dp"
-            android:src="@drawable/logo"
-            app:layout_constraintBottom_toTopOf="@+id/code_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed">
-
-        </ImageView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            tools:context=".ui.auth.LoginFragment">
 
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back" />
+            <ImageView
+                android:id="@+id/logo"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="206dp"
+                android:layout_height="138dp"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toTopOf="@+id/code_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/code_header"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="#F7F8F9"
-            android:layoutDirection="ltr"
-            app:boxCornerRadiusBottomEnd="50dp"
-            app:boxCornerRadiusBottomStart="50dp"
-            app:boxCornerRadiusTopEnd="50dp"
-            app:boxCornerRadiusTopStart="50dp"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            </ImageView>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_edit_text"
-                android:layout_width="match_parent"
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="نام کاربری (شماره تلفن همراه)"
-                android:inputType="number"
-                android:singleLine="true" />
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/hint"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:background="#F7F8F9"
-            android:layoutDirection="ltr"
-            app:boxCornerRadiusBottomEnd="50dp"
-            app:boxCornerRadiusBottomStart="50dp"
-            app:boxCornerRadiusTopEnd="50dp"
-            app:boxCornerRadiusTopStart="50dp"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/code_header"
-            app:layout_constraintVertical_bias="0.0">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_edit_text"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/code_header"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="رمز عبور"
-                android:inputType="textPassword"
-                android:singleLine="true" />
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="#F7F8F9"
+                android:layoutDirection="ltr"
+                app:boxCornerRadiusBottomEnd="50dp"
+                app:boxCornerRadiusBottomStart="50dp"
+                app:boxCornerRadiusTopEnd="50dp"
+                app:boxCornerRadiusTopStart="50dp"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="نام کاربری (شماره تلفن همراه)"
+                    android:inputType="number"
+                    android:singleLine="true" />
 
-        <TextView
-            android:id="@+id/forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="رمز عبور خود را فراموش کرده اید؟"
-            android:textColor="#6A707C"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/hint"
-            app:layout_constraintTop_toBottomOf="@+id/hint"
-            app:layout_constraintVertical_bias="0.0" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/hint"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="#F7F8F9"
+                android:layoutDirection="ltr"
+                app:boxCornerRadiusBottomEnd="50dp"
+                app:boxCornerRadiusBottomStart="50dp"
+                app:boxCornerRadiusTopEnd="50dp"
+                app:boxCornerRadiusTopStart="50dp"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/code_header"
+                app:layout_constraintVertical_bias="0.0">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="رمز عبور"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="رمز عبور خود را فراموش کرده اید؟"
+                android:textColor="#6A707C"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/hint"
+                app:layout_constraintTop_toBottomOf="@+id/hint"
+                app:layout_constraintVertical_bias="0.0" />
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/register"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="ورود"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            app:cornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hint"
-            app:layout_constraintVertical_chainStyle="packed">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/register"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="ورود"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:cornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hint"
+                app:layout_constraintVertical_chainStyle="packed">
 
-        </com.google.android.material.button.MaterialButton>
+            </com.google.android.material.button.MaterialButton>
 
-        <TextView
-            android:id="@+id/register_question"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
-            android:textSize="13sp"
-            app:colored_text="@{@string/signup_confirmation}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
+            <TextView
+                android:id="@+id/register_question"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:colored_text="@{@string/signup_confirmation}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
 
-        </TextView>
+            </TextView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

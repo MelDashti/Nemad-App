@@ -61,6 +61,7 @@ class MainFragment : BaseFragment() {
                 viewModel.leafNodeCategoryId = it.id
             } else {
                 // display list
+                binding.searchBar.setQuery("", false)
                 viewModel.subList(it)
             }
 

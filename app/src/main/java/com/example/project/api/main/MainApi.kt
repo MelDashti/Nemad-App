@@ -47,8 +47,6 @@ interface MainApiService {
     @GET("Citizen/Request/{id}")
     suspend fun getCurrentReq(@Path("id") id: String): Requests
 
-    @PUT("Authenticate/Me")
-    suspend fun setUserInfo(@Body requestBody: RequestBody): Response<ResponseBody>
 
     @GET("Citizen/Request?OrderBy.Column=sent&OrderBy.Type=desc")
     suspend fun getRequestData(

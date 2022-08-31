@@ -86,8 +86,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
 
     fun checkIfRootNode(): Boolean {
-        var rootNode = categoryList.value?.get(0)?.parentId
-        return when (rootNode) {
+        return when (categoryList.value?.get(0)?.parentId) {
             1L -> true
             null -> true
             else -> false
@@ -232,9 +231,10 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
             organizationalUnitsList.value = searchOrgQuery(query)
         else {
 //            organizationalUnitsList.value = organizationalUnitsListSearch.value
-            if (organizationalUnitsList.value!![0].parentId == null) fetchOrgUnits()
-            else
-                fetchCurrentOrgUnits()
+//            if (organizationalUnitsList.value!![0].parentId == 1L) fetchOrgUnits()
+//            else
+//                fetchCurrentOrgUnits()
+            organizationalUnitsList.value = organizationalUnitsListSearch.value
         }
     }
 
@@ -254,7 +254,7 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         if (!query.isNullOrEmpty())
             categoryList.value = searchQuery(query)
         else {
-
+            categoryList.value = categoryListSearch.value
         }
 
 

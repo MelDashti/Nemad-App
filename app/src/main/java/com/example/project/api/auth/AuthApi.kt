@@ -25,6 +25,9 @@ interface AuthenticationApiService {
     @GET("Authenticate/Me")
     suspend fun getUserInfo(): UserInfo
 
+    @GET("Authenticate/Me")
+    suspend fun verifyToken(): Response<UserInfo>
+
     @POST("Authenticate/LoginAppUser")
     suspend fun loginUser(@Body requestBody: RequestBody): Response<AuthenticationResult>
 

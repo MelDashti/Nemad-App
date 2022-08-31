@@ -36,7 +36,6 @@
                 app:destination="@id/loginFragment2"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim" />
-
         </fragment>
         <fragment
             android:id="@+id/loginFragment2"
@@ -52,8 +51,8 @@
             <action
                 android:id="@+id/action_loginFragment2_to_homeFragment"
                 app:destination="@id/homeFragment"
-                app:popUpTo="@id/homeFragment"
-                 />
+                app:popUpTo="@id/WelcomeFragment"
+                app:popUpToInclusive="true" />
 
         </fragment>
         <fragment
@@ -118,7 +117,7 @@
         android:id="@+id/myRequestFragment"
         android:name="com.example.project.ui.main.MyRequestFragment"
         android:label="fragment_my_request"
-        tools:layout="@layout/fragment_my_request" >
+        tools:layout="@layout/fragment_my_request">
         <action
             android:id="@+id/action_myRequestFragment_to_myDialog"
             app:destination="@id/myDialog" />
@@ -173,18 +172,18 @@
         <fragment
             android:id="@+id/formFragment"
             android:name="com.example.project.ui.main.FormFragment"
-            android:label="FormFragment" >
+            android:label="FormFragment">
             <action
                 android:id="@+id/action_formFragment_to_requestConfirmation2"
-                app:destination="@id/requestConfirmation2"
-             />
+                app:destination="@id/requestConfirmation2" />
         </fragment>
         <fragment
             android:id="@+id/requestConfirmation2"
             android:name="com.example.project.ui.main.RequestConfirmation"
             android:label="RequestConfirmation" />
     </navigation>
-    <navigation android:id="@+id/navigation3"
+    <navigation
+        android:id="@+id/navigation3"
         app:startDestination="@id/settingsFragment">
         <fragment
             android:id="@+id/userPasswordFragment"
@@ -205,10 +204,10 @@
             <action
                 android:id="@+id/action_settingsFragment_to_navigation"
                 app:destination="@id/navigation"
-                app:popUpTo="@id/navigation"
                 app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim"
-             />
+                app:popUpTo="@id/nav_graph"
+                 />
             <action
                 android:id="@+id/action_settingsFragment_to_nationalIdFragment"
                 app:destination="@id/nationalIdFragment" />

@@ -26,6 +26,10 @@ class AuthRepository @Inject constructor(
         return authenticationApiService.getUserInfo()
     }
 
+   suspend  fun checkTokenValid(): Response<UserInfo> {
+        return authenticationApiService.verifyToken()
+    }
+
 
     suspend fun setPassword(currentPassword: String, newPassword: String): Response<ResponseBody> {
         val jsonObject = JSONObject()

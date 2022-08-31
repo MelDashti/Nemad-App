@@ -40,6 +40,7 @@ class OrganizationFragment : Fragment() {
                 viewModel.orgId = it.id
             } else {
                 // display list
+                binding.searchBar.setQuery("", false)
                 viewModel.subOrgList(it)
             }
 

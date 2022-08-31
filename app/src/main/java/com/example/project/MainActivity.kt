@@ -4,53 +4,55 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.project.databinding.ActivityMainBinding
+import com.example.project.repository.AuthRepository
+import com.example.project.ui.main.MainActivityViewModel
 import com.example.project.ui.main.MainViewModel
 import com.example.project.util.PreferenceKeys
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    val viewModel: MainViewModel by viewModels()
+    val viewModel: MainActivityViewModel by viewModels()
+
+    var contentHasLoaded = false
+
+    @Inject
+    lateinit var authRepository: AuthRepository
+
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
-        //bottom navigation setup
+        val navController = findNavController(R.id.nav_host_fragment)
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        //set nav destinations for bottom navigation buttons
-
         binding.bottomNavigation.setOnItemSelectedListener {
-//            Log.d("fdsaf", it.itemId.toString())
-//            if (it.itemId == R.id.mainFragment) {
-//                Log.d("fdsaf", "before clearing data")
-//                viewModel.clearAllData()
-//                //                navController.graph.clear()
-//            }
-
             NavigationUI.onNavDestinationSelected(it, navController) || onOptionsItemSelected(
                 it
             )
         }
-//        binding.bottomNavigation.selectedItemId = R.id.homeFragment
-
         // checking for token and choosing starting nav graph
         val sharedPreferences =
             this.getSharedPreferences(PreferenceKeys.PREFERENCE_AUTH_KEY, Context.MODE_PRIVATE)
@@ -59,12 +61,48 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.getString(PreferenceKeys.PREFERENCE_AUTH_KEY, defaultValue)
 
         if (token == null || token == "empty") {
+            val graph = navController.navInflater.inflate(R.navigation.nav_graph)
             graph.startDestination = R.id.navigation
+            Log.d("helllo", "hahaah2")
+            navController.graph = graph
+            contentHasLoaded = true
         } else {
-            Log.d("token ", token)
-            graph.startDestination = R.id.homeFragment
+            Log.d("helllo", "hahaah4")
+            lifecycleScope.launch {
+                try {
+                    val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+                    val respone = authRepository.checkTokenValid()
+                    Log.d("helllo", respone.code().toString())
+                    if (respone.code() == 200) {
+                        graph.startDestination = R.id.homeFragment
+                        navController.graph = graph
+                    }
+                    contentHasLoaded = true
+                } catch (e: Exception) {
+                    val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+                    navController.graph = graph
+                    contentHasLoaded = true
+                }
+
+            }
         }
-        navController.graph = graph
+
+        setupSplashScreen(splashScreen)
+    }
+
+
+    private fun setupSplashScreen(splashScreen: SplashScreen) {
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    return if (contentHasLoaded) {
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else false
+                }
+            }
+        )
     }
 
 
