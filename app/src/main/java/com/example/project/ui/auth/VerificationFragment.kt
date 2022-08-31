@@ -70,7 +70,7 @@ class VerificationFragment : Fragment() {
                             ContextCompat.getColor(requireContext(), R.color.successful)
                         ).show()
 
-                    findNavController().navigate(R.id.action_verificationFragment_to_loginFragment2)
+                    findNavController().navigate(R.id.action_verificationFragment_to_homeFragment)
                 } else {
                     Snackbar.make(binding.root, "کد ورودی نامعتبر است.", Snackbar.LENGTH_LONG)
                         .setBackgroundTint(

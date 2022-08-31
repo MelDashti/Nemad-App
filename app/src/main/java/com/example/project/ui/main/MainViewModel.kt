@@ -6,7 +6,6 @@ import com.example.project.api.main.response.*
 import com.example.project.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.internal.concurrent.Task
 import retrofit2.Response
 import java.io.File
 import java.util.*
@@ -24,28 +23,24 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     private val _complaintResponse = MutableLiveData<Response<ComplaintResult>>()
     val complaintResponse: LiveData<Response<ComplaintResult>> = _complaintResponse
-
     private var parentCategoryList: Stack<List<Category>> = Stack()
     private var parentOrganizationalUnitsList: Stack<List<OrganizationalUnits>> = Stack()
-
     var organizationalUnitsList: MutableLiveData<List<OrganizationalUnits>?> = MutableLiveData()
     var organizationalUnitsListSearch: MutableLiveData<List<OrganizationalUnits>?> =
         MutableLiveData()
-
-
     var categoryList: MutableLiveData<List<Category>?> = MutableLiveData()
     var categoryListSearch: MutableLiveData<List<Category>?> = MutableLiveData()
-
-
+    val flattenOrgList: MutableList<OrganizationalUnits> = mutableListOf()
+    val flattenCategoryList: MutableList<Category> = mutableListOf()
     var requestList: MutableLiveData<List<Requests>?> = MutableLiveData()
-
     private var orgList: MutableLiveData<List<Organization>?> = MutableLiveData()
-
     private var orgUnitList: List<OrganizationalUnits>? = null
     private var list: List<Category>? = null
-
     var isLeafNode: Boolean = false
     var isOrgLeafNode: Boolean = false
+
+    var checkIfSearchEnabled: Boolean = false
+
 
     private val _query = MutableLiveData<String>()
     private val _startSearch = MutableLiveData<Boolean>()
@@ -86,9 +81,11 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
 
     fun checkIfRootNode(): Boolean {
+        if (categoryList.value.isNullOrEmpty()) return false
         return when (categoryList.value?.get(0)?.parentId) {
             1L -> true
-            null -> true
+            null ->true
+
             else -> false
         }
     }
@@ -132,20 +129,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         viewModelScope.launch {
             try {
                 val organizationalUnits = mainRepository.fetchOrganizationalUnits()
-                orgUnitList = listOf(organizationalUnits)
-                organizationalUnitsList.value = organizationalUnits.children
-                organizationalUnitsListSearch.value = organizationalUnits.children
-
-            } catch (e: Exception) {
-            }
-        }
-    }
-
-    private fun fetchCurrentOrgUnits() {
-        viewModelScope.launch {
-            try {
-                val organizationalUnits =
-                    mainRepository.fetchCurrentOrganizationalUnits(organizationalUnitsList.value!![0].parentId)
                 orgUnitList = listOf(organizationalUnits)
                 organizationalUnitsList.value = organizationalUnits.children
                 organizationalUnitsListSearch.value = organizationalUnits.children
@@ -240,17 +223,44 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     private fun searchOrgQuery(query: String): List<OrganizationalUnits> {
         val newList: MutableList<OrganizationalUnits> = mutableListOf()
-        organizationalUnitsListSearch.value!!.forEach {
+        flattenTheOrgList()
+
+//        organizationalUnitsListSearch.value!!.forEach {
+//            if (it.title!!.contains(query))
+//                newList.add(it)
+//        }
+        Log.d("added", flattenOrgList.size.toString())
+        flattenOrgList.forEach {
             if (it.title!!.contains(query))
                 newList.add(it)
         }
+
         return newList
+    }
+
+
+    private fun flattenTheOrgList() {
+        flattenOrgList.clear()
+        organizationalUnitsListSearch.value!!.forEach {
+            flattenRecursiveOrg(it)
+        }
+    }
+
+    private fun flattenRecursiveOrg(organizationalUnits: OrganizationalUnits) {
+        flattenOrgList.add(organizationalUnits)
+        Log.d("added", organizationalUnits.title.toString())
+        if (!organizationalUnits.children.isNullOrEmpty())
+            organizationalUnits.children!!.forEach {
+                flattenRecursiveOrg(it)
+            }
+
     }
 
 
     fun searchNow(query: String?) {
         _query.value = query!!
         //make a copy of category list
+        checkIfSearchEnabled = true
         if (!query.isNullOrEmpty())
             categoryList.value = searchQuery(query)
         else {
@@ -262,11 +272,34 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
 
     private fun searchQuery(query: String): List<Category> {
         val newList: MutableList<Category> = mutableListOf()
-        categoryListSearch.value!!.forEach {
+
+        flattenTheCategoryList()
+//        categoryListSearch.value!!.forEach {
+//            if (it.title!!.contains(query))
+//                newList.add(it)
+//        }
+
+        flattenCategoryList.forEach {
             if (it.title!!.contains(query))
                 newList.add(it)
         }
+
         return newList
+    }
+
+    private fun flattenTheCategoryList() {
+        flattenCategoryList.clear()
+        categoryListSearch.value!!.forEach {
+            flattenRecursiveCategory(it)
+        }
+    }
+
+    private fun flattenRecursiveCategory(category: Category) {
+        flattenCategoryList.add(category)
+        if (!category.children.isNullOrEmpty())
+            category.children!!.forEach {
+                flattenRecursiveCategory(it)
+            }
     }
 
 
@@ -300,7 +333,6 @@ class MainViewModel @Inject constructor(val mainRepository: MainRepository) : Vi
         _clearRecyclerView.value = true
         Log.d("fdsaf", "inside model right now")
         Log.d("fdsaf", clearRecyclerView.value.toString())
-
 
     }
 

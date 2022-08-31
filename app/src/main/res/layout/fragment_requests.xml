@@ -21,27 +21,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/background">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar"
-                style="@style/SearchViewStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="27dp"
-                android:background="@drawable/ic_rect"
-                android:backgroundTint="@color/transparent"
-                android:clickable="true"
-                android:focusable="true"
-                android:iconifiedByDefault="false"
-                android:layoutDirection="rtl"
-                android:queryHint="جستجو"
-                app:defaultQueryHint="جستجو"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:searchIcon="@drawable/searchicon" />
-
 
             <View
                 android:id="@+id/view2"
@@ -62,15 +41,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginTop="36dp"
+
+                android:layout_marginEnd="27dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="درخواست های من"
                 android:textColor="#AD8700"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView

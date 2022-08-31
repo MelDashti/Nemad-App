@@ -89,7 +89,7 @@ fun TextView.setSrc(type: Long?) {
     when (type) {
         0L -> {
 //            bind.toggle.setImageResource(R.drawable.waitingforacceptance)
-            text = "در انتزار تایید"
+            text = "در انتظار تایید"
         }
         1L -> {
 //            bind.toggle.setImageResource(R.drawable.underorganizatoininspection)

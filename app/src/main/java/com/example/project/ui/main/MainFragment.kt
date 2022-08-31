@@ -50,6 +50,7 @@ class MainFragment : BaseFragment() {
 
             } else {
                 // display list
+                viewModel.checkIfSearchEnabled = true
                 viewModel.subList(it)
             }
         })
@@ -62,6 +63,7 @@ class MainFragment : BaseFragment() {
             } else {
                 // display list
                 binding.searchBar.setQuery("", false)
+                viewModel.checkIfSearchEnabled = true
                 viewModel.subList(it)
             }
 
@@ -79,36 +81,17 @@ class MainFragment : BaseFragment() {
             binding.categoryRecyclerView.adapter = categoryListViewAdapter
         }
 
-
-//        // search bar
-//        viewModel.startSearch.observe(viewLifecycleOwner, {
-//            if (it) {
-//                initializeSearch()
-//                viewModel.searchDone()
-//            }
-//        })
-
         binding.searchBar.setOnClickListener {
             binding.searchBar.isIconified = false
             viewModel.searchDone()
             initializeSearch()
         }
 
-
-//
-//        viewModel.searchResultList.observe(viewLifecycleOwner, {
-//            categoryListAdapter.submitList(it)
-//        })
-
-//        viewModel._query.observe(viewLifecycleOwner, {
-//            viewModel.search(it)
-//        })
-
-
         viewModel.categoryList.observe(viewLifecycleOwner, {
 
             if (viewModel.checkIfRootNode()) {
-                binding.categoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.categoryRecyclerView.layoutManager =
+                    GridLayoutManager(requireContext(), 2)
                 addDecorationToGroupRecyclerView()
                 binding.categoryRecyclerView.adapter = categoryListAdapter
                 categoryListAdapter.submitList(it)
@@ -119,11 +102,6 @@ class MainFragment : BaseFragment() {
                 categoryListViewAdapter.submitList(it)
             }
         })
-
-//        viewModel.clearRecyclerView.observe(viewLifecycleOwner, {
-//            Log.d("fdsaf", "inside listener right now")
-//            categoryListAdapter.currentList.clear()
-//        })
 
 
         if (viewModel.isLeafNode) {

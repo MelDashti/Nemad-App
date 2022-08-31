@@ -15,7 +15,6 @@
             android:label="@string/register_fragment_label"
             tools:layout="@layout/fragment_register">
 
-
             <action
                 android:id="@+id/action_RegisterFragment_to_verificationFragment"
                 app:destination="@id/verificationFragment" />
@@ -72,6 +71,11 @@
             android:name="com.example.project.ui.auth.VerificationFragment"
             android:label="VerificationFragment"
             tools:layout="@layout/verification_fragment">
+            <action
+                android:id="@+id/action_verificationFragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:popUpTo="@id/WelcomeFragment"
+                app:popUpToInclusive="true" />
             <action
                 android:id="@+id/action_verificationFragment_to_loginFragment2"
                 app:destination="@id/loginFragment2"

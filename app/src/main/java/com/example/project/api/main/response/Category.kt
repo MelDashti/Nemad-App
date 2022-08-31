@@ -40,6 +40,7 @@ class Proceeding() {
     var dateTime: String? = "تاریخ: 26 مرداد 1401و 15:42"
     var comments: String? = "دیتا تستی"
     var attachments: List<Attachment>? = null
+    var actionStrFa: String? = null
 
 }
 

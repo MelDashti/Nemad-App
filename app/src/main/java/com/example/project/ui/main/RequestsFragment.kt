@@ -49,7 +49,6 @@ class RequestsFragment : Fragment() {
             }
         }
 
-
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(
             ContextCompat.getDrawable(
