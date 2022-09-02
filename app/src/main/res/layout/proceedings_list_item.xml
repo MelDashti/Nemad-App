@@ -7,7 +7,7 @@
 
         <variable
             name="proceeding"
-            type="com.example.project.api.main.response.Proceeding" />
+            type="com.example.nemad.api.main.response.Proceeding" />
 
     </data>
 

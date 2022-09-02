@@ -28,8 +28,10 @@
         <item name="windowSplashScreenBackground">@color/primaryColor</item>
         <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
              animated drawable. One of these is required. -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/lg_nemad_1</item>
+        <!--        <item name="logo">@drawable/logo</item>-->
+        <!--        <item name="logo">@drawable/lg_nemad_1</item>-->
         <!-- Required for animated icons -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/lg_nemad</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
         <!-- Set the theme of the Activity that directly follows your splash screen. -->
         <!-- Required -->

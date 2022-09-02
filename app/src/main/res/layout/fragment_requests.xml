@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.ui.main.RequestsViewModel" />
+            type="com.example.nemad.ui.main.RequestsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

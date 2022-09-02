@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="authentication"
-    app:startDestination="@id/navigation">
+    >
 
     <navigation
         android:id="@+id/navigation"
         app:startDestination="@id/WelcomeFragment">
         <fragment
             android:id="@+id/RegisterFragment"
-            android:name="com.example.project.ui.auth.RegisterFragment"
+            android:name="com.example.nemad.ui.auth.RegisterFragment"
             android:label="@string/register_fragment_label"
             tools:layout="@layout/fragment_register">
 
@@ -21,7 +21,7 @@
         </fragment>
         <fragment
             android:id="@+id/WelcomeFragment"
-            android:name="com.example.project.ui.auth.WelcomeFragment"
+            android:name="com.example.nemad.ui.auth.WelcomeFragment"
             android:label="@string/welcome_fragment_label"
             tools:layout="@layout/fragment_welcome">
 
@@ -38,7 +38,7 @@
         </fragment>
         <fragment
             android:id="@+id/loginFragment2"
-            android:name="com.example.project.ui.auth.LoginFragment"
+            android:name="com.example.nemad.ui.auth.LoginFragment"
             android:label="LoginFragment"
             tools:layout="@layout/fragment_login">
             <action
@@ -56,7 +56,7 @@
         </fragment>
         <fragment
             android:id="@+id/rememberPasswordFragment"
-            android:name="com.example.project.ui.auth.RememberPasswordFragment"
+            android:name="com.example.nemad.ui.auth.RememberPasswordFragment"
             android:label="RememberPasswordFragment"
             tools:layout="@layout/remember_password_fragment">
             <action
@@ -68,7 +68,7 @@
         </fragment>
         <fragment
             android:id="@+id/verificationFragment"
-            android:name="com.example.project.ui.auth.VerificationFragment"
+            android:name="com.example.nemad.ui.auth.VerificationFragment"
             android:label="VerificationFragment"
             tools:layout="@layout/verification_fragment">
             <action
@@ -86,7 +86,7 @@
         </fragment>
         <fragment
             android:id="@+id/resetFragment"
-            android:name="com.example.project.ui.auth.ResetFragment"
+            android:name="com.example.nemad.ui.auth.ResetFragment"
             android:label="ResetFragment"
             tools:layout="@layout/reset_fragment">
             <action
@@ -99,7 +99,7 @@
     </navigation>
     <fragment
         android:id="@+id/requestsFragment"
-        android:name="com.example.project.ui.main.RequestsFragment"
+        android:name="com.example.nemad.ui.main.RequestsFragment"
         android:label="RequestsFragment">
         <action
             android:id="@+id/action_requestsFragment_to_myRequestFragment"
@@ -114,12 +114,12 @@
     </fragment>
     <fragment
         android:id="@+id/polls"
-        android:name="com.example.project.ui.main.PollsFragment"
+        android:name="com.example.nemad.ui.main.PollsFragment"
         android:label="polls_fragment"
         tools:layout="@layout/polls_fragment" />
     <fragment
         android:id="@+id/myRequestFragment"
-        android:name="com.example.project.ui.main.MyRequestFragment"
+        android:name="com.example.nemad.ui.main.MyRequestFragment"
         android:label="fragment_my_request"
         tools:layout="@layout/fragment_my_request">
         <action
@@ -129,14 +129,14 @@
 
     <dialog
         android:id="@+id/myDialog"
-        android:name="com.example.project.ui.main.MyDialog"
+        android:name="com.example.nemad.ui.main.MyDialog"
         android:label="MyDialog"
 
         />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.project.ui.main.HomeFragment"
+        android:name="com.example.nemad.ui.main.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_mainFragment"
@@ -154,7 +154,7 @@
         app:startDestination="@id/mainFragment">
         <fragment
             android:id="@+id/mainFragment"
-            android:name="com.example.project.ui.main.MainFragment"
+            android:name="com.example.nemad.ui.main.MainFragment"
             android:label="MainFragment">
             <action
                 android:id="@+id/action_mainFragment_to_organizationFragment"
@@ -165,7 +165,7 @@
         </fragment>
         <fragment
             android:id="@+id/organizationFragment"
-            android:name="com.example.project.ui.main.OrganizationFragment"
+            android:name="com.example.nemad.ui.main.OrganizationFragment"
             android:label="OrganizationFragment">
             <action
                 android:id="@+id/action_organizationFragment_to_formFragment"
@@ -175,7 +175,7 @@
         </fragment>
         <fragment
             android:id="@+id/formFragment"
-            android:name="com.example.project.ui.main.FormFragment"
+            android:name="com.example.nemad.ui.main.FormFragment"
             android:label="FormFragment">
             <action
                 android:id="@+id/action_formFragment_to_requestConfirmation2"
@@ -183,7 +183,7 @@
         </fragment>
         <fragment
             android:id="@+id/requestConfirmation2"
-            android:name="com.example.project.ui.main.RequestConfirmation"
+            android:name="com.example.nemad.ui.main.RequestConfirmation"
             android:label="RequestConfirmation" />
     </navigation>
     <navigation
@@ -191,19 +191,19 @@
         app:startDestination="@id/settingsFragment">
         <fragment
             android:id="@+id/userPasswordFragment"
-            android:name="com.example.project.ui.main.UserPasswordFragment"
+            android:name="com.example.nemad.ui.main.UserPasswordFragment"
             android:label="UserPasswordFragment" />
         <fragment
             android:id="@+id/userNameFragment"
-            android:name="com.example.project.ui.main.UserNameFragment"
+            android:name="com.example.nemad.ui.main.UserNameFragment"
             android:label="UserNameFragment" />
         <fragment
             android:id="@+id/nationalIdFragment"
-            android:name="com.example.project.ui.main.NationalIdFragment"
+            android:name="com.example.nemad.ui.main.NationalIdFragment"
             android:label="NationalIdFragment" />
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.example.project.ui.main.SettingsFragment"
+            android:name="com.example.nemad.ui.main.SettingsFragment"
             android:label="SettingsFragment">
             <action
                 android:id="@+id/action_settingsFragment_to_navigation"

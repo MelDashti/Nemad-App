@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.ui.main.RequestsViewModel" />
+            type="com.example.nemad.ui.main.RequestsViewModel" />
     </data>
 
 
@@ -72,9 +72,9 @@
             android:layout_marginTop="4dp"
             android:maxLines="2"
             android:paddingEnd="16dp"
-            android:text="@{viewModel.requests.organizationalUnit.title}"
+            app:dateorg="@{viewModel.requests}"
             android:textColor="#6A6A6A"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/item_title"

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.project.viewmodels.AuthSharedViewModel" />
+            type="com.example.nemad.viewmodels.AuthSharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

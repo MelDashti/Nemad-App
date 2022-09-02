@@ -1,0 +1,72 @@
+package com.example.nemad.ui.main
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
+import com.example.nemad.R
+import com.example.nemad.databinding.FragmentUserNameBinding
+import com.google.android.material.snackbar.Snackbar
+
+class UserNameFragment : Fragment() {
+
+    lateinit var binding: FragmentUserNameBinding
+    val viewModel: SettingsViewModel by navGraphViewModels(R.id.navigation3) { defaultViewModelProviderFactory }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentUserNameBinding.inflate(inflater)
+        binding.viewModel = viewModel
+
+
+        binding.nameEditText.setText(viewModel.settings.value?.firstName)
+        binding.surnameEditText.setText(viewModel.settings.value?.lastName)
+
+        binding.confirmButton.setOnClickListener {
+            val firstName = binding.nameEditText.text.toString().trim()
+            val lastName = binding.surnameEditText.text.toString().trim()
+            viewModel.setUserName(firstName, lastName)
+        }
+
+        viewModel.userNameResponse.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+
+                if (it.isSuccessful) {
+                    Snackbar.make(
+                        binding.root,
+                        "نام و نام خانوادگی با موفقیت تغییر یافت.",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.successful)
+                        )
+                        .show()
+                    viewModel.fetchSettings()
+                    findNavController().popBackStack()
+                } else {
+                    Snackbar.make(
+                        binding.root,
+                        "خطا سرور",
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setBackgroundTint(
+                            ContextCompat.getColor(requireContext(), R.color.error)
+                        )
+                        .show()
+                }
+            }
+        })
+
+
+        return binding.root
+    }
+
+}

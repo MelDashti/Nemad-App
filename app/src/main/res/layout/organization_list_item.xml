@@ -7,11 +7,11 @@
 
         <variable
             name="clickListener"
-            type="com.example.project.adapter.OrganizationItemListener" />
+            type="com.example.nemad.adapter.OrganizationItemListener" />
 
         <variable
             name="organization"
-            type="com.example.project.api.main.response.OrganizationalUnits" />
+            type="com.example.nemad.api.main.response.OrganizationalUnits" />
 
     </data>
 

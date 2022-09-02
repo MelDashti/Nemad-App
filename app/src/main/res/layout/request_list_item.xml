@@ -7,12 +7,12 @@
 
         <variable
             name="clickListener"
-            type="com.example.project.adapter.RequestItemListener" />
+            type="com.example.nemad.adapter.RequestItemListener" />
 
 
         <variable
             name="request"
-            type="com.example.project.api.main.response.Requests" />
+            type="com.example.nemad.api.main.response.Requests" />
 
     </data>
 
